@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1"
 	charset="UTF-8"></meta>
@@ -57,7 +57,6 @@ tbody td, thead th {
 	width: 20%;
 	float: left;
 }
-
 .email-col {
 	width: 45%;
 	float: left;
@@ -118,12 +117,14 @@ tbody td, thead th {
 							<th>Name</th>
 							<th class="email-col">Email</th>
 							<th class="status-col">Status</th>
+
 						</tr>
 					</thead>
 					<tbody>
 						<tr th:each="TableRow,iterStat : ${liste}">
 							<td th:text="${iterStat.count}"></td>
 							<td th:text="${TableRow.name}"></td>
+
 							<td class="email-col" th:text="${TableRow.email}"></td>
 							<td class="status-col" th:if="${TableRow.status}">
 							<img src="https://cdn3.iconfinder.com/data/icons/flat-actions-icons-9/792/Tick_Mark_Dark-512.png"
@@ -133,6 +134,7 @@ tbody td, thead th {
 							<img src="https://www.shareicon.net/download/2016/08/20/817726_close_395x512.png"
 							style="height: 25px; margin-left: 20px;"/>
 							</td>
+
 						</tr>
 					</tbody>
 				</table>
