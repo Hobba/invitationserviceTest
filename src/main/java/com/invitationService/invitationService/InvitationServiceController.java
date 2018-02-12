@@ -6,7 +6,9 @@ import java.util.List;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.invitationService.models.TableRow;
 
@@ -22,6 +24,12 @@ public class InvitationServiceController {
 		return "index";
 	}
 	
+	@ResponseBody
+	@RequestMapping("/list/{id}")
+	public List<TableRow> getRows(@PathVariable String id){
+		
+		return new ArrayList<>();
+	}
 	
 	@RequestMapping("/email")
 	public String liste(Model model) {
@@ -43,5 +51,7 @@ public class InvitationServiceController {
 		model.addAttribute("liste", liste);
 		return "email_list";
 	}
+	
+	
 	
 }
