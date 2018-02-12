@@ -5,20 +5,57 @@
 	charset="UTF-8"></meta>
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"></link>
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"
+	integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ"
+	crossorigin="anonymous"></link>
+<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"
+	integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n"
+	crossorigin="anonymous"></script>
 <script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"
+	integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb"
+	crossorigin="anonymous"></script>
 <script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"
+	integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn"
+	crossorigin="anonymous"></script>
+
+<style>
+table {
+	width: 100%;
+}
+
+thead, tbody, tr, td, th {
+	display: block;
+}
+
+tr:after {
+	content: ' ';
+	display: block;
+	visibility: hidden;
+	clear: both;
+}
+
+thead th {
+	height: 50px;
+	width: 100%;
+
+	/*text-align: left;*/
+}
+
+tbody {
+	height: 400px;
+	overflow-y: auto;
+}
+
+thead {
+	/* fallback */
 	
+}
 
-<style type="text/css">
-.reminderbutton{
-width:100px;
-height:30px;
-bottom: 100px;
-left: 80%;
-
+tbody td, thead th {
+	width: 25%;
+	float: left;
 }
 </style>
 
@@ -32,196 +69,53 @@ left: 80%;
 	<div>
 		<span class="jumbotron"
 			style="justify-content: center; display: flex;">
-			<h1>InvitationService Startpage</h1>
+			<h1>InvitationService Start page</h1>
 		</span>
 	</div>
-<div class="fixed-bottom reminderbutton" >
 
-<input class="btn btn-warning" type="button" value="Remind your people!"/>
-</div>
 
 	<!--  -->
-	<div class="container" style="margin-top: 50px; ">
+	<div class="container" style="margin-top: 50px;">
 		<div class="row justify-content-center" style="">
+			<div class="col-lg-8" style="margin-left: 0; margin-right: 0;">
+				<div class="card" style="margin-bottom: 20px;">
+					<div class="card-block" style="text-align: right;">
+						<p style="display: inline-block; margin-right: 10px;">Select
+							survey</p>
+						<!-- Example single danger button -->
+						<div class="btn-group" style="display: inline-block;">
+							<button type="button" class="btn btn-secondary dropdown-toggle"
+								data-toggle="dropdown" aria-haspopup="true"
+								aria-expanded="false" style="text-align: left;">
+								<div style="display: inline-block; width: 110px;">Item 1</div>
+							</button>
+							<div class="dropdown-menu">
+								<a class="dropdown-item" href="#">Item 2</a> <a
+									class="dropdown-item" href="#">Item 2</a> <a
+									class="dropdown-item" href="#">Item 3</a> <a
+									class="dropdown-item" href="#">Item 4</a>
+							</div>
+						</div>
 
-			<div class="col-sm-8" style="margin-left:0; margin-right:0;">
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-8" style="margin-left: 0; margin-right: 0;">
 				<table class="table table-striped">
-					<thead class="thead-dark">
+					<thead style="background-color: black; color: white;">
 						<tr>
-							<th scope="col">#</th>
-							<th scope="col">Name</th>
-							<th scope="col">Email</th>
-							<th scope="col">Status</th>
+							<th>#</th>
+							<th>Name</th>
+							<th>Email</th>
+							<th>Status</th>
 						</tr>
 					</thead>
-					<tbody style="height: 400px;">
-						<tr>
-							<th scope="row">1</th>
-							<td>Mark</td>
-							<td>mark@mark.de</td>
-							<td><span class="glyphicon glyphicon-ok-sign"
-								style="color: green;"></span>
-								</td>
-						</tr>
-						<tr>
-							<th scope="row">2</th>
-							<td>Thornton</td>
-							<td>Thornton@thornton.com</td>
-							<td>
-								
-								<img src="https://dev.w3.org/SVG/tools/svgweb/samples/svg-files/DroidSansMono.svg" style="height:10px;"></img>
-								</td>
-						</tr>
-						<tr>
-							<th scope="row">3</th>
-							<td>Larry</td>
-							<td>the@Bird</td>
-							<td><span class="glyphicon glyphicon-remove-sign"
-								style="color: red;"></span></td>
-						</tr>
-						<tr>
-							<th scope="row">1</th>
-							<td>Mark</td>
-							<td>mark@mark.de</td>
-							<td><span class="glyphicon glyphicon-ok-sign"
-								style="color: green;"></span>
-								</td>
-						</tr>
-						<tr>
-							<th scope="row">2</th>
-							<td>Thornton</td>
-							<td>Thornton@thornton.com</td>
-							<td>
-								
-								<img src="https://dev.w3.org/SVG/tools/svgweb/samples/svg-files/DroidSansMono.svg" style="height:10px;"></img>
-								</td>
-						</tr>
-						<tr>
-							<th scope="row">3</th>
-							<td>Larry</td>
-							<td>the@Bird</td>
-							<td><span class="glyphicon glyphicon-remove-sign"
-								style="color: red;"></span></td>
-						</tr>
-						<tr>
-							<th scope="row">1</th>
-							<td>Mark</td>
-							<td>mark@mark.de</td>
-							<td><span class="glyphicon glyphicon-ok-sign"
-								style="color: green;"></span>
-								</td>
-						</tr>
-						<tr>
-							<th scope="row">2</th>
-							<td>Thornton</td>
-							<td>Thornton@thornton.com</td>
-							<td>
-								
-								<img src="https://dev.w3.org/SVG/tools/svgweb/samples/svg-files/DroidSansMono.svg" style="height:10px;"></img>
-								</td>
-						</tr>
-						<tr>
-							<th scope="row">3</th>
-							<td>Larry</td>
-							<td>the@Bird</td>
-							<td><span class="glyphicon glyphicon-remove-sign"
-								style="color: red;"></span></td>
-						</tr>
-						<tr>
-							<th scope="row">1</th>
-							<td>Mark</td>
-							<td>mark@mark.de</td>
-							<td><span class="glyphicon glyphicon-ok-sign"
-								style="color: green;"></span>
-								</td>
-						</tr>
-						<tr>
-							<th scope="row">2</th>
-							<td>Thornton</td>
-							<td>Thornton@thornton.com</td>
-							<td>
-								
-								<img src="https://dev.w3.org/SVG/tools/svgweb/samples/svg-files/DroidSansMono.svg" style="height:10px;"></img>
-								</td>
-						</tr>
-						<tr>
-							<th scope="row">3</th>
-							<td>Larry</td>
-							<td>the@Bird</td>
-							<td><span class="glyphicon glyphicon-remove-sign"
-								style="color: red;"></span></td>
-						</tr>
-						<tr>
-							<th scope="row">1</th>
-							<td>Mark</td>
-							<td>mark@mark.de</td>
-							<td><span class="glyphicon glyphicon-ok-sign"
-								style="color: green;"></span>
-								</td>
-						</tr>
-						<tr>
-							<th scope="row">2</th>
-							<td>Thornton</td>
-							<td>Thornton@thornton.com</td>
-							<td>
-								
-								<img src="https://dev.w3.org/SVG/tools/svgweb/samples/svg-files/DroidSansMono.svg" style="height:10px;"></img>
-								</td>
-						</tr>
-						<tr>
-							<th scope="row">3</th>
-							<td>Larry</td>
-							<td>the@Bird</td>
-							<td><span class="glyphicon glyphicon-remove-sign"
-								style="color: red;"></span></td>
-						</tr>
-						<tr>
-							<th scope="row">1</th>
-							<td>Mark</td>
-							<td>mark@mark.de</td>
-							<td><span class="glyphicon glyphicon-ok-sign"
-								style="color: green;"></span>
-								</td>
-						</tr>
-						<tr>
-							<th scope="row">2</th>
-							<td>Thornton</td>
-							<td>Thornton@thornton.com</td>
-							<td>
-								
-								<img src="https://dev.w3.org/SVG/tools/svgweb/samples/svg-files/DroidSansMono.svg" style="height:10px;"></img>
-								</td>
-						</tr>
-						<tr>
-							<th scope="row">3</th>
-							<td>Larry</td>
-							<td>the@Bird</td>
-							<td><span class="glyphicon glyphicon-remove-sign"
-								style="color: red;"></span></td>
-						</tr>
-						<tr>
-							<th scope="row">1</th>
-							<td>Mark</td>
-							<td>mark@mark.de</td>
-							<td><span class="glyphicon glyphicon-ok-sign"
-								style="color: green;"></span>
-								</td>
-						</tr>
-						<tr>
-							<th scope="row">2</th>
-							<td>Thornton</td>
-							<td>Thornton@thornton.com</td>
-							<td>
-								
-								<img src="https://dev.w3.org/SVG/tools/svgweb/samples/svg-files/DroidSansMono.svg" style="height:10px;"></img>
-								</td>
-						</tr>
-						<tr>
-							<th scope="row">3</th>
-							<td>Larry</td>
-							<td>the@Bird</td>
-							<td><span class="glyphicon glyphicon-remove-sign"
-								style="color: red;"></span></td>
+					<tbody>
+						<tr th:each="TableRow,iterStat : ${liste}">
+							<th th:text="${iterStat.count}"></th>
+							<td th:text="${TableRow.name}"></td>
+							<td th:text="${TableRow.email}"></td>
+							<td th:text="${TableRow.status}"></td>
 						</tr>
 					</tbody>
 				</table>
@@ -235,25 +129,8 @@ left: 80%;
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	<button type="button" class="btn btn-primary"
+		style="position: fixed; bottom: 25px; right: 25px;">Send
+		Reminders</button>
 </body>
 </html>
