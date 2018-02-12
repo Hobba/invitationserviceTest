@@ -112,7 +112,7 @@ tbody td, thead th {
 					</thead>
 					<tbody>
 						<tr th:each="TableRow,iterStat : ${liste}">
-							<th th:text="${iterStat.count}"></th>
+							<td th:text="${iterStat.count}"></td>
 							<td th:text="${TableRow.name}"></td>
 							<td th:text="${TableRow.email}"></td>
 							<td th:text="${TableRow.status}"></td>

@@ -17,11 +17,21 @@ public class InvitationServiceController {
 	
 	
 	@RequestMapping("/")
-	public String home() {
-		
+	public String home(Model model) {
+		List<TableRow> liste = new ArrayList<>();
+		liste.add(new TableRow("Peter", "e@mail.de", true));
+		liste.add(new TableRow("Peter", "e@mail.de", true));
+		liste.add(new TableRow("Peter", "e@mail.de", true));
+		liste.add(new TableRow("Hans", "e@mail.de", true));
+		liste.add(new TableRow("Peter", "e@mail.de", true));
+		liste.add(new TableRow("Peter", "e@mail.de", true));
+		liste.add(new TableRow("Peter", "e@mail.de", true));
+		liste.add(new TableRow("Peter", "e@mail.de", true));
+		liste.add(new TableRow("Peter", "e@mail.de", true));
+		liste.add(new TableRow("Peter", "e@mail.de", true));
+		model.addAttribute("liste", liste);
 		return "index";
 	}
-	
 	
 	@RequestMapping("/email")
 	public String liste(Model model) {

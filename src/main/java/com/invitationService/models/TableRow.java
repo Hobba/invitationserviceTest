@@ -4,15 +4,13 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+@Getter
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
 public class TableRow {
 
-	
-	private String name;
-	private String email;
-	private Boolean status;
-	
+	private String Name;
+	private String Email;
+	private Boolean Status;
 	
 }
