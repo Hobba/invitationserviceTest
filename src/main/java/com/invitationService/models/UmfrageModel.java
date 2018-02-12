@@ -4,14 +4,10 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-@AllArgsConstructor
-@NoArgsConstructor
 @Getter
+@NoArgsConstructor
+@AllArgsConstructor
 public class UmfrageModel {
-
-	private int id;
-	private String name;
-	
-	
-	
+	private int Id;
+	private String Name;
 }

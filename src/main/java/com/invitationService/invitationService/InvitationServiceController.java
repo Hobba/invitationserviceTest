@@ -19,26 +19,10 @@ public class InvitationServiceController {
 	
 	
 	@RequestMapping("/")
-	public String home() {
-		
-		return "index";
-	}
-	
-	@ResponseBody
-	@RequestMapping("/list/{id}")
-	public List<TableRow> getRows(@PathVariable String id){
-		
-		return new ArrayList<>();
-	}
-	
-	@RequestMapping("/email")
-	public String liste(Model model) {
-		
-		
+	public String home(Model model) {
 		List<TableRow> liste = new ArrayList<>();
-		
 		liste.add(new TableRow("Peter", "e@mail.de", true));
-		liste.add(new TableRow("Peter", "e@mail.de", true));
+		liste.add(new TableRow("Peter", "e@mail.de", false));
 		liste.add(new TableRow("Peter", "e@mail.de", true));
 		liste.add(new TableRow("Hans", "e@mail.de", true));
 		liste.add(new TableRow("Peter", "e@mail.de", true));
@@ -47,10 +31,19 @@ public class InvitationServiceController {
 		liste.add(new TableRow("Peter", "e@mail.de", true));
 		liste.add(new TableRow("Peter", "e@mail.de", true));
 		liste.add(new TableRow("Peter", "e@mail.de", true));
-		
 		model.addAttribute("liste", liste);
-		return "email_list";
+		return "index";
 	}
+	
+
+	@ResponseBody
+	@RequestMapping("/list/{id}")
+	public List<TableRow> getRows(@PathVariable String id){
+		
+		return new ArrayList<>();
+	}
+	
+
 	
 	
 	
