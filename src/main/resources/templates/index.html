@@ -54,7 +54,11 @@ thead {
 }
 
 tbody td, thead th {
-	width: 25%;
+	width: 20%;
+	float: left;
+}
+.td-email {
+	width: 40%;
 	float: left;
 }
 </style>
@@ -106,7 +110,7 @@ tbody td, thead th {
 						<tr>
 							<th>#</th>
 							<th>Name</th>
-							<th>Email</th>
+							<th class="td-email">Email</th>
 							<th>Status</th>
 						</tr>
 					</thead>
@@ -114,7 +118,7 @@ tbody td, thead th {
 						<tr th:each="TableRow,iterStat : ${liste}">
 							<td th:text="${iterStat.count}"></td>
 							<td th:text="${TableRow.name}"></td>
-							<td th:text="${TableRow.email}"></td>
+							<td class="td-email" th:text="${TableRow.email}"></td>
 							<td th:text="${TableRow.status}"></td>
 						</tr>
 					</tbody>
