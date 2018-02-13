@@ -7,10 +7,15 @@ import lombok.NoArgsConstructor;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class TableRow {
-
-	private String Name;
-	private String Email;
+public class TableRow extends User{	
 	private Boolean Status;
+	
+	public TableRow(int Id, String Firstname, String Lastname, String Email, Boolean Status) {
+		this.Id = Id;
+		this.Firstname = Firstname;
+		this.Lastname = Lastname;
+		this.Email = Email;
+		this.Status = Status;
+	}
 	
 }
