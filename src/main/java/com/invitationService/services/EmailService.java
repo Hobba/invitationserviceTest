@@ -23,6 +23,7 @@ public class EmailService {
 
 	public void sendMail(List<User> user) {
 		user.forEach(u -> sendMailToAddress(u));
+		System.out.println(user);
 	}
 
 	private JsonNode sendMailToAddress(User user) {
@@ -33,6 +34,8 @@ public class EmailService {
 			request = Unirest.post(mailgun_url + "/messages").basicAuth("api", mailgun_key)
 					.queryString("from", mailgun_from).queryString("to", user.getEmail())
 					.queryString("subject", this.parseSubject()).queryString("text", this.parseEmail()).asJson();
+			
+			System.out.println("Email successfully send to master.");
 		} catch (UnirestException e) {
 			e.printStackTrace();
 		}
