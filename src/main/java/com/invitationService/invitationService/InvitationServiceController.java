@@ -3,6 +3,7 @@ package com.invitationService.invitationService;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,15 +12,26 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.invitationService.models.TableRow;
+import com.invitationService.services.EmailService;
+import com.mashape.unirest.http.exceptions.UnirestException;
 
 @Controller
 @EnableAutoConfiguration
 public class InvitationServiceController {
 
-	
-	
+	@Autowired
+	private EmailService emailService;
+
 	@RequestMapping("/")
 	public String home(Model model) {
+		
+		try {
+			emailService.sendMail();
+		} catch (UnirestException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		List<TableRow> liste = new ArrayList<>();
 		liste.add(new TableRow("Peter", "e@mail.de", true));
 		liste.add(new TableRow("Peter", "e@mail.de", false));
@@ -40,17 +52,12 @@ public class InvitationServiceController {
 		model.addAttribute("liste", liste);
 		return "index";
 	}
-	
 
 	@ResponseBody
 	@RequestMapping("/list/{id}")
-	public List<TableRow> getRows(@PathVariable String id){
-		
+	public List<TableRow> getRows(@PathVariable String id) {
+
 		return new ArrayList<>();
 	}
-	
 
-	
-	
-	
 }
