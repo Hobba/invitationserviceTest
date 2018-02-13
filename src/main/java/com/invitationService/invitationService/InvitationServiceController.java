@@ -17,11 +17,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.invitationService.models.TableRow;
 
 import com.invitationService.models.User;
-import com.invitationService.models.Users;
 
 import com.invitationService.services.EmailService;
-
-
 
 @Controller
 @EnableAutoConfiguration
@@ -58,6 +55,7 @@ public class InvitationServiceController {
 	@RequestMapping(value="/sendInvitationEmails", method=RequestMethod.POST)
 	public String SendInvitationEmails(@RequestBody List<User> users){
 		System.out.println(users.size());
+		emailService.sendMail(users);
 		return "HELLO";
 	}
 
