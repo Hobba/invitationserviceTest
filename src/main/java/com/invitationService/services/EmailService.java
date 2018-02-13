@@ -1,7 +1,5 @@
 package com.invitationService.services;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Value;
 
 import com.invitationService.models.User;
