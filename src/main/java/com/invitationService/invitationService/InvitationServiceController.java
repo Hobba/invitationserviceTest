@@ -34,7 +34,7 @@ public class InvitationServiceController {
 	
 	
 	@PostMapping("/goToDesigner")
-	public String goToDesigner(@ModelAttribute @Validated TableRow user, RedirectAttributes redirectAttributes) {
+	public String goToDesigner(@ModelAttribute TableRow user, RedirectAttributes redirectAttributes) {
 		
 		String usermail = user.getEmail();
 		
