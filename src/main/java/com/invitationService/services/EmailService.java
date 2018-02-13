@@ -32,9 +32,7 @@ public class EmailService {
 		try {
 			request = Unirest.post(mailgun_url + "/messages").basicAuth("api", mailgun_key)
 					.queryString("from", mailgun_from).queryString("to", user.getEmail())
-					.queryString("subject", this.parseSubject()).queryString("text", this.parseEmail()).asJson();
-			
-			System.out.println("Email successfully send to master.");
+					.queryString("subject", this.parseSubject(user)).queryString("text", this.parseEmail()).asJson();
 		} catch (UnirestException e) {
 			e.printStackTrace();
 		}
@@ -46,8 +44,9 @@ public class EmailService {
 		return "DEFAULT TEXT";
 	}
 
-	private String parseSubject() {
-		return "DEFAULT SUBJECT";
+	private String parseSubject(User user) {
+		// TODO: User field "Invited by"
+		return "You were invited to a survey by user.getInvitedBy()";
 	}
 
 }
