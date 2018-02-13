@@ -31,30 +31,29 @@ public class InvitationServiceController {
 	public String home(Model model) {
 		List<TableRow> liste = new ArrayList<>();
 
-		liste.add(new TableRow(1,"Peter","Hummels","e@mail.de", true));
-		liste.add(new TableRow(1,"Peter","Hummels","e@mail.de", true));
-		liste.add(new TableRow(1,"Peter","Hummels","e@mail.de", false));
-		liste.add(new TableRow(1,"Peter","Hummels","e@mail.de", true));
-		liste.add(new TableRow(1,"Peter","Hummels","e@mail.de", true));
-		liste.add(new TableRow(1,"Peter","Hummels","e@mail.de", true));
-		liste.add(new TableRow(1,"Peter","Hummels","e@mail.de", true));
-		liste.add(new TableRow(1,"Peter","Hummels","e@mail.de", false));
-		liste.add(new TableRow(1,"Peter","Hummels","e@mail.de", true));
-		liste.add(new TableRow(1,"Peter","Hummels","e@mail.de", true));
-		liste.add(new TableRow(1,"Peter","Hummels","e@mail.de", true));
-		liste.add(new TableRow(1,"Peter","Hummels","e@mail.de", true));
-		liste.add(new TableRow(1,"Peter","Hummels","e@mail.de", true));
-		liste.add(new TableRow(1,"Peter","Hummels","e@mail.de", true));
-		liste.add(new TableRow(1,"Peter","Hummels","e@mail.de", true));
+		liste.add(new TableRow(1, "Peter", "Hummels", "e@mail.de", true));
+		liste.add(new TableRow(1, "Peter", "Hummels", "e@mail.de", true));
+		liste.add(new TableRow(1, "Peter", "Hummels", "e@mail.de", false));
+		liste.add(new TableRow(1, "Peter", "Hummels", "e@mail.de", true));
+		liste.add(new TableRow(1, "Peter", "Hummels", "e@mail.de", true));
+		liste.add(new TableRow(1, "Peter", "Hummels", "e@mail.de", true));
+		liste.add(new TableRow(1, "Peter", "Hummels", "e@mail.de", true));
+		liste.add(new TableRow(1, "Peter", "Hummels", "e@mail.de", false));
+		liste.add(new TableRow(1, "Peter", "Hummels", "e@mail.de", true));
+		liste.add(new TableRow(1, "Peter", "Hummels", "e@mail.de", true));
+		liste.add(new TableRow(1, "Peter", "Hummels", "e@mail.de", true));
+		liste.add(new TableRow(1, "Peter", "Hummels", "e@mail.de", true));
+		liste.add(new TableRow(1, "Peter", "Hummels", "e@mail.de", true));
+		liste.add(new TableRow(1, "Peter", "Hummels", "e@mail.de", true));
+		liste.add(new TableRow(1, "Peter", "Hummels", "e@mail.de", true));
 
 		model.addAttribute("liste", liste);
 		return "index";
 	}
 
 	@ResponseBody
-	@RequestMapping(value="/sendInvitationEmails", method=RequestMethod.POST)
-	public String SendInvitationEmails(@RequestBody List<User> users){
-		System.out.println(users.size());
+	@RequestMapping(value = "/sendInvitationEmails", method = RequestMethod.POST)
+	public String SendInvitationEmails(@RequestBody List<User> users) {
 		emailService.sendMail(users);
 		return "HELLO";
 	}
