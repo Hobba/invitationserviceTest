@@ -24,14 +24,6 @@ public class InvitationServiceController {
 
 	@RequestMapping("/")
 	public String home(Model model) {
-		
-		try {
-			emailService.sendMail();
-		} catch (UnirestException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
 		List<TableRow> liste = new ArrayList<>();
 		liste.add(new TableRow("Peter", "e@mail.de", true));
 		liste.add(new TableRow("Peter", "e@mail.de", false));
