@@ -21,13 +21,21 @@ public class EmailService {
 	@Value("${mailgun.api.from}")
 	private String mailgun_from;
 
-	public JsonNode sendMail() throws UnirestException {
+	public JsonNode sendMail(String emailaddress) throws UnirestException {
 
 		HttpResponse<JsonNode> request = Unirest.post(mailgun_url + "/messages").basicAuth("api", mailgun_key)
-				.queryString("from", mailgun_from).queryString("to", "business@jandev.de")
-				.queryString("subject", "Hello").queryString("text", "Hello").asJson();
+				.queryString("from", mailgun_from).queryString("to", emailaddress)
+				.queryString("subject", this.parseSubject()).queryString("text", this.parseEmail()).asJson();
 
 		return request.getBody();
+	}
+
+	public String parseEmail() {
+		return "";
+	}
+
+	public String parseSubject() {
+		return "";
 	}
 
 }
