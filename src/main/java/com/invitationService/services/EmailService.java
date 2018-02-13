@@ -21,9 +21,8 @@ public class EmailService {
 	@Value("${mailgun.api.from}")
 	private String mailgun_from;
 
-	public void sendMail(List<User> user) {
-		user.forEach(u -> sendMailToAddress(u));
-		System.out.println(user);
+	public void sendMail(User user) {
+		sendMailToAddress(user);
 	}
 
 	private JsonNode sendMailToAddress(User user) {

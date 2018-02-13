@@ -8,6 +8,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
+@Setter
 public class User {
 	@Override
 	public String toString() {

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -51,12 +52,12 @@ public class InvitationServiceController {
 		return "index";
 	}
 
+	
 	@ResponseBody
 	@RequestMapping(value="/sendInvitationEmails", method=RequestMethod.POST)
-	public String SendInvitationEmails(@RequestBody List<User> users){
-		System.out.println(users.size());
-		emailService.sendMail(users);
-		return "HELLO";
+	public User SendInvitationEmails(@RequestBody User user){
+		emailService.sendMail(user);
+		return user;
 	}
 
 	@RequestMapping("/list/{id}")
