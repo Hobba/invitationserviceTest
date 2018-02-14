@@ -47,7 +47,7 @@ public class InvitationServiceController {
 	public String goToDesigner(@Valid @ModelAttribute User user, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
 				
 		if(bindingResult.hasErrors()) {
-			redirectAttributes.addFlashAttribute("errormessage", "Hoppla, da ist etwas schief gegangen.. \\n hast du eine valide Emailadresse eingegeben?");
+			redirectAttributes.addFlashAttribute("errormessage", "Hoppla, da ist etwas schief gegangen..\n hast du eine valide Emailadresse eingegeben?");
 			return "redirect:/login";
 		}else {
 			

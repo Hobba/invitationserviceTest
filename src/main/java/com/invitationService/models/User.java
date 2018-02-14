@@ -1,9 +1,6 @@
 package com.invitationService.models;
 
 import javax.validation.constraints.Pattern;
-import javax.xml.bind.annotation.XmlRegistry;
-
-import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.validation.annotation.Validated;
 

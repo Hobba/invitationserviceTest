@@ -22,6 +22,8 @@
 	
 	    <link rel="shortcut icon" th:href="@{/img/favicon.ico}" type="image/x-icon" />
     <link type="text/css" rel="stylesheet" th:href="@{/css/style.css}" />
+    
+    <script src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
 
 <style>
 
@@ -78,16 +80,16 @@
 					<tbody>
 						<tr th:each="TableRow,iterStat : ${liste}">
 							<td th:text="${iterStat.count}"></td>
-							<td th:text="${TableRow.name}"></td>
+							<td th:text="${TableRow.Lastname}"></td>
 
-							<td class="email-col" th:text="${TableRow.email}"></td>
-							<td class="status-col" th:if="${TableRow.status}">
-							<img src="https://cdn3.iconfinder.com/data/icons/flat-actions-icons-9/792/Tick_Mark_Dark-512.png"
-								style="height: 25px; margin-left: 20px;" /></td>
+							<td class="email-col" th:text="${TableRow.Email}"></td>
+							<td class="status-col" th:if="${TableRow.Status}">
+							
+								<i class="fas fa-check-circle" style="height: 25px; margin-left: 20px; color: green;"></i>
+								</td>
 								
 							<td class="status-col" th:if="${not TableRow.status}">
-							<img src="https://www.shareicon.net/download/2016/08/20/817726_close_395x512.png"
-							style="height: 25px; margin-left: 20px;"/>
+							<i class="fas fa-times-circle" style="height: 25px; margin-left: 20px; color: red;"></i>
 							</td>
 
 						</tr>
