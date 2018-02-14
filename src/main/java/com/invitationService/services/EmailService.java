@@ -1,9 +1,10 @@
 package com.invitationService.services;
 
-import java.io.File;
-import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.InputStream;
+import java.io.StringWriter;
 
+import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Value;
 
 import com.invitationService.models.User;
@@ -34,7 +35,7 @@ public class EmailService {
 		try {
 			request = Unirest.post(mailgun_url + "/messages").basicAuth("api", mailgun_key)
 					.queryString("from", mailgun_from).queryString("to", user.getEmail())
-					.queryString("subject", this.parseSubject(user)).queryString("text", this.parseEmail()).asJson();
+					.queryString("subject", this.parseSubject(user)).queryString("html", this.parseEmail()).asJson();
 		} catch (UnirestException e) {
 			e.printStackTrace();
 		}
@@ -44,8 +45,19 @@ public class EmailService {
 
 	private String parseEmail() {
 		ClassLoader cl = getClass().getClassLoader();
-		File f = cl.getResource("static/tmpl/emailTemplate.html");
-		FileInputStream fis = new FileInputStream(f);
+		InputStream is = cl.getResourceAsStream("static/tmpl/emailTemplate.html");
+
+		return inputstreamToString(is);
+	}
+
+	private String inputstreamToString(InputStream is) {
+		StringWriter writer = new StringWriter();
+		try {
+			IOUtils.copy(is, writer, "UTF-8");
+		} catch (IOException e) {
+			return "ERROR";
+		}
+		return writer.toString();
 	}
 
 	private String parseSubject(User user) {
