@@ -10,6 +10,7 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.core.type.filter.RegexPatternTypeFilter;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -43,32 +44,16 @@ public class InvitationServiceController {
 	
 	
 	@PostMapping("/goToDesigner")
-	public String goToDesigner(@Valid @ModelAttribute User user, RedirectAttributes redirectAttributes) {
-		
-		String usermail = user.getEmail();
-		
-		//TODO Validate Email
-		
-//		checkEmail()
-//		
-//		if(usermail.length()<1 ) {
-//
-//			redirectAttributes.addFlashAttribute("errormessage", "Kein gültiges Emailformat!");
-//			return"redirect:/login";
-//			
-//		}
-//		else if(true){
-//			
-//			
-//			redirectAttributes.addFlashAttribute("errormessage", "Kein gültiges Emailformat!");
-//			return"redirect:/login";
-//		}
-//		else {
-//			return "designerMock";
-//		}
-		
-		return "designerMock";
-		
+	public String goToDesigner(@Valid @ModelAttribute User user, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+				
+		if(bindingResult.hasErrors()) {
+			redirectAttributes.addFlashAttribute("errormessage", "Hoppla, da ist etwas schief gegangen.. \\n hast du eine valide Emailadresse eingegeben?");
+			return "redirect:/login";
+		}else {
+			
+			//TODO redirect to designer service mit user.email als attribute
+			return "designerMock";
+		}			
 	}
 	
 

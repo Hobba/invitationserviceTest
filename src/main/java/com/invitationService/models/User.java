@@ -23,8 +23,8 @@ public class User {
 	protected int Id;
 	protected String Firstname;
 	protected String Lastname;
-	@org.hibernate.validator.constraints.Email
+//	@org.hibernate.validator.constraints.Email
 	@NotEmpty
-	@Pattern(regexp=".*@?.*(\\.)?.*")
+	@Pattern(regexp="^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$")
 	protected String Email;
 }
