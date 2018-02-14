@@ -39,7 +39,8 @@ public class EmailService {
 	}
 
 	private String parseEmail() {
-		return "DEFAULT TEXT";
+		ClassLoader cl = getClass().getClassLoader();
+		return cl.getResourceAsStream("static/tmpl/emailTemplate.html").toString();
 	}
 
 	private String parseSubject(User user) {
