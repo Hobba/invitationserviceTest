@@ -7,7 +7,7 @@ import com.invitationService.services.EmailService;
 
 @Configuration
 public class Config {
-	
+
 	@Bean
 	public EmailService emailService() {
 		return new EmailService();
