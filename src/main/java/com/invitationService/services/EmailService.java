@@ -1,5 +1,9 @@
 package com.invitationService.services;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
+
 import org.springframework.beans.factory.annotation.Value;
 
 import com.invitationService.models.User;
@@ -40,7 +44,8 @@ public class EmailService {
 
 	private String parseEmail() {
 		ClassLoader cl = getClass().getClassLoader();
-		return cl.getResourceAsStream("static/tmpl/emailTemplate.html").toString();
+		File f = cl.getResource("static/tmpl/emailTemplate.html");
+		FileInputStream fis = new FileInputStream(f);
 	}
 
 	private String parseSubject(User user) {
