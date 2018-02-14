@@ -60,6 +60,14 @@ public class InvitationServiceController {
 		return user;
 	}
 	
+	@ResponseBody
+	@RequestMapping(value="/sendInvitationEmailsList", method=RequestMethod.POST)
+	public List<User> SendInvitationEmailsList(@RequestBody List<User> users){
+		users.forEach(s->System.out.println(s));
+		//emailService.sendMail(user);
+		return null;
+	}
+	
 
 	@RequestMapping("/list/{id}")
 	public List<TableRow> getRows(@PathVariable String id) {
