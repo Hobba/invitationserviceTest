@@ -18,6 +18,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Validated
+
 public class User {
 	
 	protected int Id;

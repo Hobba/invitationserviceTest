@@ -1,7 +1,5 @@
 package com.invitationService.services;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Value;
 
 import com.invitationService.models.User;
@@ -21,8 +19,8 @@ public class EmailService {
 	@Value("${mailgun.api.from}")
 	private String mailgun_from;
 
-	public void sendMail(List<User> user) {
-		user.forEach(u -> sendMailToAddress(u));
+	public void sendMail(User user) {
+		sendMailToAddress(user);
 	}
 
 	private JsonNode sendMailToAddress(User user) {

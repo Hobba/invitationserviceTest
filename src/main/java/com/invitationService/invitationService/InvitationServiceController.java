@@ -86,12 +86,22 @@ public class InvitationServiceController {
 		return "index";
 	}
 
+	
 	@ResponseBody
-	@RequestMapping(value = "/sendInvitationEmails", method = RequestMethod.POST)
-	public String SendInvitationEmails(@RequestBody List<User> users) {
-		emailService.sendMail(users);
-		return "HELLO";
+	@RequestMapping(value="/sendInvitationEmails", method=RequestMethod.POST)
+	public User SendInvitationEmails(@RequestBody User user){
+		emailService.sendMail(user);
+		return user;
 	}
+	
+	@ResponseBody
+	@RequestMapping(value="/sendInvitationEmailsList", method=RequestMethod.POST)
+	public List<User> SendInvitationEmailsList(@RequestBody List<User> users){
+		users.forEach(s->System.out.println(s));
+		//emailService.sendMail(user);
+		return null;
+	}
+	
 
 	@RequestMapping("/list/{id}")
 	public List<TableRow> getRows(@PathVariable String id) {
