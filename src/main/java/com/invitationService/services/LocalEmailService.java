@@ -15,6 +15,10 @@ public class LocalEmailService implements EmailService {
 		System.out.println(parseEmail());
 	}
 
+	@Override
+	public void sendMail(Survey survey) {
+	}
+
 	private String parseEmail() {
 		ClassLoader cl = getClass().getClassLoader();
 		InputStream is = cl.getResourceAsStream("static/tmpl/emailTemplate.html");
@@ -30,12 +34,6 @@ public class LocalEmailService implements EmailService {
 			return "ERROR";
 		}
 		return writer.toString();
-	}
-
-	@Override
-	public void sendMail(Survey survey) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	// private String parseSubject(User user) {

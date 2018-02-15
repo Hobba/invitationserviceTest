@@ -9,15 +9,12 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class TableRow extends Creator {
+public class TableRow {
 
-	protected Boolean Status;
+	private int Id;
+	private String Name;
+	private String Email;
 
-	public TableRow(int Id, String Name, String Email, Boolean Status) {
-		this.Id = Id;
-		this.Name = Name;
-		this.Email = Email;
-		this.Status = Status;
-	}
+	private Boolean Status;
 
 }
