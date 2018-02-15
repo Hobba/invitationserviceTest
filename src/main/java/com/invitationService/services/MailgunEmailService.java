@@ -31,7 +31,7 @@ public class MailgunEmailService implements EmailService {
 		Email email = new Email();
 		email.setAddress(creator.getEmail());
 		email.setSubject("You created a new survey");
-		email.setContent(parseEmail());
+		email.setContent(parseEmail("creator"));
 		sendMailToAddress(email);
 	}
 
@@ -40,7 +40,7 @@ public class MailgunEmailService implements EmailService {
 			Email email = new Email();
 			email.setAddress(p.getEmail());
 			email.setSubject("You were invited to participate in a survey by " + survey.getCreator().getName());
-			email.setContent(parseEmail());
+			email.setContent(parseEmail("participants"));
 			sendMailToAddress(email);
 		}
 	}
@@ -60,10 +60,18 @@ public class MailgunEmailService implements EmailService {
 		return request.getBody();
 	}
 
-	private String parseEmail() {
+	private String parseEmail(String template) {
 		ClassLoader cl = getClass().getClassLoader();
 		InputStream is = cl.getResourceAsStream("static/tmpl/emailTemplate.html");
 
+		if (template.equals("creator")) {
+			is = cl.getResourceAsStream("static/tmpl/emailTemplate_Creator.html");
+		} else if (template.equals("participants")) {
+			is = cl.getResourceAsStream("static/tmpl/emailTemplate_Participants.html");
+		} else if (template.equals("reminder")) {
+			is = cl.getResourceAsStream("static/tmpl/emailTemplate_Reminder.html");
+		}
+		
 		return inputstreamToString(is);
 	}
 
