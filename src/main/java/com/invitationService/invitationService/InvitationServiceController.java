@@ -22,7 +22,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.invitationService.models.TableRow;
 
-import com.invitationService.models.User;
+import com.invitationService.models.Creator;
 import com.invitationService.services.EmailService;
 
 @Controller
@@ -32,12 +32,12 @@ public class InvitationServiceController {
 	@GetMapping("/login")
 	public String login(Model model) {
 
-		model.addAttribute("user", new User());
+		model.addAttribute("user", new Creator());
 		return "login_form";
 	}
 
 	@PostMapping("/goToDesigner")
-	public String goToDesigner(@Valid @ModelAttribute User user, BindingResult bindingResult,
+	public String goToDesigner(@Valid @ModelAttribute Creator user, BindingResult bindingResult,
 			RedirectAttributes redirectAttributes) {
 
 		if (bindingResult.hasErrors()) {
@@ -58,21 +58,21 @@ public class InvitationServiceController {
 	public String home(Model model) {
 		List<TableRow> liste = new ArrayList<>();
 
-		liste.add(new TableRow(1, "Peter", "Hummels", "e@mail.de", true));
-		liste.add(new TableRow(1, "Peter", "Hummels", "e@mail.de", true));
-		liste.add(new TableRow(1, "Peter", "Hummels", "e@mail.de", false));
-		liste.add(new TableRow(1, "Peter", "Hummels", "e@mail.de", true));
-		liste.add(new TableRow(1, "Peter", "Hummels", "e@mail.de", true));
-		liste.add(new TableRow(1, "Peter", "Hummels", "e@mail.de", true));
-		liste.add(new TableRow(1, "Peter", "Hummels", "e@mail.de", true));
-		liste.add(new TableRow(1, "Peter", "Hummels", "e@mail.de", false));
-		liste.add(new TableRow(1, "Peter", "Hummels", "e@mail.de", true));
-		liste.add(new TableRow(1, "Peter", "Hummels", "e@mail.de", true));
-		liste.add(new TableRow(1, "Peter", "Hummels", "e@mail.de", true));
-		liste.add(new TableRow(1, "Peter", "Hummels", "e@mail.de", true));
-		liste.add(new TableRow(1, "Peter", "Hummels", "e@mail.de", true));
-		liste.add(new TableRow(1, "Peter", "Hummels", "e@mail.de", true));
-		liste.add(new TableRow(1, "Peter", "Hummels", "e@mail.de", true));
+		liste.add(new TableRow(1, "Peter", "e@mail.de", true));
+		liste.add(new TableRow(1, "Peter", "e@mail.de", true));
+		liste.add(new TableRow(1, "Peter", "e@mail.de", false));
+		liste.add(new TableRow(1, "Peter", "e@mail.de", true));
+		liste.add(new TableRow(1, "Peter", "e@mail.de", true));
+		liste.add(new TableRow(1, "Peter", "e@mail.de", true));
+		liste.add(new TableRow(1, "Peter", "e@mail.de", true));
+		liste.add(new TableRow(1, "Peter", "e@mail.de", false));
+		liste.add(new TableRow(1, "Peter", "e@mail.de", true));
+		liste.add(new TableRow(1, "Peter", "e@mail.de", true));
+		liste.add(new TableRow(1, "Peter", "e@mail.de", true));
+		liste.add(new TableRow(1, "Peter", "e@mail.de", true));
+		liste.add(new TableRow(1, "Peter", "e@mail.de", true));
+		liste.add(new TableRow(1, "Peter", "e@mail.de", true));
+		liste.add(new TableRow(1, "Peter", "e@mail.de", true));
 
 		model.addAttribute("liste", liste);
 		return "index";
@@ -80,14 +80,14 @@ public class InvitationServiceController {
 
 	@ResponseBody
 	@RequestMapping(value = "/sendInvitationEmails", method = RequestMethod.POST)
-	public User SendInvitationEmails(@RequestBody User user) {
+	public Creator SendInvitationEmails(@RequestBody Creator user) {
 		emailService.sendMail(user);
 		return user;
 	}
 
 	@ResponseBody
 	@RequestMapping(value = "/sendInvitationEmailsList", method = RequestMethod.POST)
-	public List<User> SendInvitationEmailsList(@RequestBody List<User> users) {
+	public List<Creator> SendInvitationEmailsList(@RequestBody List<Creator> users) {
 		users.forEach(s -> System.out.println(s));
 		// emailService.sendMail(user);
 		return null;

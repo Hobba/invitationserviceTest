@@ -9,13 +9,13 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class TableRow extends User{	
+public class TableRow extends Creator {
 
-	private Boolean Status;
-	public TableRow(int Id, String Firstname, String Lastname, String Email, Boolean Status) {
+	protected Boolean Status;
+
+	public TableRow(int Id, String Name, String Email, Boolean Status) {
 		this.Id = Id;
-		this.Firstname = Firstname;
-		this.Lastname = Lastname;
+		this.Name = Name;
 		this.Email = Email;
 		this.Status = Status;
 	}

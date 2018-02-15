@@ -4,7 +4,6 @@ import javax.validation.constraints.Pattern;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.validation.annotation.Validated;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,13 +15,12 @@ import lombok.Setter;
 @Setter
 @Validated
 
-public class User {
-	
+public class Creator {
+
 	protected int Id;
-	protected String Firstname;
-	protected String Lastname;
-//	@org.hibernate.validator.constraints.Email
+	protected String Name;
+	// @org.hibernate.validator.constraints.Email
 	@NotEmpty
-	@Pattern(regexp="^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$")
+	@Pattern(regexp = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$")
 	protected String Email;
 }
