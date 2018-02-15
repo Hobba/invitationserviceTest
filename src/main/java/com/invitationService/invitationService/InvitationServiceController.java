@@ -80,16 +80,16 @@ public class InvitationServiceController {
 	}
 
 	@ResponseBody
-	@RequestMapping(value = "/sendInvitationEmails", method = RequestMethod.POST)
-	public Creator SendInvitationEmails(@RequestBody Creator creator) {
-		emailService.sendMail(creator);
-		return creator;
+	@RequestMapping(value = "/sendInvitationToCreator", method = RequestMethod.POST)
+	public Survey SendMailToCreator(@RequestBody Survey survey) {
+		emailService.sendMailToCreator(survey);
+		return survey;
 	}
 
 	@ResponseBody
-	@RequestMapping(value = "/sendInvitationEmailsNew", method = RequestMethod.POST)
-	public Survey SendInvitationEmailsNew(@RequestBody Survey survey) {
-		emailService.sendMail(survey);
+	@RequestMapping(value = "/sendInvitationToParticipants", method = RequestMethod.POST)
+	public Survey SendMailToParticipants(@RequestBody Survey survey) {
+		emailService.sendMailToParticipants(survey);
 		return survey;
 	}
 

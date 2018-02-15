@@ -3,56 +3,52 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-	 <link href="https://fonts.googleapis.com/css?family=Catamaran" rel="stylesheet"> 
-</head>
-<body>
+<link href="https://fonts.googleapis.com/css?family=Catamaran"
+	rel="stylesheet">
 
 <style>
-body{
-    font-family: 'Catamaran', sans-serif;
+body {
+	font-family: 'Catamaran', sans-serif;
 }
 
-.menu-bar{
+.menu-bar {
 	position: absolute;
 	height: 55px;
 	right: 0px;
 	left: 0px;
 	top: 0px;
-	background-color: rgb(248, 248,248);
+	background-color: rgb(248, 248, 248);
 	padding-right: 30px;
-	box-shadow: 0px 0px 13px rgb(119,119,119);
-	border-top: 2px solid rgb(225,29,55);	
-  color: red;
-  font-size: 34px;
-	
+	box-shadow: 0px 0px 13px rgb(119, 119, 119);
+	border-top: 2px solid rgb(225, 29, 55);
+	color: red;
+	font-size: 34px;
 }
 
-.invitationCard{
-  height: 200px;
- display: block; 
- background-color: rgb(240,240,240);
- margin-top: 80px;
- margin-left: 10%;
- margin-right: 10%;
- padding: 15px;
+.invitationCard {
+	height: 200px;
+	display: block;
+	background-color: rgb(240, 240, 240);
+	margin-top: 80px;
+	margin-left: 10%;
+	margin-right: 10%;
+	padding: 15px;
 }
 
-
-.invitationCard .title{
-  font-size: 25px;
-  font-height: bold;
+.invitationCard .title {
+	font-size: 25px;
+	font-height: bold;
 }
-
-
 </style>
+</head>
+<body>
 
-<div class="menu-bar" style="text-align: center;">
-  SIMQUE
-</div>
-<div class="invitationCard">
-  <h3>BootCamp Vorwissen</h3>
-  <p>Hallo</p>
-  <p>Du bist eingeladen an unserem neuen Umfragesystem teilzunehemen. Bitte nehme Dir ein Paar Minuten Zeit, die Fragen zu beantworten.</p>
-</div>
+	<div class="menu-bar" style="text-align: center;">SIMQUE</div>
+	<div class="invitationCard">
+		<h3>${TITLE}</h3>
+		<p>Hello,</p>
+		<p>I just wanted to remind you to participate in my survey!</p>
+		<p>Yours, ${CREATORNAME}</p>
+	</div>
 </body>
 </html>

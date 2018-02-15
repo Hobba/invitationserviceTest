@@ -7,7 +7,6 @@ import java.io.StringWriter;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Value;
 
-import com.invitationService.models.Creator;
 import com.invitationService.models.Email;
 import com.invitationService.models.Participant;
 import com.invitationService.models.Survey;
@@ -27,20 +26,24 @@ public class MailgunEmailService implements EmailService {
 	@Value("${mailgun.api.from}")
 	private String mailgun_from;
 
-	public void sendMail(Creator creator) {
+	public void sendMailToCreator(Survey survey) {
 		Email email = new Email();
-		email.setAddress(creator.getEmail());
+		email.setAddress(survey.getCreator().getEmail());
 		email.setSubject("You created a new survey");
-		email.setContent(parseEmail("creator"));
+		email.setContent(getEmailContent("creator"));
+		email.getContent().replaceAll("${TITLE}", survey.getTitle());
+		email.getContent().replaceAll("${CREATORNAME}", survey.getCreator().getName());
 		sendMailToAddress(email);
 	}
 
-	public void sendMail(Survey survey) {
+	public void sendMailToParticipants(Survey survey) {
 		for (Participant p : survey.getParticipants()) {
 			Email email = new Email();
 			email.setAddress(p.getEmail());
 			email.setSubject("You were invited to participate in a survey by " + survey.getCreator().getName());
-			email.setContent(parseEmail("participants"));
+			email.setContent(getEmailContent("participants"));
+			email.getContent().replaceAll("${TITLE}", survey.getTitle());
+			email.getContent().replaceAll("${CREATORNAME}", survey.getCreator().getName());
 			sendMailToAddress(email);
 		}
 	}
@@ -60,7 +63,7 @@ public class MailgunEmailService implements EmailService {
 		return request.getBody();
 	}
 
-	private String parseEmail(String template) {
+	private String getEmailContent(String template) {
 		ClassLoader cl = getClass().getClassLoader();
 		InputStream is = cl.getResourceAsStream("static/tmpl/emailTemplate.html");
 
@@ -71,11 +74,11 @@ public class MailgunEmailService implements EmailService {
 		} else if (template.equals("reminder")) {
 			is = cl.getResourceAsStream("static/tmpl/emailTemplate_Reminder.html");
 		}
-		
-		return inputstreamToString(is);
+
+		return inputStreamToString(is);
 	}
 
-	private String inputstreamToString(InputStream is) {
+	private String inputStreamToString(InputStream is) {
 		StringWriter writer = new StringWriter();
 		try {
 			IOUtils.copy(is, writer, "UTF-8");
