@@ -23,7 +23,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.invitationService.models.TableRow;
 
 import com.invitationService.models.User;
-
+import com.invitationService.services.EmailService;
 
 @Controller
 @EnableAutoConfiguration
@@ -37,10 +37,12 @@ public class InvitationServiceController {
 	}
 
 	@PostMapping("/goToDesigner")
-	public String goToDesigner(@Valid @ModelAttribute User user, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
-				
-		if(bindingResult.hasErrors()) {
-			redirectAttributes.addFlashAttribute("errormessage", "Hoppla, da ist etwas schief gegangen..\n hast du eine valide Emailadresse eingegeben?");
+	public String goToDesigner(@Valid @ModelAttribute User user, BindingResult bindingResult,
+			RedirectAttributes redirectAttributes) {
+
+		if (bindingResult.hasErrors()) {
+			redirectAttributes.addFlashAttribute("errormessage",
+					"Hoppla, da ist etwas schief gegangen..\n hast du eine valide Emailadresse eingegeben?");
 			return "redirect:/login";
 		} else {
 
@@ -49,7 +51,8 @@ public class InvitationServiceController {
 		}
 	}
 
-	
+	@Autowired
+	private EmailService emailService;
 
 	@RequestMapping("/")
 	public String home(Model model) {
@@ -75,6 +78,12 @@ public class InvitationServiceController {
 		return "index";
 	}
 
+	@ResponseBody
+	@RequestMapping(value = "/sendInvitationEmails", method = RequestMethod.POST)
+	public User SendInvitationEmails(@RequestBody User user) {
+		emailService.sendMail(user);
+		return user;
+	}
 
 	@ResponseBody
 	@RequestMapping(value = "/sendInvitationEmailsList", method = RequestMethod.POST)
