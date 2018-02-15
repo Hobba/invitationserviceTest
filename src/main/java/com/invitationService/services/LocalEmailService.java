@@ -17,10 +17,10 @@ public class LocalEmailService implements EmailService {
 		email.setAddress(survey.getCreator().getEmail());
 		email.setSubject("You created a new survey");
 		email.setContent(getEmailContent("creator"));
-		email.getContent().replaceAll("${TITLE}", survey.getTitle());
-		email.getContent().replaceAll("${CREATORNAME}", survey.getCreator().getName());
+		email.setContent(email.getContent().replaceAll("\\$\\{TITLE\\}", survey.getTitle()));
+		email.setContent(email.getContent().replaceAll("\\$\\{CREATORNAME\\}", survey.getCreator().getName()));
 
-		System.out.println(email);
+		System.out.println(email.getContent());
 	}
 
 	public void sendMailToParticipants(Survey survey) {
@@ -29,10 +29,10 @@ public class LocalEmailService implements EmailService {
 			email.setAddress(p.getEmail());
 			email.setSubject("You were invited to participate in a survey by " + survey.getCreator().getName());
 			email.setContent(getEmailContent("participants"));
-			email.getContent().replaceAll("${TITLE}", survey.getTitle());
-			email.getContent().replaceAll("${CREATORNAME}", survey.getCreator().getName());
+			email.getContent().replaceAll("\\$\\{TITLE\\}", survey.getTitle());
+			email.getContent().replaceAll("\\$\\{CREATORNAME\\}", survey.getCreator().getName());
 
-			System.out.println(email);
+			System.out.println(email.getContent());
 		}
 	}
 

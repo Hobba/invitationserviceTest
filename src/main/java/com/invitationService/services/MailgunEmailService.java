@@ -31,8 +31,8 @@ public class MailgunEmailService implements EmailService {
 		email.setAddress(survey.getCreator().getEmail());
 		email.setSubject("You created a new survey");
 		email.setContent(getEmailContent("creator"));
-		email.getContent().replaceAll("${TITLE}", survey.getTitle());
-		email.getContent().replaceAll("${CREATORNAME}", survey.getCreator().getName());
+		email.setContent(email.getContent().replaceAll("\\$\\{TITLE\\}", survey.getTitle()));
+		email.setContent(email.getContent().replaceAll("\\$\\{CREATORNAME\\}", survey.getCreator().getName()));
 		sendMailToAddress(email);
 	}
 

@@ -80,7 +80,7 @@ public class InvitationServiceController {
 	}
 
 	@ResponseBody
-	@RequestMapping(value = "/sendInvitationToCreator", method = RequestMethod.POST)
+	@RequestMapping(value = "/sendMailToCreator", method = RequestMethod.POST)
 	public Survey SendMailToCreator(@RequestBody Survey survey) {
 		emailService.sendMailToCreator(survey);
 		return survey;
