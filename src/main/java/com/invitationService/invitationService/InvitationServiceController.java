@@ -23,6 +23,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.invitationService.models.TableRow;
 
 import com.invitationService.models.Creator;
+import com.invitationService.models.Survey;
 import com.invitationService.services.EmailService;
 
 @Controller
@@ -80,9 +81,16 @@ public class InvitationServiceController {
 
 	@ResponseBody
 	@RequestMapping(value = "/sendInvitationEmails", method = RequestMethod.POST)
-	public Creator SendInvitationEmails(@RequestBody Creator user) {
-		emailService.sendMail(user);
-		return user;
+	public Creator SendInvitationEmails(@RequestBody Creator creator) {
+		emailService.sendMail(creator);
+		return creator;
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/sendInvitationEmailsNew", method = RequestMethod.POST)
+	public Survey SendInvitationEmailsNew(@RequestBody Survey survey) {
+		emailService.sendMail(survey);
+		return survey;
 	}
 
 	@ResponseBody

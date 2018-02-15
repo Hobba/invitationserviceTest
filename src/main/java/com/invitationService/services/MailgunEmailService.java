@@ -8,6 +8,8 @@ import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Value;
 
 import com.invitationService.models.Creator;
+import com.invitationService.models.Email;
+import com.invitationService.models.Participant;
 import com.invitationService.models.Survey;
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.JsonNode;
@@ -26,21 +28,31 @@ public class MailgunEmailService implements EmailService {
 	private String mailgun_from;
 
 	public void sendMail(Creator creator) {
-		sendMailToAddress(creator);
+		Email email = new Email();
+		email.setAddress(creator.getEmail());
+		email.setSubject("You created a new survey");
+		email.setContent(parseEmail());
+		sendMailToAddress(email);
 	}
 
 	public void sendMail(Survey survey) {
-
+		for (Participant p : survey.getParticipants()) {
+			Email email = new Email();
+			email.setAddress(p.getEmail());
+			email.setSubject("You were invited to participate in a survey by " + survey.getCreator().getName());
+			email.setContent(parseEmail());
+			sendMailToAddress(email);
+		}
 	}
 
-	private JsonNode sendMailToAddress(Creator user) {
+	private JsonNode sendMailToAddress(Email email) {
 
 		HttpResponse<JsonNode> request = null;
 
 		try {
 			request = Unirest.post(mailgun_url + "/messages").basicAuth("api", mailgun_key)
-					.queryString("from", mailgun_from).queryString("to", user.getEmail())
-					.queryString("subject", this.parseSubject(user)).queryString("html", this.parseEmail()).asJson();
+					.queryString("from", mailgun_from).queryString("to", email.getAddress())
+					.queryString("subject", email.getSubject()).queryString("html", email.getContent()).asJson();
 		} catch (UnirestException e) {
 			e.printStackTrace();
 		}
@@ -63,11 +75,6 @@ public class MailgunEmailService implements EmailService {
 			return "ERROR";
 		}
 		return writer.toString();
-	}
-
-	private String parseSubject(Creator user) {
-		// TODO: User field "Invited by"
-		return "You were invited to a survey by user.getInvitedBy()";
 	}
 
 }

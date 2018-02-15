@@ -11,12 +11,12 @@ import com.invitationService.models.Survey;
 
 public class LocalEmailService implements EmailService {
 
-	public void sendMail(Creator user) {
+	public void sendMail(Creator creator) {
 		System.out.println(parseEmail());
 	}
 
-	@Override
 	public void sendMail(Survey survey) {
+		System.out.println(parseEmail());
 	}
 
 	private String parseEmail() {
