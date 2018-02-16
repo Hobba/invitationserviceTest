@@ -1,12 +1,13 @@
 package com.invitationService.services;
 
-import com.invitationService.models.Creator;
 import com.invitationService.models.Survey;
 
 public interface EmailService {
 
-	void sendMail(Creator creator);
+	void sendCreationMailToCreator(Survey survey);
 
-	void sendMail(Survey survey);
+	void sendInviteToParticipants(Survey survey);
+
+	void sendReminderToParticipants(Survey survey);
 
 }

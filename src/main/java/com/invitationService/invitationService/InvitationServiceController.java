@@ -20,9 +20,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.invitationService.models.TableRow;
-
 import com.invitationService.models.Creator;
+import com.invitationService.models.Participant;
+import com.invitationService.models.Survey;
 import com.invitationService.services.EmailService;
 
 @Controller
@@ -56,33 +56,40 @@ public class InvitationServiceController {
 
 	@RequestMapping("/")
 	public String home(Model model) {
-		List<TableRow> liste = new ArrayList<>();
+		List<Participant> liste = new ArrayList<>();
 
-		liste.add(new TableRow(1, "Peter", "e@mail.de", true));
-		liste.add(new TableRow(1, "Peter", "e@mail.de", true));
-		liste.add(new TableRow(1, "Peter", "e@mail.de", false));
-		liste.add(new TableRow(1, "Peter", "e@mail.de", true));
-		liste.add(new TableRow(1, "Peter", "e@mail.de", true));
-		liste.add(new TableRow(1, "Peter", "e@mail.de", true));
-		liste.add(new TableRow(1, "Peter", "e@mail.de", true));
-		liste.add(new TableRow(1, "Peter", "e@mail.de", false));
-		liste.add(new TableRow(1, "Peter", "e@mail.de", true));
-		liste.add(new TableRow(1, "Peter", "e@mail.de", true));
-		liste.add(new TableRow(1, "Peter", "e@mail.de", true));
-		liste.add(new TableRow(1, "Peter", "e@mail.de", true));
-		liste.add(new TableRow(1, "Peter", "e@mail.de", true));
-		liste.add(new TableRow(1, "Peter", "e@mail.de", true));
-		liste.add(new TableRow(1, "Peter", "e@mail.de", true));
+		liste.add(new Participant(1, "e@mail.de", true));
+		liste.add(new Participant(1, "e@mail.de", true));
+		liste.add(new Participant(1, "e@mail.de", false));
+		liste.add(new Participant(1, "e@mail.de", true));
+		liste.add(new Participant(1, "e@mail.de", true));
+		liste.add(new Participant(1, "e@mail.de", true));
+		liste.add(new Participant(1, "e@mail.de", true));
+		liste.add(new Participant(1, "e@mail.de", false));
+		liste.add(new Participant(1, "e@mail.de", true));
+		liste.add(new Participant(1, "e@mail.de", true));
+		liste.add(new Participant(1, "e@mail.de", true));
+		liste.add(new Participant(1, "e@mail.de", true));
+		liste.add(new Participant(1, "e@mail.de", true));
+		liste.add(new Participant(1, "e@mail.de", true));
+		liste.add(new Participant(1, "e@mail.de", true));
 
 		model.addAttribute("liste", liste);
 		return "index";
 	}
 
 	@ResponseBody
-	@RequestMapping(value = "/sendInvitationEmails", method = RequestMethod.POST)
-	public Creator SendInvitationEmails(@RequestBody Creator user) {
-		emailService.sendMail(user);
-		return user;
+	@RequestMapping(value = "/sendMailToCreator", method = RequestMethod.POST)
+	public Survey SendMailToCreator(@RequestBody Survey survey) {
+		emailService.sendCreationMailToCreator(survey);
+		return survey;
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/sendInvitationToParticipants", method = RequestMethod.POST)
+	public Survey SendMailToParticipants(@RequestBody Survey survey) {
+		emailService.sendInviteToParticipants(survey);
+		return survey;
 	}
 
 	@ResponseBody
@@ -94,7 +101,7 @@ public class InvitationServiceController {
 	}
 
 	@RequestMapping("/list/{id}")
-	public List<TableRow> getRows(@PathVariable String id) {
+	public List<Participant> getRows(@PathVariable String id) {
 		return new ArrayList<>();
 	}
 

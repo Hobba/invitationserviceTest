@@ -5,16 +5,15 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Getter
-@Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class TableRow {
+@Getter
+@Setter
 
-	private int Id;
-	private String Name;
-	private String Email;
+public class Email {
 
-	private Boolean Status;
+	protected String address;
+	protected String subject;
+	protected String content;
 
 }
