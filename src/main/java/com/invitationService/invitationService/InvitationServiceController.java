@@ -28,6 +28,8 @@ import com.invitationService.services.EmailService;
 @Controller
 @EnableAutoConfiguration
 public class InvitationServiceController {
+	
+	//TODO: REFACTOR THIS!
 
 	@GetMapping("/login")
 	public String login(Model model) {
