@@ -7,3 +7,8 @@ Für Live Emails:
 --spring.profiles.active=production
 
 ausgewählt werden.
+
+﻿Beispiel:
+mvn clean install -Dspring.profiles.active=local
+alternativ:
+export SPRING_PROFILES_ACTIVE=local
