@@ -30,7 +30,7 @@ public class MailgunEmailService implements EmailService {
 		Email email = new Email();
 		email.setAddress(survey.getCreator().getEmail());
 		email.setSubject("You created a new survey");
-		email.setContent(getEmailContent("creator"));
+		email.setContent(getEmailContent(TEMPLATE_TYPE.CREATOR));
 		email.setContent(email.getContent().replaceAll("\\$\\{TITLE\\}", survey.getTitle()));
 		email.setContent(email.getContent().replaceAll("\\$\\{CREATORNAME\\}", survey.getCreator().getName()));
 
@@ -42,7 +42,7 @@ public class MailgunEmailService implements EmailService {
 			Email email = new Email();
 			email.setAddress(p.getEmail());
 			email.setSubject("You were invited to participate in a survey by " + survey.getCreator().getName());
-			email.setContent(getEmailContent("participants"));
+			email.setContent(getEmailContent(TEMPLATE_TYPE.PARTICIPANTS));
 			email.getContent().replaceAll("\\$\\{TITLE\\}", survey.getTitle());
 			email.getContent().replaceAll("\\$\\{CREATORNAME\\}", survey.getCreator().getName());
 
@@ -55,7 +55,7 @@ public class MailgunEmailService implements EmailService {
 			Email email = new Email();
 			email.setAddress(p.getEmail());
 			email.setSubject("You were invited to participate in a survey by " + survey.getCreator().getName());
-			email.setContent(getEmailContent("participants"));
+			email.setContent(getEmailContent(TEMPLATE_TYPE.REMINDER));
 			email.getContent().replaceAll("\\$\\{TITLE\\}", survey.getTitle());
 			email.getContent().replaceAll("\\$\\{CREATORNAME\\}", survey.getCreator().getName());
 
@@ -78,19 +78,21 @@ public class MailgunEmailService implements EmailService {
 		return request.getBody();
 	}
 
-	private String getEmailContent(String template) {
+	private String getEmailContent(TEMPLATE_TYPE template) {
 		ClassLoader cl = getClass().getClassLoader();
-		InputStream is = cl.getResourceAsStream("static/tmpl/emailTemplate.html");
 
-		if (template.equals("creator")) {
-			is = cl.getResourceAsStream("static/tmpl/emailTemplate_Creator.html");
-		} else if (template.equals("participants")) {
-			is = cl.getResourceAsStream("static/tmpl/emailTemplate_Participants.html");
-		} else if (template.equals("reminder")) {
-			is = cl.getResourceAsStream("static/tmpl/emailTemplate_Reminder.html");
+		System.out.println(template.toString());
+
+		switch (template) {
+		case CREATOR:
+			return inputStreamToString(cl.getResourceAsStream("static/tmpl/emailTemplate_Creator.html"));
+		case PARTICIPANTS:
+			return inputStreamToString(cl.getResourceAsStream("static/tmpl/emailTemplate_Participants.html"));
+		case REMINDER:
+			return inputStreamToString(cl.getResourceAsStream("static/tmpl/emailTemplate_Reminder.html"));
+		default:
+			return inputStreamToString(cl.getResourceAsStream("static/tmpl/emailTemplate.html"));
 		}
-
-		return inputStreamToString(is);
 	}
 
 	private String inputStreamToString(InputStream is) {
@@ -101,6 +103,10 @@ public class MailgunEmailService implements EmailService {
 			return "ERROR";
 		}
 		return writer.toString();
+	}
+
+	private enum TEMPLATE_TYPE {
+		CREATOR, PARTICIPANTS, REMINDER;
 	}
 
 }
