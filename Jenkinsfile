@@ -12,18 +12,23 @@ pipeline {
                 sh '''
                     echo "PATH = ${PATH}"
                     echo "M2_HOME = ${M2_HOME}"
-                    export SPRING_PROFILES_ACTIVE=production
                 '''
             }
         }
         stage('Build') { 
             steps { 
-                sh 'mvn install'
+                sh '''
+                export SPRING_PROFILES_ACTIVE=production
+                mvn install
+                '''
             }
         }
         stage('Test'){
             steps {
-                sh 'mvn test'
+                sh '''
+                export SPRING_PROFILES_ACTIVE=production
+                mvn test
+                '''
             }
         }
         stage('DeployDev'){
