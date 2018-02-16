@@ -81,10 +81,10 @@ public class InvitationServiceController {
 	}
 
 	@ResponseBody
-	@RequestMapping(value = "/sendMailToCreator", method = RequestMethod.POST)
-	public Survey SendMailToCreator(@RequestBody Survey survey) {
-		emailService.sendCreationMailToCreator(survey);
-		return survey;
+	@RequestMapping(value = "/sendAccountMailToCreator", method = RequestMethod.POST)
+	public Creator SendMailToCreator(@RequestBody Creator creator) {
+		emailService.sendAccountMailToCreator(creator);
+		return creator;
 	}
 
 	@ResponseBody

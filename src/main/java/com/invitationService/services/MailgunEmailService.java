@@ -7,6 +7,7 @@ import java.io.StringWriter;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Value;
 
+import com.invitationService.models.Creator;
 import com.invitationService.models.Email;
 import com.invitationService.models.Participant;
 import com.invitationService.models.Survey;
@@ -26,13 +27,11 @@ public class MailgunEmailService implements EmailService {
 	@Value("${mailgun.api.from}")
 	private String mailgun_from;
 
-	public void sendCreationMailToCreator(Survey survey) {
+	public void sendAccountMailToCreator(Creator creator) {
 		Email email = new Email();
-		email.setAddress(survey.getCreator().getEmail());
-		email.setSubject("[SimQue] Du hast eine neue Umfrage erstellt");
+		email.setAddress(creator.getEmail());
+		email.setSubject("[SimQue] Du hast dich bei SimQue angemeldet");
 		email.setContent(getEmailContent(TEMPLATE_TYPE.CREATOR));
-		email.setContent(email.getContent().replaceAll("\\$\\{TITLE\\}", survey.getTitle()));
-		email.setContent(email.getContent().replaceAll("\\$\\{CREATORNAME\\}", survey.getCreator().getName()));
 		// email.setContent(email.getContent().replaceAll("\\$\\{CREATORLINK\\}",
 		// survey.getCreatorLink()));
 
@@ -47,7 +46,7 @@ public class MailgunEmailService implements EmailService {
 					"Du wurdest von " + survey.getCreator().getName() + " eingeladen, an einer Umfrage teilzunehmen");
 			email.setContent(getEmailContent(TEMPLATE_TYPE.PARTICIPANTS));
 			email.getContent().replaceAll("\\$\\{TITLE\\}", survey.getTitle());
-			email.getContent().replaceAll("\\$\\{CREATORNAME\\}", survey.getCreator().getName());
+			email.getContent().replaceAll("\\$\\{CREATORNAME\\}", getCreatorName(survey.getCreator()));
 			email.getContent().replaceAll("\\$\\{GREETING\\}", survey.getGreeting());
 			// email.setContent(email.getContent().replaceAll("\\$\\{USERLINK\\}",
 			// survey.getUserLink()));
@@ -64,7 +63,7 @@ public class MailgunEmailService implements EmailService {
 					"Hast du vergessen an der Umfrage von " + survey.getCreator().getName() + " teilzunehmen?");
 			email.setContent(getEmailContent(TEMPLATE_TYPE.REMINDER));
 			email.getContent().replaceAll("\\$\\{TITLE\\}", survey.getTitle());
-			email.getContent().replaceAll("\\$\\{CREATORNAME\\}", survey.getCreator().getName());
+			email.getContent().replaceAll("\\$\\{CREATORNAME\\}", getCreatorName(survey.getCreator()));
 			// email.setContent(email.getContent().replaceAll("\\$\\{USERLINK\\}",
 			// survey.getUserLink()));
 
@@ -102,6 +101,14 @@ public class MailgunEmailService implements EmailService {
 		default:
 			// TODO: Throw exception.
 			return inputStreamToString(cl.getResourceAsStream("static/tmpl/emailTemplate.html"));
+		}
+	}
+
+	private String getCreatorName(Creator creator) {
+		if (!creator.getName().isEmpty()) {
+			return creator.getName();
+		} else {
+			return creator.getEmail();
 		}
 	}
 
