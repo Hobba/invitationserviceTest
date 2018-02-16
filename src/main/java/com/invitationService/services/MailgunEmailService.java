@@ -29,10 +29,12 @@ public class MailgunEmailService implements EmailService {
 	public void sendCreationMailToCreator(Survey survey) {
 		Email email = new Email();
 		email.setAddress(survey.getCreator().getEmail());
-		email.setSubject("You created a new survey");
+		email.setSubject("[SimQue] Du hast eine neue Umfrage erstellt");
 		email.setContent(getEmailContent(TEMPLATE_TYPE.CREATOR));
 		email.setContent(email.getContent().replaceAll("\\$\\{TITLE\\}", survey.getTitle()));
 		email.setContent(email.getContent().replaceAll("\\$\\{CREATORNAME\\}", survey.getCreator().getName()));
+		// email.setContent(email.getContent().replaceAll("\\$\\{CREATORLINK\\}",
+		// survey.getCreatorLink()));
 
 		sendMailToAddress(email);
 	}
@@ -41,10 +43,14 @@ public class MailgunEmailService implements EmailService {
 		for (Participant p : survey.getParticipants()) {
 			Email email = new Email();
 			email.setAddress(p.getEmail());
-			email.setSubject("You were invited to participate in a survey by " + survey.getCreator().getName());
+			email.setSubject(
+					"Du wurdest von " + survey.getCreator().getName() + " eingeladen, an einer Umfrage teilzunehmen");
 			email.setContent(getEmailContent(TEMPLATE_TYPE.PARTICIPANTS));
 			email.getContent().replaceAll("\\$\\{TITLE\\}", survey.getTitle());
 			email.getContent().replaceAll("\\$\\{CREATORNAME\\}", survey.getCreator().getName());
+			email.getContent().replaceAll("\\$\\{GREETING\\}", survey.getGreeting());
+			// email.setContent(email.getContent().replaceAll("\\$\\{USERLINK\\}",
+			// survey.getUserLink()));
 
 			sendMailToAddress(email);
 		}
@@ -54,10 +60,13 @@ public class MailgunEmailService implements EmailService {
 		for (Participant p : survey.getParticipants()) {
 			Email email = new Email();
 			email.setAddress(p.getEmail());
-			email.setSubject("You were invited to participate in a survey by " + survey.getCreator().getName());
+			email.setSubject(
+					"Hast du vergessen an der Umfrage von " + survey.getCreator().getName() + " teilzunehmen?");
 			email.setContent(getEmailContent(TEMPLATE_TYPE.REMINDER));
 			email.getContent().replaceAll("\\$\\{TITLE\\}", survey.getTitle());
 			email.getContent().replaceAll("\\$\\{CREATORNAME\\}", survey.getCreator().getName());
+			// email.setContent(email.getContent().replaceAll("\\$\\{USERLINK\\}",
+			// survey.getUserLink()));
 
 			sendMailToAddress(email);
 		}
@@ -91,6 +100,7 @@ public class MailgunEmailService implements EmailService {
 		case REMINDER:
 			return inputStreamToString(cl.getResourceAsStream("static/tmpl/emailTemplate_Reminder.html"));
 		default:
+			// TODO: Throw exception.
 			return inputStreamToString(cl.getResourceAsStream("static/tmpl/emailTemplate.html"));
 		}
 	}
