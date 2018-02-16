@@ -42,7 +42,7 @@ public class InvitationServiceController {
 
 		if (bindingResult.hasErrors()) {
 			redirectAttributes.addFlashAttribute("errormessage",
-					"Hoppla, da ist etwas schief gegangen..\n hast du eine valide Emailadresse eingegeben?");
+					"Bitte die Eingabe prüfen, die Emailadresse ist nicht gültig.");
 			return "redirect:/login";
 		} else {
 
