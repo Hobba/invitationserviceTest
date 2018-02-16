@@ -12,6 +12,7 @@ pipeline {
                 sh '''
                     echo "PATH = ${PATH}"
                     echo "M2_HOME = ${M2_HOME}"
+                    export SPRING_PROFILES_ACTIVE=production
                 '''
             }
         }
