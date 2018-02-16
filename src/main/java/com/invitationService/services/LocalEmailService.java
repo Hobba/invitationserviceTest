@@ -42,8 +42,8 @@ public class LocalEmailService implements EmailService {
 			email.setAddress(p.getEmail());
 			email.setSubject("Hey, this is a reminder to participate in my survey");
 			email.setContent(getEmailContent("reminder"));
-			email.getContent().replaceAll("${TITLE}", survey.getTitle());
-			email.getContent().replaceAll("${CREATORNAME}", survey.getCreator().getName());
+			email.getContent().replaceAll("\\$\\{TITLE\\}", survey.getTitle());
+			email.getContent().replaceAll("\\$\\{CREATORNAME\\}", survey.getCreator().getName());
 			System.out.println(email.getContent());
 		}
 	}
