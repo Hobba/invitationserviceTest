@@ -16,16 +16,18 @@
 <link type="text/css" rel="stylesheet" th:href="@{/css/style.css}" />
 <link href="https://fonts.googleapis.com/css?family=Nunito"
 	rel="stylesheet"></link>
+	
+	
 </head>
 
-<body style="font-family: 'Nunito', sans-serif;">
+<body style="font-family: 'Nunito', sans-serif;" onresize="resizeTrigger()">
 
 	<div
 		style="background-image: url('https://static.pexels.com/photos/669622/pexels-photo-669622.jpeg'); background-size: cover; background-position: 0 center; position: fixed; z-index: 0; right: 0px; left: 0px; top: 0px; bottom: 0px;">
 	</div>
 
 	<nav class="navbar navbar-expand-lg navbar-light"
-		style="background-color: rgba(248, 248, 248, 0.95)">
+		style="background-color: rgba(248, 248, 248, 0.95); z-index:2;">
 		<a class="navbar-brand" href="#"><img class="simque-brand-logo"
 			th:src="@{/img/logo_simque.png}" /></a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -47,7 +49,7 @@
 	</nav>
 
 
-	<div class="container" style="margin-top: 40px;">
+	<div id="main-container" class="container" style="margin-top: 40px;">
 		<div class="row" style="justify-content: center;">
 			<!-- 			<div class="col-sm-8" -->
 			<!-- 				style="background-color: rgba(256, 256, 256, 0.95); height: 300px; padding-top: 20px;"> -->
@@ -57,23 +59,16 @@
 			<!-- 					sofort mit Deiner ersten Umfrage starten.</p> -->
 
 			<!-- 			</div> -->
-			<div class="col-md-9 col-sm-12 col-lg-9 "
-				style="background-color: rgba(256, 256, 256, 0.95); height: 300px;">
+			<div th:if="${showLogin}" class="col-md-9 col-sm-12 col-lg-9 "
+				style="background-color: rgba(256, 256, 256, 0.95); height: 300px;padding: 20px; box-shadow: 0px 0px 10px rgb(70,70,70);">
 				<h3>SimQue - Your Simple Questionnaire</h3>
-				<p style="padding: 20px;">Schön, dass Du hier bist! Gib Deine
+				<p>Schön, dass Du hier bist! Gib Deine
 					Emailadresse ein und wir senden Dir deinen persönlichen
 					Zugangslink, anschließend kannst Du sofort mit Deiner ersten
 					Umfrage starten.</p>
 
 				<form enctype="multipart/form-data" th:object="${user}"
-					th:action="@{/goToDesigner}" method="post" style="margin: auto;">
-
-
-					<div style="display: none;">
-						<label style="width: 130px;">Name </label> <input type="text"
-							th:field="*{Name}" />
-					</div>
-
+					th:action="@{/goToConfirmation}" method="post" style="margin: auto;">
 
 					<input type="text" th:field="*{Email}"
 						placeholder="example@cgi.com" style="width: auto;" />
@@ -87,10 +82,19 @@
 
 					<div>
 						<button class="btn btn-primary" type="submit" value="Login"
-							style="margin-top: 7px;">Los Geht's</button>
+							style="margin-top: 7px; background-color: #991F3D;border-color: #991F3D;">Los Geht's</button>
 					</div>
 				</form>
 			</div>
+			
+			
+			
+			<div th:if="${not showLogin}" class="col-md-9 col-sm-12 col-lg-9 "
+				style="background-color: rgba(256, 256, 256, 0.95);padding: 20px; box-shadow: 0px 0px 10px rgb(70,70,70);">
+				<div style="text-align: center; margin-bottom: 15px;"><i style="font-size: 50px; color: LightGreen;" class="far fa-check-circle"></i></div>
+				<p>Wir haben Dir soeben eine E-Mail an <b th:text="${email}"></b> gesendet. Öffne die Email und klicke den Link an. Schon kannst du damit beginnen, die erste Umfrage zu erstellen. Viel Spaß!</p>
+			</div>
+			
 
 		</div>
 
@@ -98,4 +102,32 @@
 
 
 </body>
+
+
+<script type="text/javascript">
+//<![CDATA[
+	
+	
+	$(document).ready(function() {
+		var w = window.outerWidth;
+		if (w < 576) {
+			$("#main-container").css('margin-top', "0px");
+		} else {
+			$("#main-container").css('margin-top', "40px");
+		}
+	});
+
+	function resizeTrigger() {
+		var w = window.outerWidth;
+		if (w < 576) {
+			$("#main-container").css('margin-top', "0px");
+		} else {
+			$("#main-container").css('margin-top', "40px");
+		}
+
+	}
+	//]]>
+</script>
+
+
 </html>

@@ -29,25 +29,26 @@ import com.invitationService.services.EmailService;
 @EnableAutoConfiguration
 public class InvitationServiceController {
 
-	@GetMapping("/login")
+	@GetMapping("/")
 	public String login(Model model) {
-
 		model.addAttribute("user", new Creator());
+		model.addAttribute("showLogin", true);
 		return "login_form";
 	}
 
-	@PostMapping("/goToDesigner")
+	
+	
+	@PostMapping("/goToConfirmation")
 	public String goToDesigner(@Valid @ModelAttribute Creator user, BindingResult bindingResult,
-			RedirectAttributes redirectAttributes) {
-
+			RedirectAttributes redirectAttributes, Model model) {
 		if (bindingResult.hasErrors()) {
 			redirectAttributes.addFlashAttribute("errormessage",
 					"Bitte die Eingabe prüfen, die Emailadresse ist nicht gültig.");
-			return "redirect:/login";
+			return "redirect:/";
 		} else {
-
-			// TODO redirect to designer service mit user.email als attribute
-			return "designerMock";
+			model.addAttribute("showLogin",false);
+			model.addAttribute("email", user.getEmail());
+			return "login_form";
 		}
 	}
 
