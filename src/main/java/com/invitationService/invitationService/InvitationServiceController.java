@@ -41,15 +41,18 @@ public class InvitationServiceController {
 	
 	
 	@PostMapping("/goToConfirmation")
-	public String goToDesigner(@Valid @ModelAttribute Creator user, BindingResult bindingResult,
+	public String goToDesigner(@Valid @ModelAttribute Creator creator, BindingResult bindingResult,
 			RedirectAttributes redirectAttributes, Model model) {
 		if (bindingResult.hasErrors()) {
 			redirectAttributes.addFlashAttribute("errormessage",
 					"Bitte die Eingabe prüfen, die Emailadresse ist nicht gültig.");
 			return "redirect:/";
 		} else {
+			//send email to creator
+			emailService.sendAccountMailToCreator(creator);
+			
 			model.addAttribute("showLogin",false);
-			model.addAttribute("email", user.getEmail());
+			model.addAttribute("email", creator.getEmail());
 			return "login_form";
 		}
 	}
