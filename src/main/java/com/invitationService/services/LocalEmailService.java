@@ -12,7 +12,7 @@ import com.invitationService.models.Survey;
 
 public class LocalEmailService implements EmailService {
 
-	public void sendMailToCreator(Survey survey) {
+	public void sendCreationMailToCreator(Survey survey) {
 		Email email = new Email();
 		email.setAddress(survey.getCreator().getEmail());
 		email.setSubject("You created a new survey");
@@ -23,7 +23,7 @@ public class LocalEmailService implements EmailService {
 		System.out.println(email.getContent());
 	}
 
-	public void sendMailToParticipants(Survey survey) {
+	public void sendInviteToParticipants(Survey survey) {
 		for (Participant p : survey.getParticipants()) {
 			Email email = new Email();
 			email.setAddress(p.getEmail());
@@ -32,6 +32,18 @@ public class LocalEmailService implements EmailService {
 			email.getContent().replaceAll("\\$\\{TITLE\\}", survey.getTitle());
 			email.getContent().replaceAll("\\$\\{CREATORNAME\\}", survey.getCreator().getName());
 
+			System.out.println(email.getContent());
+		}
+	}
+
+	public void sendReminderToParticipants(Survey survey) {
+		for (Participant p : survey.getParticipants()) {
+			Email email = new Email();
+			email.setAddress(p.getEmail());
+			email.setSubject("Hey, this is a reminder to participate in my survey");
+			email.setContent(getEmailContent("reminder"));
+			email.getContent().replaceAll("${TITLE}", survey.getTitle());
+			email.getContent().replaceAll("${CREATORNAME}", survey.getCreator().getName());
 			System.out.println(email.getContent());
 		}
 	}

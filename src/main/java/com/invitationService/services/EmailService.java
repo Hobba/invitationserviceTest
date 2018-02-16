@@ -3,9 +3,11 @@ package com.invitationService.services;
 import com.invitationService.models.Survey;
 
 public interface EmailService {
-	
-	void sendMailToCreator(Survey survey);
 
-	void sendMailToParticipants(Survey survey);
+	void sendCreationMailToCreator(Survey survey);
+
+	void sendInviteToParticipants(Survey survey);
+
+	void sendReminderToParticipants(Survey survey);
 
 }
