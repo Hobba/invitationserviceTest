@@ -89,8 +89,6 @@ public class MailgunEmailService implements EmailService {
 	private String getEmailContent(TEMPLATE_TYPE template) {
 		ClassLoader cl = getClass().getClassLoader();
 
-		System.out.println(template.toString());
-
 		switch (template) {
 		case CREATOR:
 			return inputStreamToString(cl.getResourceAsStream("static/tmpl/emailTemplate_Creator.html"));
