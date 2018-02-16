@@ -30,7 +30,7 @@ public class MailgunEmailService implements EmailService {
 	public void sendAccountMailToCreator(Creator creator) {
 		Email email = new Email();
 		email.setAddress(creator.getEmail());
-		email.setSubject("[SimQue] Du hast dich bei SimQue angemeldet");
+		email.setSubject("SimQue: Deine Registrierung");
 		email.setContent(getEmailContent(TEMPLATE_TYPE.CREATOR));
 		// email.setContent(email.getContent().replaceAll("\\$\\{CREATORLINK\\}",
 		// survey.getCreatorLink()));
