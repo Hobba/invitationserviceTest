@@ -1,0 +1,7 @@
+folgende Dinge sind mir aufgefallen
+===================================
+
+- TODO - bitte mit Namenskürzel eingeben - und mit ein wenig mehr Information.
+- emailservice benötigt eine Rest Schnittstelle
+- kein "System.out.println" verwenden
+- kein "return null;"
