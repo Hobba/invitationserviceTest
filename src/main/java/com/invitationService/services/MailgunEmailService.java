@@ -13,8 +13,6 @@ import com.invitationService.models.Creator;
 import com.invitationService.models.Email;
 import com.invitationService.models.Participant;
 import com.invitationService.models.Survey;
-import com.mashape.unirest.http.HttpResponse;
-import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
 
@@ -78,19 +76,15 @@ public class MailgunEmailService implements EmailService {
 		}
 	}
 
-	private JsonNode sendMailToAddress(Email email) {
-
-		HttpResponse<JsonNode> request = null;
-
+	private void sendMailToAddress(Email email) {
 		try {
-			request = Unirest.post(mailgun_url + "/messages").basicAuth("api", mailgun_key)
-					.queryString("from", mailgun_from).queryString("to", email.getAddress())
-					.queryString("subject", email.getSubject()).queryString("html", email.getContent()).asJson();
-		} catch (UnirestException e) {
+			Unirest.post(mailgun_url + "/messages").basicAuth("api", mailgun_key).queryString("from", mailgun_from)
+					.queryString("to", email.getAddress()).queryString("subject", email.getSubject())
+					.queryString("html", email.getContent()).asJson();
+		} catch (UnirestException | RuntimeException e) {
 			LOGGER.warn("Couldn't send email due to mail server connection issues", e);
+			// TODO: (JAN) Retry to send email
 		}
-
-		return request.getBody();
 	}
 
 	private String getEmailContent(TEMPLATE_TYPE template) {
