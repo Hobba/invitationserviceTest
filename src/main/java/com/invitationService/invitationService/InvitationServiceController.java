@@ -59,29 +59,29 @@ public class InvitationServiceController {
 	@Autowired
 	private EmailService emailService;
 
-	@RequestMapping("/emails")
-	public String home(Model model) {
-		List<Participant> liste = new ArrayList<>();
-
-		liste.add(new Participant(1, "e@mail.de", true));
-		liste.add(new Participant(1, "e@mail.de", true));
-		liste.add(new Participant(1, "e@mail.de", false));
-		liste.add(new Participant(1, "e@mail.de", true));
-		liste.add(new Participant(1, "e@mail.de", true));
-		liste.add(new Participant(1, "e@mail.de", true));
-		liste.add(new Participant(1, "e@mail.de", true));
-		liste.add(new Participant(1, "e@mail.de", false));
-		liste.add(new Participant(1, "e@mail.de", true));
-		liste.add(new Participant(1, "e@mail.de", true));
-		liste.add(new Participant(1, "e@mail.de", true));
-		liste.add(new Participant(1, "e@mail.de", true));
-		liste.add(new Participant(1, "e@mail.de", true));
-		liste.add(new Participant(1, "e@mail.de", true));
-		liste.add(new Participant(1, "e@mail.de", true));
-
-		model.addAttribute("liste", liste);
-		return "index";
-	}
+//	@RequestMapping("/emails")
+//	public String home(Model model) {
+//		List<Participant> liste = new ArrayList<>();
+//
+//		liste.add(new Participant(1, "e@mail.de", true));
+//		liste.add(new Participant(1, "e@mail.de", true));
+//		liste.add(new Participant(1, "e@mail.de", false));
+//		liste.add(new Participant(1, "e@mail.de", true));
+//		liste.add(new Participant(1, "e@mail.de", true));
+//		liste.add(new Participant(1, "e@mail.de", true));
+//		liste.add(new Participant(1, "e@mail.de", true));
+//		liste.add(new Participant(1, "e@mail.de", false));
+//		liste.add(new Participant(1, "e@mail.de", true));
+//		liste.add(new Participant(1, "e@mail.de", true));
+//		liste.add(new Participant(1, "e@mail.de", true));
+//		liste.add(new Participant(1, "e@mail.de", true));
+//		liste.add(new Participant(1, "e@mail.de", true));
+//		liste.add(new Participant(1, "e@mail.de", true));
+//		liste.add(new Participant(1, "e@mail.de", true));
+//
+//		model.addAttribute("liste", liste);
+//		return "index";
+//	}
 
 	@ResponseBody
 	@RequestMapping(value = "/sendAccountMailToCreator", method = RequestMethod.POST)
