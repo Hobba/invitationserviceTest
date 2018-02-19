@@ -1114,3 +1114,5 @@ body {
 	</div>
 </body>
 </html>
+2018-02-19 14:30:52.341  INFO 31474 --- [Thread-8] ationConfigEmbeddedWebApplicationContext : Closing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@6b32f8a5: startup date [Mon Feb 19 12:22:22 CET 2018]; root of context hierarchy
+2018-02-19 14:30:52.359  INFO 31474 --- [Thread-8] o.s.j.e.a.AnnotationMBeanExporter        : Unregistering JMX-exposed beans on shutdown
