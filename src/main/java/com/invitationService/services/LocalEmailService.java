@@ -24,11 +24,17 @@ public class LocalEmailService implements EmailService {
 
 	private final Logger LOGGER = LoggerFactory.getLogger(LocalEmailService.class);
 
-	public void sendAccountMailToCreator(Creator creator) {
+	public void sendAccountMailToCreator(Creator creator, boolean isRegistered) {
 		Email email = new Email();
 		email.setAddress(creator.getEmail());
 		email.setSubject("SimQue: Deine Registrierung");
-		email.setContent(getEmailContent(TEMPLATE_TYPE.CREATOR));
+
+		if (isRegistered) {
+			email.setContent(getEmailContent(TEMPLATE_TYPE.CREATOR_REGISTERED));
+		} else {
+			email.setContent(getEmailContent(TEMPLATE_TYPE.CREATOR_UNREGISTERED));
+		}
+
 		email.setContent(email.getContent().replaceAll("\\$\\{CREATORLINK\\}", designservice_base_url));
 
 		LOGGER.info(email.getContent());
@@ -69,8 +75,10 @@ public class LocalEmailService implements EmailService {
 		ClassLoader cl = getClass().getClassLoader();
 
 		switch (template) {
-		case CREATOR:
+		case CREATOR_UNREGISTERED:
 			return inputStreamToString(cl.getResourceAsStream("static/tmpl/emailTemplate_Creator.html"));
+		case CREATOR_REGISTERED:
+			return inputStreamToString(cl.getResourceAsStream("static/tmpl/emailTemplate_Creator_Registered.html"));
 		case PARTICIPANTS:
 			return inputStreamToString(cl.getResourceAsStream("static/tmpl/emailTemplate_Participants.html"));
 		case REMINDER:
@@ -100,7 +108,7 @@ public class LocalEmailService implements EmailService {
 	}
 
 	private enum TEMPLATE_TYPE {
-		CREATOR, PARTICIPANTS, REMINDER;
+		CREATOR_UNREGISTERED, CREATOR_REGISTERED, PARTICIPANTS, REMINDER;
 	}
 
 }

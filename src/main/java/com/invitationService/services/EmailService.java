@@ -5,7 +5,7 @@ import com.invitationService.models.Survey;
 
 public interface EmailService {
 
-	void sendAccountMailToCreator(Creator creator);
+	void sendAccountMailToCreator(Creator creator, boolean isRegistered);
 
 	void sendInviteToParticipants(Survey survey);
 

@@ -47,13 +47,16 @@ public class InvitationServiceController {
 			return "login_form";
 		} else {
 			// send email to creator
-			emailService.sendAccountMailToCreator(user);
 
 			if (creatorDAO.isCreatorExist(user.getEmail())) {
 				model.addAttribute("userExisted", true);
+				
+				emailService.sendAccountMailToCreator(user, true);
 			} else {
 				creatorDAO.insertCreator(user);
 				model.addAttribute("userExisted", false);
+				
+				emailService.sendAccountMailToCreator(user, false);
 			}
 
 			model.addAttribute("showLogin", false);
@@ -89,13 +92,6 @@ public class InvitationServiceController {
 	// model.addAttribute("liste", liste);
 	// return "index";
 	// }
-
-	@ResponseBody
-	@RequestMapping(value = "/sendAccountMailToCreator", method = RequestMethod.POST)
-	public Creator SendMailToCreator(@RequestBody Creator creator) {
-		emailService.sendAccountMailToCreator(creator);
-		return creator;
-	}
 
 	@ResponseBody
 	@RequestMapping(value = "/sendInvitationToParticipants", method = RequestMethod.POST)
