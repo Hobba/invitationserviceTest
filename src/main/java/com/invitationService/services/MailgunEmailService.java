@@ -29,6 +29,9 @@ public class MailgunEmailService implements EmailService {
 	@Value("${mailgun.api.from}")
 	private String mailgun_from;
 
+	@Value("${invitationservice.base.url}")
+	private String base_url;
+
 	private final Logger LOGGER = LoggerFactory.getLogger(MailgunEmailService.class);
 
 	public void sendAccountMailToCreator(Creator creator) {
@@ -36,8 +39,7 @@ public class MailgunEmailService implements EmailService {
 		email.setAddress(creator.getEmail());
 		email.setSubject("SimQue: Deine Registrierung");
 		email.setContent(getEmailContent(TEMPLATE_TYPE.CREATOR));
-		// email.setContent(email.getContent().replaceAll("\\$\\{CREATORLINK\\}",
-		// survey.getCreatorLink()));
+		email.setContent(email.getContent().replaceAll("\\$\\{CREATORLINK\\}", base_url));
 
 		sendMailToAddress(email);
 	}

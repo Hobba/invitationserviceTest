@@ -7,6 +7,7 @@ import java.io.StringWriter;
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 
 import com.invitationService.models.Creator;
 import com.invitationService.models.Email;
@@ -15,6 +16,9 @@ import com.invitationService.models.Survey;
 
 public class LocalEmailService implements EmailService {
 
+	@Value("${invitationservice.base.url}")
+	private String base_url;
+
 	private final Logger LOGGER = LoggerFactory.getLogger(LocalEmailService.class);
 
 	public void sendAccountMailToCreator(Creator creator) {
@@ -22,8 +26,7 @@ public class LocalEmailService implements EmailService {
 		email.setAddress(creator.getEmail());
 		email.setSubject("[SimQue] Du hast dich bei SimQue angemeldet");
 		email.setContent(getEmailContent(TEMPLATE_TYPE.CREATOR));
-		// email.setContent(email.getContent().replaceAll("\\$\\{CREATORLINK\\}",
-		// survey.getCreatorLink()));
+		email.setContent(email.getContent().replaceAll("\\$\\{CREATORLINK\\}", base_url));
 
 		LOGGER.info(email.getContent());
 	}
