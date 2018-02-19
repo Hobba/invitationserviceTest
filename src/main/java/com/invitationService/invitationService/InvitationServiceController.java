@@ -32,6 +32,11 @@ public class InvitationServiceController {
 	
 	//TODO: REFACTOR THIS!
 
+	
+	@Autowired
+	private CreatorDAO creatorDAO;
+	
+	
 	@GetMapping("/")
 	public String login(Model model) {
 		model.addAttribute("user", new Creator());
@@ -45,8 +50,6 @@ public class InvitationServiceController {
 	public String goToDesigner(@Valid @ModelAttribute Creator user, BindingResult bindingResult,
 			Model model) {
 		if (bindingResult.hasErrors()) {
-			//redirectAttributes.addFlashAttribute("errormessage",
-			//		"Bitte die Eingabe prüfen, die Emailadresse ist nicht gültig.");
 			model.addAttribute("showLogin",true);
 			model.addAttribute("user", user);
 			model.addAttribute("errormessage","Bitte die Eingabe prüfen, die Emailadresse ist nicht gültig.");
@@ -54,8 +57,17 @@ public class InvitationServiceController {
 		} else {
 			//send email to creator
 			emailService.sendAccountMailToCreator(user);
+			
+			if(creatorDAO.isCreatorExist(user.getEmail())){
+				model.addAttribute("userExisted", true);
+			}else {
+				creatorDAO.insertCreator(user);
+				model.addAttribute("userExisted", false);
+			}
+			
 			model.addAttribute("showLogin",false);
 			model.addAttribute("email", user.getEmail());
+			
 			return "login_form";
 		}
 	}

@@ -92,8 +92,17 @@
 			
 			<div th:if="${not showLogin}" class="col-md-9 col-sm-12 col-lg-9 "
 				style="background-color: rgba(256, 256, 256, 0.95);padding: 20px; box-shadow: 0px 0px 10px rgb(70,70,70);">
-				<div style="text-align: center; margin-bottom: 15px;"><i style="font-size: 50px; color: LightGreen;" class="far fa-check-circle"></i></div>
-				<p>Wir haben Dir soeben eine E-Mail an <b th:text="${email}"></b> gesendet. Öffne die Email und klicke den Link an. Schon kannst du damit beginnen, die erste Umfrage zu erstellen. Viel Spaß!</p>
+				
+				
+				<div th:if="${userExisted}">
+						<div style="text-align: center; margin-bottom: 15px;"><i style="font-size: 50px; color: LightGreen;" class="far fa-check-circle"></i></div>
+						<p>Hallo <b th:text="${email}"></b>, schön, dass du wieder da bist. Wir haben Dir eben ein Email mit einem Link gesendet. Öffne die Email und klicke den Link an. Viel Spaß!</p>
+				</div>
+				<div th:if="${not userExisted}">
+					<div style="text-align: center; margin-bottom: 15px;"><i style="font-size: 50px; color: LightGreen;" class="far fa-check-circle"></i></div>
+					<p>Wir haben Dir soeben eine E-Mail an <b th:text="${email}"></b> gesendet. Öffne die Email und klicke den Link an. Schon kannst du damit beginnen, die erste Umfrage zu erstellen. Viel Spaß!</p>
+				</div>
+
 			</div>
 			
 

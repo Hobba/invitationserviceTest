@@ -11,7 +11,6 @@ import lombok.Setter;
 @Setter
 
 public class Email {
-
 	protected String address;
 	protected String subject;
 	protected String content;

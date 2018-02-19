@@ -17,9 +17,8 @@ import lombok.Setter;
 
 public class Creator {
 
-	protected int Id;
-	protected String Name;
+	private String Name;
 	@NotEmpty
 	@Pattern(regexp = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$")
-	protected String Email;
+	private String email;
 }
