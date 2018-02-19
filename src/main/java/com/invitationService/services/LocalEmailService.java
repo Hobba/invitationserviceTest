@@ -35,7 +35,8 @@ public class LocalEmailService implements EmailService {
 			email.setContent(getEmailContent(TEMPLATE_TYPE.CREATOR_UNREGISTERED));
 		}
 
-		email.setContent(email.getContent().replaceAll("\\$\\{CREATORLINK\\}", designservice_base_url));
+		email.setContent(email.getContent().replaceAll("\\$\\{CREATORLINK\\}",
+				designservice_base_url + "?creator=" + creator.getEmail()));
 
 		LOGGER.info(email.getContent());
 	}
