@@ -75,14 +75,15 @@
 					<div>
 
 
-						<p th:if="${errormessage}" style="margin-bottom: 0px;">
+						<div th:if="${errormessage}" style="margin-top: 3px; min-height: 10px;">
 							<label th:text="${errormessage}" style="color: red;"></label>
-						</p>
+						</div>
+					<!-- 	<div th:if="${empty errormessage}" style="margin-top: 3px; height: 10px; display: block"></div> -->
 					</div>
 
 					<div>
 						<button class="btn btn-primary" type="submit" value="Login"
-							style="margin-top: 7px; background-color: #991F3D;border-color: #991F3D;">Los Geht's</button>
+							style="background-color: #991F3D;border-color: #991F3D;">Los Geht's</button>
 					</div>
 				</form>
 			</div>

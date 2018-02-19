@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -41,18 +42,20 @@ public class InvitationServiceController {
 	
 	
 	@PostMapping("/goToConfirmation")
-	public String goToDesigner(@Valid @ModelAttribute Creator creator, BindingResult bindingResult,
-			RedirectAttributes redirectAttributes, Model model) {
+	public String goToDesigner(@Valid @ModelAttribute Creator user,@RequestParam("Address") String add, BindingResult bindingResult,
+			Model model) {
 		if (bindingResult.hasErrors()) {
-			redirectAttributes.addFlashAttribute("errormessage",
-					"Bitte die Eingabe prüfen, die Emailadresse ist nicht gültig.");
-			return "redirect:/";
+			//redirectAttributes.addFlashAttribute("errormessage",
+			//		"Bitte die Eingabe prüfen, die Emailadresse ist nicht gültig.");
+			model.addAttribute("showLogin",true);
+			model.addAttribute("user", user);
+			model.addAttribute("errormessage","Bitte die Eingabe prüfen, die Emailadresse ist nicht gültig.");
+			return "login_form";
 		} else {
 			//send email to creator
-			emailService.sendAccountMailToCreator(creator);
-			
+			emailService.sendAccountMailToCreator(user);
 			model.addAttribute("showLogin",false);
-			model.addAttribute("email", creator.getEmail());
+			model.addAttribute("email", user.getEmail());
 			return "login_form";
 		}
 	}
