@@ -15,7 +15,7 @@ import com.invitationService.models.Survey;
 
 public class LocalEmailService implements EmailService {
 
-	final Logger logger = LoggerFactory.getLogger(LocalEmailService.class);
+	private final Logger LOGGER = LoggerFactory.getLogger(LocalEmailService.class);
 
 	public void sendAccountMailToCreator(Creator creator) {
 		Email email = new Email();
@@ -25,7 +25,7 @@ public class LocalEmailService implements EmailService {
 		// email.setContent(email.getContent().replaceAll("\\$\\{CREATORLINK\\}",
 		// survey.getCreatorLink()));
 
-		logger.info(email.getContent());
+		LOGGER.info(email.getContent());
 	}
 
 	public void sendInviteToParticipants(Survey survey) {
@@ -41,7 +41,7 @@ public class LocalEmailService implements EmailService {
 			// email.setContent(email.getContent().replaceAll("\\$\\{USERLINK\\}",
 			// survey.getUserLink()));
 
-			logger.info(email.getContent());
+			LOGGER.info(email.getContent());
 		}
 	}
 
@@ -57,7 +57,7 @@ public class LocalEmailService implements EmailService {
 			// email.setContent(email.getContent().replaceAll("\\$\\{USERLINK\\}",
 			// survey.getUserLink()));
 
-			logger.info(email.getContent());
+			LOGGER.info(email.getContent());
 		}
 	}
 

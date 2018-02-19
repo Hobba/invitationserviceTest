@@ -5,6 +5,8 @@ import java.io.InputStream;
 import java.io.StringWriter;
 
 import org.apache.commons.io.IOUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 
 import com.invitationService.models.Creator;
@@ -26,6 +28,8 @@ public class MailgunEmailService implements EmailService {
 
 	@Value("${mailgun.api.from}")
 	private String mailgun_from;
+
+	private final Logger LOGGER = LoggerFactory.getLogger(MailgunEmailService.class);
 
 	public void sendAccountMailToCreator(Creator creator) {
 		Email email = new Email();
@@ -80,7 +84,7 @@ public class MailgunEmailService implements EmailService {
 					.queryString("from", mailgun_from).queryString("to", email.getAddress())
 					.queryString("subject", email.getSubject()).queryString("html", email.getContent()).asJson();
 		} catch (UnirestException e) {
-			e.printStackTrace();
+			LOGGER.warn("Couldn't send email due to mail server connection issues", e);
 		}
 
 		return request.getBody();
