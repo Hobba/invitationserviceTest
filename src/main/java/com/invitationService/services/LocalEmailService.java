@@ -5,6 +5,8 @@ import java.io.InputStream;
 import java.io.StringWriter;
 
 import org.apache.commons.io.IOUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.invitationService.models.Creator;
 import com.invitationService.models.Email;
@@ -12,6 +14,8 @@ import com.invitationService.models.Participant;
 import com.invitationService.models.Survey;
 
 public class LocalEmailService implements EmailService {
+
+	final Logger logger = LoggerFactory.getLogger(LocalEmailService.class);
 
 	public void sendAccountMailToCreator(Creator creator) {
 		Email email = new Email();
@@ -21,7 +25,7 @@ public class LocalEmailService implements EmailService {
 		// email.setContent(email.getContent().replaceAll("\\$\\{CREATORLINK\\}",
 		// survey.getCreatorLink()));
 
-		System.out.println(email.getContent());
+		logger.info(email.getContent());
 	}
 
 	public void sendInviteToParticipants(Survey survey) {
@@ -37,7 +41,7 @@ public class LocalEmailService implements EmailService {
 			// email.setContent(email.getContent().replaceAll("\\$\\{USERLINK\\}",
 			// survey.getUserLink()));
 
-			System.out.println(email.getContent());
+			logger.info(email.getContent());
 		}
 	}
 
@@ -53,7 +57,7 @@ public class LocalEmailService implements EmailService {
 			// email.setContent(email.getContent().replaceAll("\\$\\{USERLINK\\}",
 			// survey.getUserLink()));
 
-			System.out.println(email.getContent());
+			logger.info(email.getContent());
 		}
 	}
 
