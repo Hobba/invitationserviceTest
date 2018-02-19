@@ -28,40 +28,37 @@ import com.invitationService.services.EmailService;
 @EnableAutoConfiguration
 public class InvitationServiceController {
 
-	
 	@Autowired
 	private CreatorDAO creatorDAO;
-	
-	
+
 	@GetMapping("/")
 	public String login(Model model) {
 		model.addAttribute("user", new Creator());
 		model.addAttribute("showLogin", true);
 		return "login_form";
 	}
-	
+
 	@PostMapping("/goToConfirmation")
-	public String goToDesigner(@Valid @ModelAttribute Creator user, BindingResult bindingResult,
-			Model model) {
+	public String goToDesigner(@Valid @ModelAttribute Creator user, BindingResult bindingResult, Model model) {
 		if (bindingResult.hasErrors()) {
-			model.addAttribute("showLogin",true);
+			model.addAttribute("showLogin", true);
 			model.addAttribute("user", user);
-			model.addAttribute("errormessage","Bitte die Eingabe prüfen, die Emailadresse ist nicht gültig.");
+			model.addAttribute("errormessage", "Bitte die Eingabe prüfen, die Emailadresse ist nicht gültig.");
 			return "login_form";
 		} else {
-			//send email to creator
+			// send email to creator
 			emailService.sendAccountMailToCreator(user);
-			
-			if(creatorDAO.isCreatorExist(user.getEmail())){
+
+			if (creatorDAO.isCreatorExist(user.getEmail())) {
 				model.addAttribute("userExisted", true);
-			}else {
+			} else {
 				creatorDAO.insertCreator(user);
 				model.addAttribute("userExisted", false);
 			}
-			
-			model.addAttribute("showLogin",false);
+
+			model.addAttribute("showLogin", false);
 			model.addAttribute("email", user.getEmail());
-			
+
 			return "login_form";
 		}
 	}
@@ -69,29 +66,29 @@ public class InvitationServiceController {
 	@Autowired
 	private EmailService emailService;
 
-//	@RequestMapping("/emails")
-//	public String home(Model model) {
-//		List<Participant> liste = new ArrayList<>();
-//
-//		liste.add(new Participant(1, "e@mail.de", true));
-//		liste.add(new Participant(1, "e@mail.de", true));
-//		liste.add(new Participant(1, "e@mail.de", false));
-//		liste.add(new Participant(1, "e@mail.de", true));
-//		liste.add(new Participant(1, "e@mail.de", true));
-//		liste.add(new Participant(1, "e@mail.de", true));
-//		liste.add(new Participant(1, "e@mail.de", true));
-//		liste.add(new Participant(1, "e@mail.de", false));
-//		liste.add(new Participant(1, "e@mail.de", true));
-//		liste.add(new Participant(1, "e@mail.de", true));
-//		liste.add(new Participant(1, "e@mail.de", true));
-//		liste.add(new Participant(1, "e@mail.de", true));
-//		liste.add(new Participant(1, "e@mail.de", true));
-//		liste.add(new Participant(1, "e@mail.de", true));
-//		liste.add(new Participant(1, "e@mail.de", true));
-//
-//		model.addAttribute("liste", liste);
-//		return "index";
-//	}
+	// @RequestMapping("/emails")
+	// public String home(Model model) {
+	// List<Participant> liste = new ArrayList<>();
+	//
+	// liste.add(new Participant(1, "e@mail.de", true));
+	// liste.add(new Participant(1, "e@mail.de", true));
+	// liste.add(new Participant(1, "e@mail.de", false));
+	// liste.add(new Participant(1, "e@mail.de", true));
+	// liste.add(new Participant(1, "e@mail.de", true));
+	// liste.add(new Participant(1, "e@mail.de", true));
+	// liste.add(new Participant(1, "e@mail.de", true));
+	// liste.add(new Participant(1, "e@mail.de", false));
+	// liste.add(new Participant(1, "e@mail.de", true));
+	// liste.add(new Participant(1, "e@mail.de", true));
+	// liste.add(new Participant(1, "e@mail.de", true));
+	// liste.add(new Participant(1, "e@mail.de", true));
+	// liste.add(new Participant(1, "e@mail.de", true));
+	// liste.add(new Participant(1, "e@mail.de", true));
+	// liste.add(new Participant(1, "e@mail.de", true));
+	//
+	// model.addAttribute("liste", liste);
+	// return "index";
+	// }
 
 	@ResponseBody
 	@RequestMapping(value = "/sendAccountMailToCreator", method = RequestMethod.POST)

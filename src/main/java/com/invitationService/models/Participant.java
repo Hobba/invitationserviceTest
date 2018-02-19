@@ -11,10 +11,8 @@ import lombok.Setter;
 @Setter
 
 public class Participant {
-	
-	protected int Id;
 
 	protected String email;
-	protected Boolean Status;
+	protected Boolean status;
 
 }
