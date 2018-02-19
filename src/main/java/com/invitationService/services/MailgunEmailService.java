@@ -32,6 +32,9 @@ public class MailgunEmailService implements EmailService {
 	@Value("${invitationservice.base.url}")
 	private String base_url;
 
+	@Value("${designservice.base.url}")
+	private String designservice_base_url;
+
 	private final Logger LOGGER = LoggerFactory.getLogger(MailgunEmailService.class);
 
 	public void sendAccountMailToCreator(Creator creator) {
@@ -39,7 +42,7 @@ public class MailgunEmailService implements EmailService {
 		email.setAddress(creator.getEmail());
 		email.setSubject("SimQue: Deine Registrierung");
 		email.setContent(getEmailContent(TEMPLATE_TYPE.CREATOR));
-		email.setContent(email.getContent().replaceAll("\\$\\{CREATORLINK\\}", base_url));
+		email.setContent(email.getContent().replaceAll("\\$\\{CREATORLINK\\}", designservice_base_url));
 
 		sendMailToAddress(email);
 	}
@@ -54,8 +57,7 @@ public class MailgunEmailService implements EmailService {
 			email.getContent().replaceAll("\\$\\{TITLE\\}", survey.getTitle());
 			email.getContent().replaceAll("\\$\\{CREATORNAME\\}", getCreatorName(survey.getCreator()));
 			email.getContent().replaceAll("\\$\\{GREETING\\}", survey.getGreeting());
-			// email.setContent(email.getContent().replaceAll("\\$\\{USERLINK\\}",
-			// survey.getUserLink()));
+			email.setContent(email.getContent().replaceAll("\\$\\{USERLINK\\}", "http://userlink.de/"));
 
 			sendMailToAddress(email);
 		}
@@ -70,8 +72,7 @@ public class MailgunEmailService implements EmailService {
 			email.setContent(getEmailContent(TEMPLATE_TYPE.REMINDER));
 			email.getContent().replaceAll("\\$\\{TITLE\\}", survey.getTitle());
 			email.getContent().replaceAll("\\$\\{CREATORNAME\\}", getCreatorName(survey.getCreator()));
-			// email.setContent(email.getContent().replaceAll("\\$\\{USERLINK\\}",
-			// survey.getUserLink()));
+			email.setContent(email.getContent().replaceAll("\\$\\{USERLINK\\}", "http://userlink.de"));
 
 			sendMailToAddress(email);
 		}
@@ -103,7 +104,7 @@ public class MailgunEmailService implements EmailService {
 		case REMINDER:
 			return inputStreamToString(cl.getResourceAsStream("static/tmpl/emailTemplate_Reminder.html"));
 		default:
-			// TODO: Throw exception.
+			LOGGER.warn("Couldn't get template files, falling back to default file.");
 			return inputStreamToString(cl.getResourceAsStream("static/tmpl/emailTemplate.html"));
 		}
 	}
@@ -121,7 +122,7 @@ public class MailgunEmailService implements EmailService {
 		try {
 			IOUtils.copy(is, writer, "UTF-8");
 		} catch (IOException e) {
-			return "ERROR";
+			LOGGER.warn("Couldn't copy InputStream to StringWriter", e);
 		}
 		return writer.toString();
 	}
