@@ -17,9 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.invitationService.models.Creator;
 import com.invitationService.models.Participant;
@@ -29,8 +27,6 @@ import com.invitationService.services.EmailService;
 @Controller
 @EnableAutoConfiguration
 public class InvitationServiceController {
-	
-	//TODO: REFACTOR THIS!
 
 	
 	@Autowired
@@ -43,8 +39,6 @@ public class InvitationServiceController {
 		model.addAttribute("showLogin", true);
 		return "login_form";
 	}
-
-	
 	
 	@PostMapping("/goToConfirmation")
 	public String goToDesigner(@Valid @ModelAttribute Creator user, BindingResult bindingResult,
@@ -75,29 +69,29 @@ public class InvitationServiceController {
 	@Autowired
 	private EmailService emailService;
 
-	@RequestMapping("/")
-	public String home(Model model) {
-		List<Participant> liste = new ArrayList<>();
-
-		liste.add(new Participant(1, "e@mail.de", true));
-		liste.add(new Participant(1, "e@mail.de", true));
-		liste.add(new Participant(1, "e@mail.de", false));
-		liste.add(new Participant(1, "e@mail.de", true));
-		liste.add(new Participant(1, "e@mail.de", true));
-		liste.add(new Participant(1, "e@mail.de", true));
-		liste.add(new Participant(1, "e@mail.de", true));
-		liste.add(new Participant(1, "e@mail.de", false));
-		liste.add(new Participant(1, "e@mail.de", true));
-		liste.add(new Participant(1, "e@mail.de", true));
-		liste.add(new Participant(1, "e@mail.de", true));
-		liste.add(new Participant(1, "e@mail.de", true));
-		liste.add(new Participant(1, "e@mail.de", true));
-		liste.add(new Participant(1, "e@mail.de", true));
-		liste.add(new Participant(1, "e@mail.de", true));
-
-		model.addAttribute("liste", liste);
-		return "index";
-	}
+//	@RequestMapping("/emails")
+//	public String home(Model model) {
+//		List<Participant> liste = new ArrayList<>();
+//
+//		liste.add(new Participant(1, "e@mail.de", true));
+//		liste.add(new Participant(1, "e@mail.de", true));
+//		liste.add(new Participant(1, "e@mail.de", false));
+//		liste.add(new Participant(1, "e@mail.de", true));
+//		liste.add(new Participant(1, "e@mail.de", true));
+//		liste.add(new Participant(1, "e@mail.de", true));
+//		liste.add(new Participant(1, "e@mail.de", true));
+//		liste.add(new Participant(1, "e@mail.de", false));
+//		liste.add(new Participant(1, "e@mail.de", true));
+//		liste.add(new Participant(1, "e@mail.de", true));
+//		liste.add(new Participant(1, "e@mail.de", true));
+//		liste.add(new Participant(1, "e@mail.de", true));
+//		liste.add(new Participant(1, "e@mail.de", true));
+//		liste.add(new Participant(1, "e@mail.de", true));
+//		liste.add(new Participant(1, "e@mail.de", true));
+//
+//		model.addAttribute("liste", liste);
+//		return "index";
+//	}
 
 	@ResponseBody
 	@RequestMapping(value = "/sendAccountMailToCreator", method = RequestMethod.POST)

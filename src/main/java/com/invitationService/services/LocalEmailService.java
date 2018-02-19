@@ -7,6 +7,7 @@ import java.io.StringWriter;
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 
 import com.invitationService.models.Creator;
 import com.invitationService.models.Email;
@@ -15,17 +16,22 @@ import com.invitationService.models.Survey;
 
 public class LocalEmailService implements EmailService {
 
-	final Logger logger = LoggerFactory.getLogger(LocalEmailService.class);
+	@Value("${invitationservice.base.url}")
+	private String base_url;
+
+	@Value("${designservice.base.url}")
+	private String designservice_base_url;
+
+	private final Logger LOGGER = LoggerFactory.getLogger(LocalEmailService.class);
 
 	public void sendAccountMailToCreator(Creator creator) {
 		Email email = new Email();
 		email.setAddress(creator.getEmail());
-		email.setSubject("[SimQue] Du hast dich bei SimQue angemeldet");
+		email.setSubject("SimQue: Deine Registrierung");
 		email.setContent(getEmailContent(TEMPLATE_TYPE.CREATOR));
-		// email.setContent(email.getContent().replaceAll("\\$\\{CREATORLINK\\}",
-		// survey.getCreatorLink()));
+		email.setContent(email.getContent().replaceAll("\\$\\{CREATORLINK\\}", designservice_base_url));
 
-		logger.info(email.getContent());
+		LOGGER.info(email.getContent());
 	}
 
 	public void sendInviteToParticipants(Survey survey) {
@@ -38,10 +44,9 @@ public class LocalEmailService implements EmailService {
 			email.getContent().replaceAll("\\$\\{TITLE\\}", survey.getTitle());
 			email.getContent().replaceAll("\\$\\{CREATORNAME\\}", getCreatorName(survey.getCreator()));
 			email.getContent().replaceAll("\\$\\{GREETING\\}", survey.getGreeting());
-			// email.setContent(email.getContent().replaceAll("\\$\\{USERLINK\\}",
-			// survey.getUserLink()));
+			email.setContent(email.getContent().replaceAll("\\$\\{USERLINK\\}", "http://userlink.de/"));
 
-			logger.info(email.getContent());
+			LOGGER.info(email.getContent());
 		}
 	}
 
@@ -54,10 +59,9 @@ public class LocalEmailService implements EmailService {
 			email.setContent(getEmailContent(TEMPLATE_TYPE.REMINDER));
 			email.getContent().replaceAll("\\$\\{TITLE\\}", survey.getTitle());
 			email.getContent().replaceAll("\\$\\{CREATORNAME\\}", getCreatorName(survey.getCreator()));
-			// email.setContent(email.getContent().replaceAll("\\$\\{USERLINK\\}",
-			// survey.getUserLink()));
+			email.setContent(email.getContent().replaceAll("\\$\\{USERLINK\\}", "http://userlink.de"));
 
-			logger.info(email.getContent());
+			LOGGER.info(email.getContent());
 		}
 	}
 
@@ -72,7 +76,7 @@ public class LocalEmailService implements EmailService {
 		case REMINDER:
 			return inputStreamToString(cl.getResourceAsStream("static/tmpl/emailTemplate_Reminder.html"));
 		default:
-			// TODO: Throw exception.
+			LOGGER.warn("Couldn't get template files, falling back to default file.");
 			return inputStreamToString(cl.getResourceAsStream("static/tmpl/emailTemplate.html"));
 		}
 	}
@@ -90,7 +94,7 @@ public class LocalEmailService implements EmailService {
 		try {
 			IOUtils.copy(is, writer, "UTF-8");
 		} catch (IOException e) {
-			return "ERROR";
+			LOGGER.warn("Couldn't copy InputStream to StringWriter", e);
 		}
 		return writer.toString();
 	}
