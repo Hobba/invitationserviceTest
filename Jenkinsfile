@@ -6,6 +6,9 @@ pipeline {
     tools {
         maven 'maven-3.5.0'
     }
+    environment {
+        TOKEN_KEY = credentials('TOKEN_KEY')
+    }
     stages {
         stage ('Initialize') {
             steps {
