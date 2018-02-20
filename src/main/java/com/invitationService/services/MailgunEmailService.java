@@ -7,16 +7,21 @@ import java.io.StringWriter;
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 
 import com.invitationService.models.Creator;
 import com.invitationService.models.Email;
 import com.invitationService.models.Participant;
 import com.invitationService.models.Survey;
+import com.invitationService.tokenmaster.TokenService;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
 
 public class MailgunEmailService implements EmailService {
+
+	@Autowired
+	private TokenService tokenService;
 
 	@Value("${mailgun.api.url}")
 	private String mailgun_url;
@@ -46,8 +51,10 @@ public class MailgunEmailService implements EmailService {
 			email.setContent(getEmailContent(TEMPLATE_TYPE.CREATOR_UNREGISTERED));
 		}
 
-		email.setContent(email.getContent().replaceAll("\\$\\{CREATORLINK\\}",
-				designservice_base_url + "c/?creator=" + creator.getEmail()));
+	
+
+		email.setContent(email.getContent().replaceAll("\\$\\{CREATORLINK\\}", designservice_base_url + "c/?creator="
+				+ tokenService.createJWT("", "invitationservice", "email", creator.getEmail())));
 
 		sendMailToAddress(email);
 	}
