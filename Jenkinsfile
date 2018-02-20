@@ -12,11 +12,9 @@ pipeline {
     stages {
         stage ('Initialize') {
             steps {
-                sh '''
-                   
+                sh '''               
                     echo "PATH = ${PATH}"
                     echo "M2_HOME = ${M2_HOME}"
-                    echo "REMOVE ME! Token Key is: ${TOKEN_KEY}"
                 '''
             }
         }
@@ -36,7 +34,7 @@ pipeline {
                 scp -o StrictHostKeyChecking=no -i /var/jenkins_home/.ssh/id_rsa target/${JAR_NAME} centos@194.45.211.158:/home/centos/${JAR_NAME}
                 scp -o StrictHostKeyChecking=no -i /var/jenkins_home/.ssh/id_rsa devStart.sh centos@194.45.211.158:/home/centos/dev${JAR_NAME}Start.sh
                 ssh -o StrictHostKeyChecking=no -i /var/jenkins_home/.ssh/id_rsa centos@194.45.211.158 chmod +x /home/centos/dev${JAR_NAME}Start.sh
-                ssh -o StrictHostKeyChecking=no -i /var/jenkins_home/.ssh/id_rsa centos@194.45.211.158 /home/centos/dev${JAR_NAME}Start.sh ${JAR_NAME}
+                ssh -o StrictHostKeyChecking=no -i /var/jenkins_home/.ssh/id_rsa centos@194.45.211.158 TOKEN_KEY=$TOKEN_KEY; /home/centos/dev${JAR_NAME}Start.sh ${JAR_NAME}
                 '''
             }
         }
