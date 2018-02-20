@@ -6,9 +6,11 @@ import org.springframework.beans.factory.annotation.Value;
 
 public class ApiKeyClass {
 	
+	public ApiKeyClass(String key) {
+		this.key = key;
+	}
+	
 	//NOTIZ WIE MAN DIE ANNOTATION FIXED: Die Klasse ApiKeyClass muss als Bean angelegt werden und im TokenService Autowired werden, nur so kann die Value Annotation funktionieren. :)
-
-	@Value("${token.key}")
 	private String key;
 
 	Logger logger = LoggerFactory.getLogger(this.getClass());

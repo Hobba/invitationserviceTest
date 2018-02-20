@@ -7,6 +7,7 @@ import javax.crypto.spec.SecretKeySpec;
 import javax.xml.bind.DatatypeConverter;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import io.jsonwebtoken.Claims;
@@ -17,12 +18,12 @@ import io.jsonwebtoken.SignatureAlgorithm;
 @Service
 public class TokenService {
 
-	private static final String CLAIM_EMAIL = "email";
-	private ApiKeyClass apiKey = new ApiKeyClass();
-	private long ttlMillis = 1209600000;
+	@Value("${token.key}")
+	private String key;
 	
-//	@Autowired
-//	ApiKeyClass apiKey;
+	private static final String CLAIM_EMAIL = "email";
+
+	private long ttlMillis = 1209600000;
 
 	// Sample method to construct a JWT
 	public String createJWT(String id, String issuer, String subject, String email) {
@@ -35,6 +36,7 @@ public class TokenService {
 		Date now = new Date(nowMillis);
 
 		// We will sign our JWT with our ApiKey secret
+		ApiKeyClass apiKey = new ApiKeyClass(key);
 		byte[] apiKeySecretBytes = DatatypeConverter.parseBase64Binary(apiKey.getSecret());
 		Key signingKey = new SecretKeySpec(apiKeySecretBytes, signatureAlgorithm.getJcaName());
 
@@ -54,7 +56,7 @@ public class TokenService {
 	}
 
 	public String parseJWT(String jwt) {
-
+		ApiKeyClass apiKey = new ApiKeyClass(key);
 		// This line will throw an exception if it is not a signed JWS (as expected)
 		Claims claims = Jwts.parser().setSigningKey(DatatypeConverter.parseBase64Binary(apiKey.getSecret()))
 				.parseClaimsJws(jwt).getBody();
