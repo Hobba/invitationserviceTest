@@ -3,6 +3,8 @@ package com.invitationService.invitationService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import com.invitationService.tokenmaster.ApiKeyClass;
+
 @Configuration
 public class Config {
 
@@ -10,5 +12,10 @@ public class Config {
 	public CreatorDAO creatorDAO() {
 		return new CreatorDAO();
 	}
+	
+//	@Bean
+//	public ApiKeyClass api() {
+//		return new ApiKeyClass();
+//	}
 
 }
