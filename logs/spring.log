@@ -2312,3 +2312,710 @@ body {
 2018-02-20 17:32:03.186  INFO 25639 --- [restartedMain] o.s.j.e.a.AnnotationMBeanExporter        : Registering beans for JMX exposure on startup
 2018-02-20 17:32:03.213  INFO 25639 --- [restartedMain] s.b.c.e.t.TomcatEmbeddedServletContainer : Tomcat started on port(s): 8083 (http)
 2018-02-20 17:32:03.214  INFO 25639 --- [restartedMain] c.i.i.InvitationServiceApplication       : Started InvitationServiceApplication in 1.026 seconds (JVM running for 25514.481)
+2018-02-20 17:34:51.663  INFO 25639 --- [http-nio-8083-exec-1] o.a.c.c.C.[Tomcat-2].[localhost].[/]     : Initializing Spring FrameworkServlet 'dispatcherServlet'
+2018-02-20 17:34:51.737  INFO 25639 --- [http-nio-8083-exec-1] o.s.web.servlet.DispatcherServlet        : FrameworkServlet 'dispatcherServlet': initialization started
+2018-02-20 17:34:51.830  INFO 25639 --- [http-nio-8083-exec-1] o.s.web.servlet.DispatcherServlet        : FrameworkServlet 'dispatcherServlet': initialization completed in 89 ms
+2018-02-20 17:35:01.281  INFO 25639 --- [http-nio-8083-exec-4] org.mongodb.driver.connection            : Opened connection [connectionId{localValue:42, serverValue:56}] to localhost:27017
+2018-02-20 17:35:01.837  INFO 25639 --- [http-nio-8083-exec-4] c.i.services.LocalEmailService           : <!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link href="https://fonts.googleapis.com/css?family=Catamaran"
+	rel="stylesheet">
+
+<style>
+body {
+	font-family: 'Catamaran', sans-serif;
+}
+
+.menu-bar {
+	position: absolute;
+	height: 55px;
+	right: 0px;
+	left: 0px;
+	top: 0px;
+	background-color: rgb(248, 248, 248);
+	padding-right: 30px;
+	box-shadow: 0px 0px 13px rgb(119, 119, 119);
+	border-top: 2px solid rgb(225, 29, 55);
+	color: red;
+	font-size: 34px;
+}
+
+.invitationCard {
+	display: block;
+	background-color: rgb(240, 240, 240);
+	margin-top: 80px;
+	margin-left: 10%;
+	margin-right: 10%;
+	padding: 15px;
+}
+
+.invitationCard .title {
+	font-size: 25px;
+	font-height: bold;
+}
+</style>
+</head>
+<body>
+
+	<div class="menu-bar" style="text-align: center;">SIMQUE</div>
+	<div class="invitationCard">
+		<p>Hallo,</p>
+		<p>schön, dass du wieder da bist. Klicke bitte auf den nachfolgenden Link:</p>
+		<a name="regLink" href="http://localhost/DS/c/?creator=j4meier@googlemail.com">http://localhost/DS/c/?creator=j4meier@googlemail.com</a>
+		<p>Der Link ist insgesamt 14 Tagen gültig. Ist der Link abgelaufen, sende Dir einfach einen neuen Link zu, Deine Umfrage bleiben erhalten.</p>
+		<p>Dein SimQue Team</p>
+	</div>
+</body>
+</html>
+2018-02-20 17:35:14.133  INFO 25639 --- [Thread-269] ationConfigEmbeddedWebApplicationContext : Closing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@7b506d84: startup date [Tue Feb 20 17:32:02 CET 2018]; root of context hierarchy
+2018-02-20 17:35:14.181  INFO 25639 --- [Thread-269] o.s.j.e.a.AnnotationMBeanExporter        : Unregistering JMX-exposed beans on shutdown
+2018-02-20 17:35:14.268  INFO 25639 --- [Thread-269] org.mongodb.driver.connection            : Closed connection [connectionId{localValue:42, serverValue:56}] to localhost:27017 because the pool has been closed.
+2018-02-20 17:35:20.776  INFO 25639 --- [restartedMain] c.i.i.InvitationServiceApplication       : Starting InvitationServiceApplication on BootCamp2018 with PID 25639 (/home/member/Project/invitationservice/target/classes started by member in /home/member/Project/invitationservice)
+2018-02-20 17:35:20.805  INFO 25639 --- [restartedMain] c.i.i.InvitationServiceApplication       : The following profiles are active: local
+2018-02-20 17:35:20.815  INFO 25639 --- [restartedMain] ationConfigEmbeddedWebApplicationContext : Refreshing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@3752d196: startup date [Tue Feb 20 17:35:20 CET 2018]; root of context hierarchy
+2018-02-20 17:35:28.425 ERROR 25639 --- [restartedMain] o.s.boot.SpringApplication               : Application startup failed
+
+java.lang.NoClassDefFoundError: com/invitationService/services/EmailService
+	at java.lang.Class.getDeclaredMethods0(Native Method)
+	at java.lang.Class.privateGetDeclaredMethods(Class.java:2701)
+	at java.lang.Class.getDeclaredMethods(Class.java:1975)
+	at org.springframework.util.ReflectionUtils.getDeclaredMethods(ReflectionUtils.java:613)
+	at org.springframework.util.ReflectionUtils.doWithMethods(ReflectionUtils.java:524)
+	at org.springframework.util.ReflectionUtils.doWithMethods(ReflectionUtils.java:510)
+	at org.springframework.util.ReflectionUtils.getUniqueDeclaredMethods(ReflectionUtils.java:570)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.getTypeForFactoryMethod(AbstractAutowireCapableBeanFactory.java:697)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.determineTargetType(AbstractAutowireCapableBeanFactory.java:640)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.predictBeanType(AbstractAutowireCapableBeanFactory.java:609)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.isFactoryBean(AbstractBeanFactory.java:1484)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doGetBeanNamesForType(DefaultListableBeanFactory.java:425)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.getBeanNamesForType(DefaultListableBeanFactory.java:395)
+	at org.springframework.boot.autoconfigure.web.EmbeddedServletContainerAutoConfiguration$BeanPostProcessorsRegistrar.registerSyntheticBeanIfMissing(EmbeddedServletContainerAutoConfiguration.java:148)
+	at org.springframework.boot.autoconfigure.web.EmbeddedServletContainerAutoConfiguration$BeanPostProcessorsRegistrar.registerBeanDefinitions(EmbeddedServletContainerAutoConfiguration.java:137)
+	at org.springframework.context.annotation.ConfigurationClassBeanDefinitionReader.loadBeanDefinitionsFromRegistrars(ConfigurationClassBeanDefinitionReader.java:359)
+	at org.springframework.context.annotation.ConfigurationClassBeanDefinitionReader.loadBeanDefinitionsForConfigurationClass(ConfigurationClassBeanDefinitionReader.java:143)
+	at org.springframework.context.annotation.ConfigurationClassBeanDefinitionReader.loadBeanDefinitions(ConfigurationClassBeanDefinitionReader.java:116)
+	at org.springframework.context.annotation.ConfigurationClassPostProcessor.processConfigBeanDefinitions(ConfigurationClassPostProcessor.java:320)
+	at org.springframework.context.annotation.ConfigurationClassPostProcessor.postProcessBeanDefinitionRegistry(ConfigurationClassPostProcessor.java:228)
+	at org.springframework.context.support.PostProcessorRegistrationDelegate.invokeBeanDefinitionRegistryPostProcessors(PostProcessorRegistrationDelegate.java:272)
+	at org.springframework.context.support.PostProcessorRegistrationDelegate.invokeBeanFactoryPostProcessors(PostProcessorRegistrationDelegate.java:92)
+	at org.springframework.context.support.AbstractApplicationContext.invokeBeanFactoryPostProcessors(AbstractApplicationContext.java:687)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:525)
+	at org.springframework.boot.context.embedded.EmbeddedWebApplicationContext.refresh(EmbeddedWebApplicationContext.java:122)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:693)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:360)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:303)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1118)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1107)
+	at com.invitationService.invitationService.InvitationServiceApplication.main(InvitationServiceApplication.java:10)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:49)
+Caused by: java.lang.ClassNotFoundException: com.invitationService.services.EmailService
+	at java.net.URLClassLoader.findClass(URLClassLoader.java:381)
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:424)
+	at sun.misc.Launcher$AppClassLoader.loadClass(Launcher.java:335)
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:357)
+	at org.springframework.boot.devtools.restart.classloader.RestartClassLoader.loadClass(RestartClassLoader.java:151)
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:357)
+	... 36 common frames omitted
+
+2018-02-20 17:35:28.455  INFO 25639 --- [restartedMain] ationConfigEmbeddedWebApplicationContext : Closing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@3752d196: startup date [Tue Feb 20 17:35:20 CET 2018]; root of context hierarchy
+2018-02-20 17:35:28.462  WARN 25639 --- [restartedMain] o.s.boot.SpringApplication               : Unable to close ApplicationContext
+
+org.springframework.beans.factory.CannotLoadBeanClassException: Cannot find class [com.invitationService.invitationService.Config] for bean with name 'config' defined in file [/home/member/Project/invitationservice/target/classes/com/invitationService/invitationService/Config.class]; nested exception is java.lang.ClassNotFoundException: com.invitationService.invitationService.Config
+	at org.springframework.beans.factory.support.AbstractBeanFactory.resolveBeanClass(AbstractBeanFactory.java:1385)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.determineTargetType(AbstractAutowireCapableBeanFactory.java:641)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.predictBeanType(AbstractAutowireCapableBeanFactory.java:609)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.isFactoryBean(AbstractBeanFactory.java:1484)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doGetBeanNamesForType(DefaultListableBeanFactory.java:425)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.getBeanNamesForType(DefaultListableBeanFactory.java:395)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.getBeansOfType(DefaultListableBeanFactory.java:515)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.getBeansOfType(DefaultListableBeanFactory.java:508)
+	at org.springframework.context.support.AbstractApplicationContext.getBeansOfType(AbstractApplicationContext.java:1188)
+	at org.springframework.boot.SpringApplication.getExitCodeFromMappedException(SpringApplication.java:818)
+	at org.springframework.boot.SpringApplication.getExitCodeFromException(SpringApplication.java:804)
+	at org.springframework.boot.SpringApplication.handleExitCode(SpringApplication.java:790)
+	at org.springframework.boot.SpringApplication.handleRunFailure(SpringApplication.java:744)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:314)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1118)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1107)
+	at com.invitationService.invitationService.InvitationServiceApplication.main(InvitationServiceApplication.java:10)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:49)
+Caused by: java.lang.ClassNotFoundException: com.invitationService.invitationService.Config
+	at java.net.URLClassLoader.findClass(URLClassLoader.java:381)
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:424)
+	at sun.misc.Launcher$AppClassLoader.loadClass(Launcher.java:335)
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:357)
+	at org.springframework.boot.devtools.restart.classloader.RestartClassLoader.loadClass(RestartClassLoader.java:151)
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:357)
+	at org.springframework.util.ClassUtils.forName(ClassUtils.java:250)
+	at org.springframework.beans.factory.support.AbstractBeanDefinition.resolveBeanClass(AbstractBeanDefinition.java:401)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doResolveBeanClass(AbstractBeanFactory.java:1432)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.resolveBeanClass(AbstractBeanFactory.java:1377)
+	... 21 common frames omitted
+
+2018-02-20 17:36:03.088  INFO 25639 --- [restartedMain] c.i.i.InvitationServiceApplication       : Starting InvitationServiceApplication on BootCamp2018 with PID 25639 (/home/member/Project/invitationservice/target/classes started by member in /home/member/Project/invitationservice)
+2018-02-20 17:36:03.153  INFO 25639 --- [restartedMain] c.i.i.InvitationServiceApplication       : The following profiles are active: local
+2018-02-20 17:36:03.368  INFO 25639 --- [restartedMain] ationConfigEmbeddedWebApplicationContext : Refreshing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@661b13e1: startup date [Tue Feb 20 17:36:03 CET 2018]; root of context hierarchy
+2018-02-20 17:36:10.458  INFO 25639 --- [restartedMain] s.b.c.e.t.TomcatEmbeddedServletContainer : Tomcat initialized with port(s): 8083 (http)
+2018-02-20 17:36:10.543  INFO 25639 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2018-02-20 17:36:10.606  INFO 25639 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet Engine: Apache Tomcat/8.5.27
+2018-02-20 17:36:10.808  INFO 25639 --- [localhost-startStop-1] o.a.c.c.C.[Tomcat-2].[localhost].[/]     : Initializing Spring embedded WebApplicationContext
+2018-02-20 17:36:10.836  INFO 25639 --- [localhost-startStop-1] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 7468 ms
+2018-02-20 17:36:11.526  INFO 25639 --- [localhost-startStop-1] o.s.b.w.servlet.ServletRegistrationBean  : Mapping servlet: 'dispatcherServlet' to [/]
+2018-02-20 17:36:11.542  INFO 25639 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'characterEncodingFilter' to: [/*]
+2018-02-20 17:36:11.566  INFO 25639 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+2018-02-20 17:36:11.592  INFO 25639 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'httpPutFormContentFilter' to: [/*]
+2018-02-20 17:36:11.656  INFO 25639 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'requestContextFilter' to: [/*]
+2018-02-20 17:36:11.801  WARN 25639 --- [restartedMain] ationConfigEmbeddedWebApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'invitationServiceController': Unsatisfied dependency expressed through field 'creatorDAO'; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type 'com.invitationService.invitationService.CreatorDAO' available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
+2018-02-20 17:36:11.816  INFO 25639 --- [restartedMain] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2018-02-20 17:36:11.861  INFO 25639 --- [restartedMain] utoConfigurationReportLoggingInitializer : 
+
+Error starting ApplicationContext. To display the auto-configuration report re-run your application with 'debug' enabled.
+2018-02-20 17:36:14.070 ERROR 25639 --- [restartedMain] o.s.b.d.LoggingFailureAnalysisReporter   : 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Field creatorDAO in com.invitationService.invitationService.InvitationServiceController required a bean of type 'com.invitationService.invitationService.CreatorDAO' that could not be found.
+
+
+Action:
+
+Consider defining a bean of type 'com.invitationService.invitationService.CreatorDAO' in your configuration.
+
+2018-02-20 17:36:38.128  INFO 2711 --- [restartedMain] c.i.i.InvitationServiceApplication       : Starting InvitationServiceApplication on BootCamp2018 with PID 2711 (/home/member/Project/invitationservice/target/classes started by member in /home/member/Project/invitationservice)
+2018-02-20 17:36:38.165  INFO 2711 --- [restartedMain] c.i.i.InvitationServiceApplication       : The following profiles are active: local
+2018-02-20 17:36:43.621  INFO 2711 --- [restartedMain] ationConfigEmbeddedWebApplicationContext : Refreshing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@48f78b17: startup date [Tue Feb 20 17:36:43 CET 2018]; root of context hierarchy
+2018-02-20 17:37:09.704  INFO 2711 --- [restartedMain] s.b.c.e.t.TomcatEmbeddedServletContainer : Tomcat initialized with port(s): 8083 (http)
+2018-02-20 17:37:09.910  INFO 2711 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2018-02-20 17:37:09.916  INFO 2711 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet Engine: Apache Tomcat/8.5.27
+2018-02-20 17:37:10.594  INFO 2711 --- [localhost-startStop-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2018-02-20 17:37:10.610  INFO 2711 --- [localhost-startStop-1] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 27030 ms
+2018-02-20 17:37:11.263  INFO 2711 --- [localhost-startStop-1] o.s.b.w.servlet.ServletRegistrationBean  : Mapping servlet: 'dispatcherServlet' to [/]
+2018-02-20 17:37:11.290  INFO 2711 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'characterEncodingFilter' to: [/*]
+2018-02-20 17:37:11.291  INFO 2711 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+2018-02-20 17:37:11.292  INFO 2711 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'httpPutFormContentFilter' to: [/*]
+2018-02-20 17:37:11.297  INFO 2711 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'requestContextFilter' to: [/*]
+2018-02-20 17:37:11.903  INFO 2711 --- [restartedMain] org.mongodb.driver.cluster               : Cluster created with settings {hosts=[localhost:27017], mode=SINGLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=500}
+2018-02-20 17:37:12.095  INFO 2711 --- [cluster-ClusterId{value='5a8c4eb7be23aa0a97d611f5', description='null'}-localhost:27017] org.mongodb.driver.connection            : Opened connection [connectionId{localValue:1, serverValue:59}] to localhost:27017
+2018-02-20 17:37:12.101  INFO 2711 --- [cluster-ClusterId{value='5a8c4eb7be23aa0a97d611f5', description='null'}-localhost:27017] org.mongodb.driver.cluster               : Monitor thread successfully connected to server with description ServerDescription{address=localhost:27017, type=STANDALONE, state=CONNECTED, ok=true, version=ServerVersion{versionList=[3, 6, 2]}, minWireVersion=0, maxWireVersion=6, maxDocumentSize=16777216, roundTripTimeNanos=4438049}
+2018-02-20 17:37:13.016  INFO 2711 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerAdapter : Looking for @ControllerAdvice: org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@48f78b17: startup date [Tue Feb 20 17:36:43 CET 2018]; root of context hierarchy
+2018-02-20 17:37:13.143  INFO 2711 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/],methods=[GET]}" onto public java.lang.String com.invitationService.invitationService.InvitationServiceController.login(org.springframework.ui.Model)
+2018-02-20 17:37:13.150  INFO 2711 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/goToConfirmation],methods=[POST]}" onto public java.lang.String com.invitationService.invitationService.InvitationServiceController.goToDesigner(com.invitationService.models.Creator,org.springframework.validation.BindingResult,org.springframework.ui.Model)
+2018-02-20 17:37:13.151  INFO 2711 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/sendInvitationToParticipants],methods=[POST]}" onto public com.invitationService.models.Survey com.invitationService.invitationService.InvitationServiceController.SendMailToParticipants(com.invitationService.models.Survey)
+2018-02-20 17:37:13.153  INFO 2711 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/sendInvitationEmailsList],methods=[POST]}" onto public java.util.List<com.invitationService.models.Creator> com.invitationService.invitationService.InvitationServiceController.SendInvitationEmailsList(java.util.List<com.invitationService.models.Creator>)
+2018-02-20 17:37:13.154  INFO 2711 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/list/{id}]}" onto public java.util.List<com.invitationService.models.Participant> com.invitationService.invitationService.InvitationServiceController.getRows(java.lang.String)
+2018-02-20 17:37:13.162  INFO 2711 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2018-02-20 17:37:13.163  INFO 2711 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+2018-02-20 17:37:13.215  INFO 2711 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-02-20 17:37:13.216  INFO 2711 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-02-20 17:37:13.270  INFO 2711 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-02-20 17:37:14.065  WARN 2711 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : Unable to start LiveReload server
+2018-02-20 17:37:14.150  INFO 2711 --- [restartedMain] o.s.j.e.a.AnnotationMBeanExporter        : Registering beans for JMX exposure on startup
+2018-02-20 17:37:14.262  INFO 2711 --- [restartedMain] s.b.c.e.t.TomcatEmbeddedServletContainer : Tomcat started on port(s): 8083 (http)
+2018-02-20 17:37:14.274  INFO 2711 --- [restartedMain] c.i.i.InvitationServiceApplication       : Started InvitationServiceApplication in 45.214 seconds (JVM running for 52.865)
+2018-02-20 17:37:31.276  INFO 2711 --- [http-nio-8083-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring FrameworkServlet 'dispatcherServlet'
+2018-02-20 17:37:31.314  INFO 2711 --- [http-nio-8083-exec-1] o.s.web.servlet.DispatcherServlet        : FrameworkServlet 'dispatcherServlet': initialization started
+2018-02-20 17:37:32.263  INFO 2711 --- [http-nio-8083-exec-1] o.s.web.servlet.DispatcherServlet        : FrameworkServlet 'dispatcherServlet': initialization completed in 918 ms
+2018-02-20 17:37:52.727  INFO 2711 --- [Thread-1] ationConfigEmbeddedWebApplicationContext : Closing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@48f78b17: startup date [Tue Feb 20 17:36:43 CET 2018]; root of context hierarchy
+2018-02-20 17:37:52.846  INFO 2711 --- [Thread-1] o.s.j.e.a.AnnotationMBeanExporter        : Unregistering JMX-exposed beans on shutdown
+2018-02-20 17:38:00.921  INFO 25639 --- [restartedMain] c.i.i.InvitationServiceApplication       : Starting InvitationServiceApplication on BootCamp2018 with PID 25639 (/home/member/Project/invitationservice/target/classes started by member in /home/member/Project/invitationservice)
+2018-02-20 17:38:00.996  INFO 25639 --- [restartedMain] c.i.i.InvitationServiceApplication       : The following profiles are active: local
+2018-02-20 17:38:01.262  INFO 25639 --- [restartedMain] ationConfigEmbeddedWebApplicationContext : Refreshing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@36892eb5: startup date [Tue Feb 20 17:38:01 CET 2018]; root of context hierarchy
+2018-02-20 17:38:04.769  INFO 2711 --- [restartedMain] c.i.i.InvitationServiceApplication       : Starting InvitationServiceApplication on BootCamp2018 with PID 2711 (/home/member/Project/invitationservice/target/classes started by member in /home/member/Project/invitationservice)
+2018-02-20 17:38:04.867  INFO 2711 --- [restartedMain] c.i.i.InvitationServiceApplication       : The following profiles are active: local
+2018-02-20 17:38:05.132  INFO 2711 --- [restartedMain] ationConfigEmbeddedWebApplicationContext : Refreshing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@1d9b7aff: startup date [Tue Feb 20 17:38:05 CET 2018]; root of context hierarchy
+2018-02-20 17:38:25.160  INFO 25639 --- [restartedMain] s.b.c.e.t.TomcatEmbeddedServletContainer : Tomcat initialized with port(s): 8083 (http)
+2018-02-20 17:38:25.282  INFO 25639 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2018-02-20 17:38:25.316  INFO 25639 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet Engine: Apache Tomcat/8.5.27
+2018-02-20 17:38:25.645  INFO 25639 --- [localhost-startStop-1] o.a.c.c.C.[Tomcat-3].[localhost].[/]     : Initializing Spring embedded WebApplicationContext
+2018-02-20 17:38:25.666  INFO 25639 --- [localhost-startStop-1] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 24426 ms
+2018-02-20 17:38:26.078  INFO 2711 --- [restartedMain] s.b.c.e.t.TomcatEmbeddedServletContainer : Tomcat initialized with port(s): 8083 (http)
+2018-02-20 17:38:26.123  INFO 2711 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2018-02-20 17:38:26.156  INFO 2711 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet Engine: Apache Tomcat/8.5.27
+2018-02-20 17:38:26.300  INFO 2711 --- [localhost-startStop-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2018-02-20 17:38:26.374  INFO 2711 --- [localhost-startStop-1] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 21242 ms
+2018-02-20 17:38:26.415  INFO 25639 --- [localhost-startStop-1] o.s.b.w.servlet.ServletRegistrationBean  : Mapping servlet: 'dispatcherServlet' to [/]
+2018-02-20 17:38:26.440  INFO 25639 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'characterEncodingFilter' to: [/*]
+2018-02-20 17:38:26.440  INFO 25639 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+2018-02-20 17:38:26.460  INFO 25639 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'httpPutFormContentFilter' to: [/*]
+2018-02-20 17:38:26.472  INFO 25639 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'requestContextFilter' to: [/*]
+2018-02-20 17:38:26.836  INFO 2711 --- [localhost-startStop-1] o.s.b.w.servlet.ServletRegistrationBean  : Mapping servlet: 'dispatcherServlet' to [/]
+2018-02-20 17:38:26.943  INFO 2711 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'characterEncodingFilter' to: [/*]
+2018-02-20 17:38:26.967  INFO 2711 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+2018-02-20 17:38:26.981  INFO 2711 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'httpPutFormContentFilter' to: [/*]
+2018-02-20 17:38:26.993  INFO 2711 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'requestContextFilter' to: [/*]
+2018-02-20 17:38:27.323  INFO 25639 --- [restartedMain] org.mongodb.driver.cluster               : Cluster created with settings {hosts=[localhost:27017], mode=SINGLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=500}
+2018-02-20 17:38:27.576  INFO 2711 --- [restartedMain] org.mongodb.driver.cluster               : Cluster created with settings {hosts=[localhost:27017], mode=SINGLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=500}
+2018-02-20 17:38:27.730  INFO 25639 --- [cluster-ClusterId{value='5a8c4f03be23aa6427570f1a', description='null'}-localhost:27017] org.mongodb.driver.connection            : Opened connection [connectionId{localValue:43, serverValue:60}] to localhost:27017
+2018-02-20 17:38:27.754  INFO 2711 --- [cluster-ClusterId{value='5a8c4f03be23aa0a97d611f6', description='null'}-localhost:27017] org.mongodb.driver.connection            : Opened connection [connectionId{localValue:2, serverValue:61}] to localhost:27017
+2018-02-20 17:38:27.757  INFO 25639 --- [cluster-ClusterId{value='5a8c4f03be23aa6427570f1a', description='null'}-localhost:27017] org.mongodb.driver.cluster               : Monitor thread successfully connected to server with description ServerDescription{address=localhost:27017, type=STANDALONE, state=CONNECTED, ok=true, version=ServerVersion{versionList=[3, 6, 2]}, minWireVersion=0, maxWireVersion=6, maxDocumentSize=16777216, roundTripTimeNanos=4193983}
+2018-02-20 17:38:27.786  INFO 2711 --- [cluster-ClusterId{value='5a8c4f03be23aa0a97d611f6', description='null'}-localhost:27017] org.mongodb.driver.cluster               : Monitor thread successfully connected to server with description ServerDescription{address=localhost:27017, type=STANDALONE, state=CONNECTED, ok=true, version=ServerVersion{versionList=[3, 6, 2]}, minWireVersion=0, maxWireVersion=6, maxDocumentSize=16777216, roundTripTimeNanos=6811225}
+2018-02-20 17:38:29.995  INFO 2711 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerAdapter : Looking for @ControllerAdvice: org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@1d9b7aff: startup date [Tue Feb 20 17:38:05 CET 2018]; root of context hierarchy
+2018-02-20 17:38:30.227  INFO 2711 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/],methods=[GET]}" onto public java.lang.String com.invitationService.invitationService.InvitationServiceController.login(org.springframework.ui.Model)
+2018-02-20 17:38:30.267  INFO 2711 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/goToConfirmation],methods=[POST]}" onto public java.lang.String com.invitationService.invitationService.InvitationServiceController.goToDesigner(com.invitationService.models.Creator,org.springframework.validation.BindingResult,org.springframework.ui.Model)
+2018-02-20 17:38:30.271  INFO 25639 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerAdapter : Looking for @ControllerAdvice: org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@36892eb5: startup date [Tue Feb 20 17:38:01 CET 2018]; root of context hierarchy
+2018-02-20 17:38:30.294  INFO 2711 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/sendInvitationToParticipants],methods=[POST]}" onto public com.invitationService.models.Survey com.invitationService.invitationService.InvitationServiceController.SendMailToParticipants(com.invitationService.models.Survey)
+2018-02-20 17:38:30.325  INFO 2711 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/sendInvitationEmailsList],methods=[POST]}" onto public java.util.List<com.invitationService.models.Creator> com.invitationService.invitationService.InvitationServiceController.SendInvitationEmailsList(java.util.List<com.invitationService.models.Creator>)
+2018-02-20 17:38:30.336  INFO 2711 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/list/{id}]}" onto public java.util.List<com.invitationService.models.Participant> com.invitationService.invitationService.InvitationServiceController.getRows(java.lang.String)
+2018-02-20 17:38:30.386  INFO 2711 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2018-02-20 17:38:30.425  INFO 2711 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+2018-02-20 17:38:30.523  INFO 25639 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/],methods=[GET]}" onto public java.lang.String com.invitationService.invitationService.InvitationServiceController.login(org.springframework.ui.Model)
+2018-02-20 17:38:30.540  INFO 25639 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/sendInvitationEmailsList],methods=[POST]}" onto public java.util.List<com.invitationService.models.Creator> com.invitationService.invitationService.InvitationServiceController.SendInvitationEmailsList(java.util.List<com.invitationService.models.Creator>)
+2018-02-20 17:38:30.551  INFO 25639 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/list/{id}]}" onto public java.util.List<com.invitationService.models.Participant> com.invitationService.invitationService.InvitationServiceController.getRows(java.lang.String)
+2018-02-20 17:38:30.567  INFO 25639 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/goToConfirmation],methods=[POST]}" onto public java.lang.String com.invitationService.invitationService.InvitationServiceController.goToDesigner(com.invitationService.models.Creator,org.springframework.validation.BindingResult,org.springframework.ui.Model)
+2018-02-20 17:38:30.585  INFO 25639 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/sendInvitationToParticipants],methods=[POST]}" onto public com.invitationService.models.Survey com.invitationService.invitationService.InvitationServiceController.SendMailToParticipants(com.invitationService.models.Survey)
+2018-02-20 17:38:30.597  INFO 2711 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-02-20 17:38:30.653  INFO 25639 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2018-02-20 17:38:30.657  INFO 2711 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-02-20 17:38:30.668  INFO 25639 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+2018-02-20 17:38:30.836  INFO 25639 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-02-20 17:38:30.876  INFO 25639 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-02-20 17:38:30.902  INFO 2711 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-02-20 17:38:31.081  INFO 25639 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-02-20 17:38:31.912  WARN 2711 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : Unable to start LiveReload server
+2018-02-20 17:38:32.494  WARN 25639 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : Unable to start LiveReload server
+2018-02-20 17:38:32.915  INFO 2711 --- [restartedMain] o.s.j.e.a.AnnotationMBeanExporter        : Registering beans for JMX exposure on startup
+2018-02-20 17:38:33.306  INFO 2711 --- [restartedMain] s.b.c.e.t.TomcatEmbeddedServletContainer : Tomcat started on port(s): 8083 (http)
+2018-02-20 17:38:33.311  INFO 2711 --- [restartedMain] c.i.i.InvitationServiceApplication       : Started InvitationServiceApplication in 31.347 seconds (JVM running for 131.901)
+2018-02-20 17:38:33.345  INFO 25639 --- [restartedMain] o.s.j.e.a.AnnotationMBeanExporter        : Registering beans for JMX exposure on startup
+2018-02-20 17:38:33.660 ERROR 25639 --- [restartedMain] o.apache.catalina.core.StandardService   : Failed to start connector [Connector[HTTP/1.1-8083]]
+
+org.apache.catalina.LifecycleException: Failed to start component [Connector[HTTP/1.1-8083]]
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:167)
+	at org.apache.catalina.core.StandardService.addConnector(StandardService.java:225)
+	at org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainer.addPreviouslyRemovedConnectors(TomcatEmbeddedServletContainer.java:250)
+	at org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainer.start(TomcatEmbeddedServletContainer.java:193)
+	at org.springframework.boot.context.embedded.EmbeddedWebApplicationContext.startEmbeddedServletContainer(EmbeddedWebApplicationContext.java:297)
+	at org.springframework.boot.context.embedded.EmbeddedWebApplicationContext.finishRefresh(EmbeddedWebApplicationContext.java:145)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:546)
+	at org.springframework.boot.context.embedded.EmbeddedWebApplicationContext.refresh(EmbeddedWebApplicationContext.java:122)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:693)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:360)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:303)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1118)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1107)
+	at com.invitationService.invitationService.InvitationServiceApplication.main(InvitationServiceApplication.java:10)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:49)
+Caused by: org.apache.catalina.LifecycleException: Protocol handler start failed
+	at org.apache.catalina.connector.Connector.startInternal(Connector.java:1021)
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:150)
+	... 18 common frames omitted
+Caused by: java.net.BindException: Address already in use
+	at sun.nio.ch.Net.bind0(Native Method)
+	at sun.nio.ch.Net.bind(Net.java:433)
+	at sun.nio.ch.Net.bind(Net.java:425)
+	at sun.nio.ch.ServerSocketChannelImpl.bind(ServerSocketChannelImpl.java:223)
+	at sun.nio.ch.ServerSocketAdaptor.bind(ServerSocketAdaptor.java:74)
+	at org.apache.tomcat.util.net.NioEndpoint.bind(NioEndpoint.java:210)
+	at org.apache.tomcat.util.net.AbstractEndpoint.start(AbstractEndpoint.java:1150)
+	at org.apache.coyote.AbstractProtocol.start(AbstractProtocol.java:591)
+	at org.apache.catalina.connector.Connector.startInternal(Connector.java:1018)
+	... 19 common frames omitted
+
+2018-02-20 17:38:33.697  INFO 25639 --- [restartedMain] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2018-02-20 17:38:33.749  INFO 25639 --- [restartedMain] utoConfigurationReportLoggingInitializer : 
+
+Error starting ApplicationContext. To display the auto-configuration report re-run your application with 'debug' enabled.
+2018-02-20 17:38:33.811 ERROR 25639 --- [restartedMain] o.s.b.d.LoggingFailureAnalysisReporter   : 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+The Tomcat connector configured to listen on port 8083 failed to start. The port may already be in use or the connector may be misconfigured.
+
+Action:
+
+Verify the connector's configuration, identify and stop any process that's listening on port 8083, or configure this application to listen on another port.
+
+2018-02-20 17:38:33.820  INFO 25639 --- [restartedMain] ationConfigEmbeddedWebApplicationContext : Closing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@36892eb5: startup date [Tue Feb 20 17:38:01 CET 2018]; root of context hierarchy
+2018-02-20 17:38:33.831  INFO 25639 --- [restartedMain] o.s.j.e.a.AnnotationMBeanExporter        : Unregistering JMX-exposed beans on shutdown
+2018-02-20 17:38:55.241  INFO 2711 --- [http-nio-8083-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring FrameworkServlet 'dispatcherServlet'
+2018-02-20 17:38:55.243  INFO 2711 --- [http-nio-8083-exec-1] o.s.web.servlet.DispatcherServlet        : FrameworkServlet 'dispatcherServlet': initialization started
+2018-02-20 17:38:55.342  INFO 2711 --- [http-nio-8083-exec-1] o.s.web.servlet.DispatcherServlet        : FrameworkServlet 'dispatcherServlet': initialization completed in 97 ms
+2018-02-20 17:39:02.011  INFO 2711 --- [Thread-9] ationConfigEmbeddedWebApplicationContext : Closing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@1d9b7aff: startup date [Tue Feb 20 17:38:05 CET 2018]; root of context hierarchy
+2018-02-20 17:39:02.078  INFO 2711 --- [Thread-9] o.s.j.e.a.AnnotationMBeanExporter        : Unregistering JMX-exposed beans on shutdown
+2018-02-20 17:39:04.162  INFO 25639 --- [restartedMain] c.i.i.InvitationServiceApplication       : Starting InvitationServiceApplication on BootCamp2018 with PID 25639 (/home/member/Project/invitationservice/target/classes started by member in /home/member/Project/invitationservice)
+2018-02-20 17:39:04.192  INFO 25639 --- [restartedMain] c.i.i.InvitationServiceApplication       : The following profiles are active: local
+2018-02-20 17:39:04.520  INFO 25639 --- [restartedMain] ationConfigEmbeddedWebApplicationContext : Refreshing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@143f66e5: startup date [Tue Feb 20 17:39:04 CET 2018]; root of context hierarchy
+2018-02-20 17:39:08.889  INFO 2711 --- [restartedMain] c.i.i.InvitationServiceApplication       : Starting InvitationServiceApplication on BootCamp2018 with PID 2711 (/home/member/Project/invitationservice/target/classes started by member in /home/member/Project/invitationservice)
+2018-02-20 17:39:08.922  INFO 2711 --- [restartedMain] c.i.i.InvitationServiceApplication       : The following profiles are active: local
+2018-02-20 17:39:09.003  INFO 2711 --- [restartedMain] ationConfigEmbeddedWebApplicationContext : Refreshing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@7ce97537: startup date [Tue Feb 20 17:39:09 CET 2018]; root of context hierarchy
+2018-02-20 17:39:18.950  INFO 25639 --- [restartedMain] s.b.c.e.t.TomcatEmbeddedServletContainer : Tomcat initialized with port(s): 8083 (http)
+2018-02-20 17:39:18.997  INFO 25639 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2018-02-20 17:39:19.010  INFO 25639 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet Engine: Apache Tomcat/8.5.27
+2018-02-20 17:39:19.241  INFO 25639 --- [localhost-startStop-1] o.a.c.c.C.[Tomcat-4].[localhost].[/]     : Initializing Spring embedded WebApplicationContext
+2018-02-20 17:39:19.278  INFO 25639 --- [localhost-startStop-1] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 14758 ms
+2018-02-20 17:39:20.092  INFO 25639 --- [localhost-startStop-1] o.s.b.w.servlet.ServletRegistrationBean  : Mapping servlet: 'dispatcherServlet' to [/]
+2018-02-20 17:39:20.153  INFO 25639 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'characterEncodingFilter' to: [/*]
+2018-02-20 17:39:20.244  INFO 25639 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+2018-02-20 17:39:20.291  INFO 25639 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'httpPutFormContentFilter' to: [/*]
+2018-02-20 17:39:20.331  INFO 25639 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'requestContextFilter' to: [/*]
+2018-02-20 17:39:22.073  INFO 25639 --- [restartedMain] org.mongodb.driver.cluster               : Cluster created with settings {hosts=[localhost:27017], mode=SINGLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=500}
+2018-02-20 17:39:22.189  INFO 25639 --- [cluster-ClusterId{value='5a8c4f3abe23aa6427570f1b', description='null'}-localhost:27017] org.mongodb.driver.connection            : Opened connection [connectionId{localValue:44, serverValue:62}] to localhost:27017
+2018-02-20 17:39:22.210  INFO 25639 --- [cluster-ClusterId{value='5a8c4f3abe23aa6427570f1b', description='null'}-localhost:27017] org.mongodb.driver.cluster               : Monitor thread successfully connected to server with description ServerDescription{address=localhost:27017, type=STANDALONE, state=CONNECTED, ok=true, version=ServerVersion{versionList=[3, 6, 2]}, minWireVersion=0, maxWireVersion=6, maxDocumentSize=16777216, roundTripTimeNanos=926922}
+2018-02-20 17:39:25.969  INFO 25639 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerAdapter : Looking for @ControllerAdvice: org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@143f66e5: startup date [Tue Feb 20 17:39:04 CET 2018]; root of context hierarchy
+2018-02-20 17:39:26.153  INFO 25639 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/],methods=[GET]}" onto public java.lang.String com.invitationService.invitationService.InvitationServiceController.login(org.springframework.ui.Model)
+2018-02-20 17:39:26.167  INFO 25639 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/sendInvitationEmailsList],methods=[POST]}" onto public java.util.List<com.invitationService.models.Creator> com.invitationService.invitationService.InvitationServiceController.SendInvitationEmailsList(java.util.List<com.invitationService.models.Creator>)
+2018-02-20 17:39:26.200  INFO 25639 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/list/{id}]}" onto public java.util.List<com.invitationService.models.Participant> com.invitationService.invitationService.InvitationServiceController.getRows(java.lang.String)
+2018-02-20 17:39:26.243  INFO 25639 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/goToConfirmation],methods=[POST]}" onto public java.lang.String com.invitationService.invitationService.InvitationServiceController.goToDesigner(com.invitationService.models.Creator,org.springframework.validation.BindingResult,org.springframework.ui.Model)
+2018-02-20 17:39:26.269  INFO 25639 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/sendInvitationToParticipants],methods=[POST]}" onto public com.invitationService.models.Survey com.invitationService.invitationService.InvitationServiceController.SendMailToParticipants(com.invitationService.models.Survey)
+2018-02-20 17:39:26.324  INFO 25639 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2018-02-20 17:39:26.411  INFO 25639 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+2018-02-20 17:39:27.102  INFO 25639 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-02-20 17:39:27.168  INFO 25639 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-02-20 17:39:27.484  INFO 2711 --- [restartedMain] s.b.c.e.t.TomcatEmbeddedServletContainer : Tomcat initialized with port(s): 8083 (http)
+2018-02-20 17:39:27.600  INFO 2711 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2018-02-20 17:39:27.631  INFO 25639 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-02-20 17:39:27.631  INFO 2711 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet Engine: Apache Tomcat/8.5.27
+2018-02-20 17:39:27.856  INFO 2711 --- [localhost-startStop-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2018-02-20 17:39:27.897  INFO 2711 --- [localhost-startStop-1] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 18894 ms
+2018-02-20 17:39:30.382  INFO 2711 --- [localhost-startStop-1] o.s.b.w.servlet.ServletRegistrationBean  : Mapping servlet: 'dispatcherServlet' to [/]
+2018-02-20 17:39:30.460  INFO 2711 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'characterEncodingFilter' to: [/*]
+2018-02-20 17:39:30.592  INFO 2711 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+2018-02-20 17:39:30.637  WARN 25639 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : Unable to start LiveReload server
+2018-02-20 17:39:30.678  INFO 2711 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'httpPutFormContentFilter' to: [/*]
+2018-02-20 17:39:30.796  INFO 2711 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'requestContextFilter' to: [/*]
+2018-02-20 17:39:31.867  INFO 2711 --- [restartedMain] org.mongodb.driver.cluster               : Cluster created with settings {hosts=[localhost:27017], mode=SINGLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=500}
+2018-02-20 17:39:31.933  INFO 25639 --- [restartedMain] o.s.j.e.a.AnnotationMBeanExporter        : Registering beans for JMX exposure on startup
+2018-02-20 17:39:32.107  INFO 2711 --- [cluster-ClusterId{value='5a8c4f43be23aa0a97d611f7', description='null'}-localhost:27017] org.mongodb.driver.connection            : Opened connection [connectionId{localValue:3, serverValue:63}] to localhost:27017
+2018-02-20 17:39:32.200  INFO 2711 --- [cluster-ClusterId{value='5a8c4f43be23aa0a97d611f7', description='null'}-localhost:27017] org.mongodb.driver.cluster               : Monitor thread successfully connected to server with description ServerDescription{address=localhost:27017, type=STANDALONE, state=CONNECTED, ok=true, version=ServerVersion{versionList=[3, 6, 2]}, minWireVersion=0, maxWireVersion=6, maxDocumentSize=16777216, roundTripTimeNanos=92456543}
+2018-02-20 17:39:32.635  INFO 25639 --- [restartedMain] s.b.c.e.t.TomcatEmbeddedServletContainer : Tomcat started on port(s): 8083 (http)
+2018-02-20 17:39:32.640  INFO 25639 --- [restartedMain] c.i.i.InvitationServiceApplication       : Started InvitationServiceApplication in 30.348 seconds (JVM running for 25963.907)
+2018-02-20 17:39:38.511  INFO 25639 --- [http-nio-8083-exec-1] o.a.c.c.C.[Tomcat-4].[localhost].[/]     : Initializing Spring FrameworkServlet 'dispatcherServlet'
+2018-02-20 17:39:38.561  INFO 25639 --- [http-nio-8083-exec-1] o.s.web.servlet.DispatcherServlet        : FrameworkServlet 'dispatcherServlet': initialization started
+2018-02-20 17:39:39.014  INFO 25639 --- [http-nio-8083-exec-1] o.s.web.servlet.DispatcherServlet        : FrameworkServlet 'dispatcherServlet': initialization completed in 389 ms
+2018-02-20 17:39:42.209  INFO 2711 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerAdapter : Looking for @ControllerAdvice: org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@7ce97537: startup date [Tue Feb 20 17:39:09 CET 2018]; root of context hierarchy
+2018-02-20 17:39:43.480  INFO 2711 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/],methods=[GET]}" onto public java.lang.String com.invitationService.invitationService.InvitationServiceController.login(org.springframework.ui.Model)
+2018-02-20 17:39:43.596  INFO 2711 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/goToConfirmation],methods=[POST]}" onto public java.lang.String com.invitationService.invitationService.InvitationServiceController.goToDesigner(com.invitationService.models.Creator,org.springframework.validation.BindingResult,org.springframework.ui.Model)
+2018-02-20 17:39:43.677  INFO 2711 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/sendInvitationToParticipants],methods=[POST]}" onto public com.invitationService.models.Survey com.invitationService.invitationService.InvitationServiceController.SendMailToParticipants(com.invitationService.models.Survey)
+2018-02-20 17:39:43.768  INFO 2711 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/sendInvitationEmailsList],methods=[POST]}" onto public java.util.List<com.invitationService.models.Creator> com.invitationService.invitationService.InvitationServiceController.SendInvitationEmailsList(java.util.List<com.invitationService.models.Creator>)
+2018-02-20 17:39:43.886  INFO 2711 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/list/{id}]}" onto public java.util.List<com.invitationService.models.Participant> com.invitationService.invitationService.InvitationServiceController.getRows(java.lang.String)
+2018-02-20 17:39:44.264  INFO 2711 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2018-02-20 17:39:44.571  INFO 2711 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+2018-02-20 17:39:46.974  INFO 2711 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-02-20 17:39:47.101  INFO 2711 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-02-20 17:39:49.112  INFO 2711 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-02-20 17:39:53.699  WARN 2711 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : Unable to start LiveReload server
+2018-02-20 17:39:58.795  INFO 2711 --- [restartedMain] o.s.j.e.a.AnnotationMBeanExporter        : Registering beans for JMX exposure on startup
+2018-02-20 17:39:59.032 ERROR 2711 --- [restartedMain] o.apache.catalina.core.StandardService   : Failed to start connector [Connector[HTTP/1.1-8083]]
+
+org.apache.catalina.LifecycleException: Failed to start component [Connector[HTTP/1.1-8083]]
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:167)
+	at org.apache.catalina.core.StandardService.addConnector(StandardService.java:225)
+	at org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainer.addPreviouslyRemovedConnectors(TomcatEmbeddedServletContainer.java:250)
+	at org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainer.start(TomcatEmbeddedServletContainer.java:193)
+	at org.springframework.boot.context.embedded.EmbeddedWebApplicationContext.startEmbeddedServletContainer(EmbeddedWebApplicationContext.java:297)
+	at org.springframework.boot.context.embedded.EmbeddedWebApplicationContext.finishRefresh(EmbeddedWebApplicationContext.java:145)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:546)
+	at org.springframework.boot.context.embedded.EmbeddedWebApplicationContext.refresh(EmbeddedWebApplicationContext.java:122)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:693)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:360)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:303)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1118)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1107)
+	at com.invitationService.invitationService.InvitationServiceApplication.main(InvitationServiceApplication.java:10)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:49)
+Caused by: org.apache.catalina.LifecycleException: Protocol handler start failed
+	at org.apache.catalina.connector.Connector.startInternal(Connector.java:1021)
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:150)
+	... 18 common frames omitted
+Caused by: java.net.BindException: Address already in use
+	at sun.nio.ch.Net.bind0(Native Method)
+	at sun.nio.ch.Net.bind(Net.java:433)
+	at sun.nio.ch.Net.bind(Net.java:425)
+	at sun.nio.ch.ServerSocketChannelImpl.bind(ServerSocketChannelImpl.java:223)
+	at sun.nio.ch.ServerSocketAdaptor.bind(ServerSocketAdaptor.java:74)
+	at org.apache.tomcat.util.net.NioEndpoint.bind(NioEndpoint.java:210)
+	at org.apache.tomcat.util.net.AbstractEndpoint.start(AbstractEndpoint.java:1150)
+	at org.apache.coyote.AbstractProtocol.start(AbstractProtocol.java:591)
+	at org.apache.catalina.connector.Connector.startInternal(Connector.java:1018)
+	... 19 common frames omitted
+
+2018-02-20 17:39:59.068  INFO 2711 --- [restartedMain] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2018-02-20 17:39:59.196  INFO 2711 --- [restartedMain] utoConfigurationReportLoggingInitializer : 
+
+Error starting ApplicationContext. To display the auto-configuration report re-run your application with 'debug' enabled.
+2018-02-20 17:39:59.576 ERROR 2711 --- [restartedMain] o.s.b.d.LoggingFailureAnalysisReporter   : 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+The Tomcat connector configured to listen on port 8083 failed to start. The port may already be in use or the connector may be misconfigured.
+
+Action:
+
+Verify the connector's configuration, identify and stop any process that's listening on port 8083, or configure this application to listen on another port.
+
+2018-02-20 17:39:59.923  INFO 2711 --- [restartedMain] ationConfigEmbeddedWebApplicationContext : Closing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@7ce97537: startup date [Tue Feb 20 17:39:09 CET 2018]; root of context hierarchy
+2018-02-20 17:40:00.194  INFO 2711 --- [restartedMain] o.s.j.e.a.AnnotationMBeanExporter        : Unregistering JMX-exposed beans on shutdown
+2018-02-20 17:40:30.841  INFO 3392 --- [restartedMain] c.i.i.InvitationServiceApplication       : Starting InvitationServiceApplication on BootCamp2018 with PID 3392 (/home/member/Project/invitationservice/target/classes started by member in /home/member/Project/invitationservice)
+2018-02-20 17:40:30.967  INFO 3392 --- [restartedMain] c.i.i.InvitationServiceApplication       : The following profiles are active: local
+2018-02-20 17:40:41.822  INFO 3469 --- [restartedMain] c.i.i.InvitationServiceApplication       : Starting InvitationServiceApplication on BootCamp2018 with PID 3469 (/home/member/Project/invitationservice/target/classes started by member in /home/member/Project/invitationservice)
+2018-02-20 17:40:42.219  INFO 3469 --- [restartedMain] c.i.i.InvitationServiceApplication       : The following profiles are active: local
+2018-02-20 17:40:46.560  INFO 3392 --- [restartedMain] ationConfigEmbeddedWebApplicationContext : Refreshing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@1703487: startup date [Tue Feb 20 17:40:45 CET 2018]; root of context hierarchy
+2018-02-20 17:40:56.972  INFO 3469 --- [restartedMain] ationConfigEmbeddedWebApplicationContext : Refreshing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@2c2f4590: startup date [Tue Feb 20 17:40:56 CET 2018]; root of context hierarchy
+2018-02-20 17:45:23.108  INFO 3392 --- [restartedMain] s.b.c.e.t.TomcatEmbeddedServletContainer : Tomcat initialized with port(s): 8083 (http)
+2018-02-20 17:45:23.395  INFO 3392 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2018-02-20 17:45:23.421  INFO 3392 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet Engine: Apache Tomcat/8.5.27
+2018-02-20 17:45:25.093  INFO 3392 --- [localhost-startStop-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2018-02-20 17:45:25.120  INFO 3392 --- [localhost-startStop-1] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 279391 ms
+2018-02-20 17:45:28.440  INFO 3392 --- [localhost-startStop-1] o.s.b.w.servlet.ServletRegistrationBean  : Mapping servlet: 'dispatcherServlet' to [/]
+2018-02-20 17:45:28.583  INFO 3392 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'characterEncodingFilter' to: [/*]
+2018-02-20 17:45:28.625  INFO 3392 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+2018-02-20 17:45:28.643  INFO 3392 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'httpPutFormContentFilter' to: [/*]
+2018-02-20 17:45:28.654  INFO 3392 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'requestContextFilter' to: [/*]
+2018-02-20 17:45:33.875  INFO 3392 --- [restartedMain] org.mongodb.driver.cluster               : Cluster created with settings {hosts=[localhost:27017], mode=SINGLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=500}
+2018-02-20 17:45:35.395  INFO 3392 --- [cluster-ClusterId{value='5a8c50adbe23aa0d4019a654', description='null'}-localhost:27017] org.mongodb.driver.connection            : Opened connection [connectionId{localValue:1, serverValue:66}] to localhost:27017
+2018-02-20 17:45:35.430  INFO 3392 --- [cluster-ClusterId{value='5a8c50adbe23aa0d4019a654', description='null'}-localhost:27017] org.mongodb.driver.cluster               : Monitor thread successfully connected to server with description ServerDescription{address=localhost:27017, type=STANDALONE, state=CONNECTED, ok=true, version=ServerVersion{versionList=[3, 6, 2]}, minWireVersion=0, maxWireVersion=6, maxDocumentSize=16777216, roundTripTimeNanos=9725741}
+2018-02-20 17:45:45.445  INFO 3392 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerAdapter : Looking for @ControllerAdvice: org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@1703487: startup date [Tue Feb 20 17:40:45 CET 2018]; root of context hierarchy
+2018-02-20 17:45:46.893  INFO 3392 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/],methods=[GET]}" onto public java.lang.String com.invitationService.invitationService.InvitationServiceController.login(org.springframework.ui.Model)
+2018-02-20 17:45:46.916  INFO 3392 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/goToConfirmation],methods=[POST]}" onto public java.lang.String com.invitationService.invitationService.InvitationServiceController.goToDesigner(com.invitationService.models.Creator,org.springframework.validation.BindingResult,org.springframework.ui.Model)
+2018-02-20 17:45:46.939  INFO 3392 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/sendInvitationToParticipants],methods=[POST]}" onto public com.invitationService.models.Survey com.invitationService.invitationService.InvitationServiceController.SendMailToParticipants(com.invitationService.models.Survey)
+2018-02-20 17:45:46.953  INFO 3392 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/sendInvitationEmailsList],methods=[POST]}" onto public java.util.List<com.invitationService.models.Creator> com.invitationService.invitationService.InvitationServiceController.SendInvitationEmailsList(java.util.List<com.invitationService.models.Creator>)
+2018-02-20 17:45:46.965  INFO 3392 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/list/{id}]}" onto public java.util.List<com.invitationService.models.Participant> com.invitationService.invitationService.InvitationServiceController.getRows(java.lang.String)
+2018-02-20 17:45:47.015  INFO 3392 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2018-02-20 17:45:47.027  INFO 3392 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+2018-02-20 17:45:47.426  INFO 3392 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-02-20 17:45:47.449  INFO 3392 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-02-20 17:45:48.308  INFO 3392 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-02-20 17:45:52.310  WARN 3392 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : Unable to start LiveReload server
+2018-02-20 17:45:52.683  INFO 3392 --- [restartedMain] o.s.j.e.a.AnnotationMBeanExporter        : Registering beans for JMX exposure on startup
+2018-02-20 17:45:52.937 ERROR 3392 --- [restartedMain] o.apache.catalina.core.StandardService   : Failed to start connector [Connector[HTTP/1.1-8083]]
+
+org.apache.catalina.LifecycleException: Failed to start component [Connector[HTTP/1.1-8083]]
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:167)
+	at org.apache.catalina.core.StandardService.addConnector(StandardService.java:225)
+	at org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainer.addPreviouslyRemovedConnectors(TomcatEmbeddedServletContainer.java:250)
+	at org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainer.start(TomcatEmbeddedServletContainer.java:193)
+	at org.springframework.boot.context.embedded.EmbeddedWebApplicationContext.startEmbeddedServletContainer(EmbeddedWebApplicationContext.java:297)
+	at org.springframework.boot.context.embedded.EmbeddedWebApplicationContext.finishRefresh(EmbeddedWebApplicationContext.java:145)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:546)
+	at org.springframework.boot.context.embedded.EmbeddedWebApplicationContext.refresh(EmbeddedWebApplicationContext.java:122)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:693)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:360)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:303)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1118)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1107)
+	at com.invitationService.invitationService.InvitationServiceApplication.main(InvitationServiceApplication.java:10)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:49)
+Caused by: org.apache.catalina.LifecycleException: Protocol handler start failed
+	at org.apache.catalina.connector.Connector.startInternal(Connector.java:1021)
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:150)
+	... 18 common frames omitted
+Caused by: java.net.BindException: Address already in use
+	at sun.nio.ch.Net.bind0(Native Method)
+	at sun.nio.ch.Net.bind(Net.java:433)
+	at sun.nio.ch.Net.bind(Net.java:425)
+	at sun.nio.ch.ServerSocketChannelImpl.bind(ServerSocketChannelImpl.java:223)
+	at sun.nio.ch.ServerSocketAdaptor.bind(ServerSocketAdaptor.java:74)
+	at org.apache.tomcat.util.net.NioEndpoint.bind(NioEndpoint.java:210)
+	at org.apache.tomcat.util.net.AbstractEndpoint.start(AbstractEndpoint.java:1150)
+	at org.apache.coyote.AbstractProtocol.start(AbstractProtocol.java:591)
+	at org.apache.catalina.connector.Connector.startInternal(Connector.java:1018)
+	... 19 common frames omitted
+
+2018-02-20 17:45:53.065  INFO 3392 --- [restartedMain] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2018-02-20 17:45:53.143  INFO 3392 --- [restartedMain] utoConfigurationReportLoggingInitializer : 
+
+Error starting ApplicationContext. To display the auto-configuration report re-run your application with 'debug' enabled.
+2018-02-20 17:45:53.177 ERROR 3392 --- [restartedMain] o.s.b.d.LoggingFailureAnalysisReporter   : 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+The Tomcat connector configured to listen on port 8083 failed to start. The port may already be in use or the connector may be misconfigured.
+
+Action:
+
+Verify the connector's configuration, identify and stop any process that's listening on port 8083, or configure this application to listen on another port.
+
+2018-02-20 17:45:53.185  INFO 3392 --- [restartedMain] ationConfigEmbeddedWebApplicationContext : Closing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@1703487: startup date [Tue Feb 20 17:40:45 CET 2018]; root of context hierarchy
+2018-02-20 17:45:53.202  INFO 3392 --- [restartedMain] o.s.j.e.a.AnnotationMBeanExporter        : Unregistering JMX-exposed beans on shutdown
+2018-02-20 17:46:54.676  INFO 25639 --- [Thread-276] ationConfigEmbeddedWebApplicationContext : Closing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@143f66e5: startup date [Tue Feb 20 17:39:04 CET 2018]; root of context hierarchy
+2018-02-20 17:46:54.768  INFO 25639 --- [Thread-276] o.s.j.e.a.AnnotationMBeanExporter        : Unregistering JMX-exposed beans on shutdown
+2018-02-20 17:47:08.261  INFO 25639 --- [restartedMain] c.i.i.InvitationServiceApplication       : Starting InvitationServiceApplication on BootCamp2018 with PID 25639 (/home/member/Project/invitationservice/target/classes started by member in /home/member/Project/invitationservice)
+2018-02-20 17:47:08.284  INFO 25639 --- [restartedMain] c.i.i.InvitationServiceApplication       : The following profiles are active: local
+2018-02-20 17:47:08.325  INFO 25639 --- [restartedMain] ationConfigEmbeddedWebApplicationContext : Refreshing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@373a11cb: startup date [Tue Feb 20 17:47:08 CET 2018]; root of context hierarchy
+2018-02-20 17:47:10.434  INFO 25639 --- [restartedMain] s.b.c.e.t.TomcatEmbeddedServletContainer : Tomcat initialized with port(s): 8083 (http)
+2018-02-20 17:47:10.434  INFO 25639 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2018-02-20 17:47:10.434  INFO 25639 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet Engine: Apache Tomcat/8.5.27
+2018-02-20 17:47:10.453  INFO 25639 --- [localhost-startStop-1] o.a.c.c.C.[Tomcat-5].[localhost].[/]     : Initializing Spring embedded WebApplicationContext
+2018-02-20 17:47:10.455  INFO 25639 --- [localhost-startStop-1] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 2133 ms
+2018-02-20 17:47:10.537  INFO 25639 --- [localhost-startStop-1] o.s.b.w.servlet.ServletRegistrationBean  : Mapping servlet: 'dispatcherServlet' to [/]
+2018-02-20 17:47:10.544  INFO 25639 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'characterEncodingFilter' to: [/*]
+2018-02-20 17:47:10.561  INFO 25639 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+2018-02-20 17:47:10.561  INFO 25639 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'httpPutFormContentFilter' to: [/*]
+2018-02-20 17:47:10.567  INFO 25639 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'requestContextFilter' to: [/*]
+2018-02-20 17:47:10.750  INFO 25639 --- [restartedMain] org.mongodb.driver.cluster               : Cluster created with settings {hosts=[localhost:27017], mode=SINGLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=500}
+2018-02-20 17:47:10.796  INFO 25639 --- [cluster-ClusterId{value='5a8c510ebe23aa6427570f1d', description='null'}-localhost:27017] org.mongodb.driver.connection            : Opened connection [connectionId{localValue:46, serverValue:73}] to localhost:27017
+2018-02-20 17:47:10.808  INFO 25639 --- [cluster-ClusterId{value='5a8c510ebe23aa6427570f1d', description='null'}-localhost:27017] org.mongodb.driver.cluster               : Monitor thread successfully connected to server with description ServerDescription{address=localhost:27017, type=STANDALONE, state=CONNECTED, ok=true, version=ServerVersion{versionList=[3, 6, 2]}, minWireVersion=0, maxWireVersion=6, maxDocumentSize=16777216, roundTripTimeNanos=227367}
+2018-02-20 17:47:11.389  INFO 25639 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerAdapter : Looking for @ControllerAdvice: org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@373a11cb: startup date [Tue Feb 20 17:47:08 CET 2018]; root of context hierarchy
+2018-02-20 17:47:11.424  INFO 25639 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/],methods=[GET]}" onto public java.lang.String com.invitationService.invitationService.InvitationServiceController.login(org.springframework.ui.Model)
+2018-02-20 17:47:11.429  INFO 25639 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/sendInvitationEmailsList],methods=[POST]}" onto public java.util.List<com.invitationService.models.Creator> com.invitationService.invitationService.InvitationServiceController.SendInvitationEmailsList(java.util.List<com.invitationService.models.Creator>)
+2018-02-20 17:47:11.436  INFO 25639 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/list/{id}]}" onto public java.util.List<com.invitationService.models.Participant> com.invitationService.invitationService.InvitationServiceController.getRows(java.lang.String)
+2018-02-20 17:47:11.439  INFO 25639 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/goToConfirmation],methods=[POST]}" onto public java.lang.String com.invitationService.invitationService.InvitationServiceController.goToDesigner(com.invitationService.models.Creator,org.springframework.validation.BindingResult,org.springframework.ui.Model)
+2018-02-20 17:47:11.440  INFO 25639 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/sendInvitationToParticipants],methods=[POST]}" onto public com.invitationService.models.Survey com.invitationService.invitationService.InvitationServiceController.SendMailToParticipants(com.invitationService.models.Survey)
+2018-02-20 17:47:11.442  INFO 25639 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2018-02-20 17:47:11.455  INFO 25639 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+2018-02-20 17:47:11.480  INFO 25639 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-02-20 17:47:11.481  INFO 25639 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-02-20 17:47:11.549  INFO 25639 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-02-20 17:47:11.794  WARN 25639 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : Unable to start LiveReload server
+2018-02-20 17:47:11.905  INFO 25639 --- [restartedMain] o.s.j.e.a.AnnotationMBeanExporter        : Registering beans for JMX exposure on startup
+2018-02-20 17:47:12.113  INFO 25639 --- [restartedMain] s.b.c.e.t.TomcatEmbeddedServletContainer : Tomcat started on port(s): 8083 (http)
+2018-02-20 17:47:12.115  INFO 25639 --- [restartedMain] c.i.i.InvitationServiceApplication       : Started InvitationServiceApplication in 4.253 seconds (JVM running for 26423.382)
+2018-02-20 17:51:05.277  INFO 25639 --- [Thread-296] ationConfigEmbeddedWebApplicationContext : Closing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@373a11cb: startup date [Tue Feb 20 17:47:08 CET 2018]; root of context hierarchy
+2018-02-20 17:51:05.292  INFO 25639 --- [Thread-296] o.s.j.e.a.AnnotationMBeanExporter        : Unregistering JMX-exposed beans on shutdown
+2018-02-20 17:51:05.410  INFO 2711 --- [restartedMain] c.i.i.InvitationServiceApplication       : Starting InvitationServiceApplication on BootCamp2018 with PID 2711 (/home/member/Project/invitationservice/target/classes started by member in /home/member/Project/invitationservice)
+2018-02-20 17:51:05.432  INFO 2711 --- [restartedMain] c.i.i.InvitationServiceApplication       : The following profiles are active: local
+2018-02-20 17:51:05.456  INFO 2711 --- [restartedMain] ationConfigEmbeddedWebApplicationContext : Refreshing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@5740c1fa: startup date [Tue Feb 20 17:51:05 CET 2018]; root of context hierarchy
+2018-02-20 17:51:06.117  INFO 25639 --- [restartedMain] c.i.i.InvitationServiceApplication       : Starting InvitationServiceApplication on BootCamp2018 with PID 25639 (/home/member/Project/invitationservice/target/classes started by member in /home/member/Project/invitationservice)
+2018-02-20 17:51:06.120  INFO 25639 --- [restartedMain] c.i.i.InvitationServiceApplication       : The following profiles are active: local
+2018-02-20 17:51:06.134  INFO 25639 --- [restartedMain] ationConfigEmbeddedWebApplicationContext : Refreshing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@37197d66: startup date [Tue Feb 20 17:51:06 CET 2018]; root of context hierarchy
+2018-02-20 17:51:07.076  INFO 2711 --- [restartedMain] s.b.c.e.t.TomcatEmbeddedServletContainer : Tomcat initialized with port(s): 8083 (http)
+2018-02-20 17:51:07.077  INFO 2711 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2018-02-20 17:51:07.077  INFO 2711 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet Engine: Apache Tomcat/8.5.27
+2018-02-20 17:51:07.147  INFO 2711 --- [localhost-startStop-1] o.a.c.c.C.[Tomcat-3].[localhost].[/]     : Initializing Spring embedded WebApplicationContext
+2018-02-20 17:51:07.156  INFO 2711 --- [localhost-startStop-1] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1700 ms
+2018-02-20 17:51:07.363  INFO 2711 --- [localhost-startStop-1] o.s.b.w.servlet.ServletRegistrationBean  : Mapping servlet: 'dispatcherServlet' to [/]
+2018-02-20 17:51:07.373  INFO 2711 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'characterEncodingFilter' to: [/*]
+2018-02-20 17:51:07.393  INFO 2711 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+2018-02-20 17:51:07.398  INFO 2711 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'httpPutFormContentFilter' to: [/*]
+2018-02-20 17:51:07.402  INFO 2711 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'requestContextFilter' to: [/*]
+2018-02-20 17:51:07.657  INFO 2711 --- [restartedMain] org.mongodb.driver.cluster               : Cluster created with settings {hosts=[localhost:27017], mode=SINGLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=500}
+2018-02-20 17:51:07.720  INFO 2711 --- [cluster-ClusterId{value='5a8c51fbbe23aa0a97d611fa', description='null'}-localhost:27017] org.mongodb.driver.connection            : Opened connection [connectionId{localValue:6, serverValue:74}] to localhost:27017
+2018-02-20 17:51:07.753  INFO 2711 --- [cluster-ClusterId{value='5a8c51fbbe23aa0a97d611fa', description='null'}-localhost:27017] org.mongodb.driver.cluster               : Monitor thread successfully connected to server with description ServerDescription{address=localhost:27017, type=STANDALONE, state=CONNECTED, ok=true, version=ServerVersion{versionList=[3, 6, 2]}, minWireVersion=0, maxWireVersion=6, maxDocumentSize=16777216, roundTripTimeNanos=12821706}
+2018-02-20 17:51:08.023  INFO 25639 --- [restartedMain] s.b.c.e.t.TomcatEmbeddedServletContainer : Tomcat initialized with port(s): 8083 (http)
+2018-02-20 17:51:08.032  INFO 25639 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2018-02-20 17:51:08.033  INFO 25639 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet Engine: Apache Tomcat/8.5.27
+2018-02-20 17:51:08.092  INFO 25639 --- [localhost-startStop-1] o.a.c.c.C.[Tomcat-5].[localhost].[/]     : Initializing Spring embedded WebApplicationContext
+2018-02-20 17:51:08.106  INFO 25639 --- [localhost-startStop-1] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1972 ms
+2018-02-20 17:51:08.188  INFO 25639 --- [localhost-startStop-1] o.s.b.w.servlet.ServletRegistrationBean  : Mapping servlet: 'dispatcherServlet' to [/]
+2018-02-20 17:51:08.193  INFO 25639 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'characterEncodingFilter' to: [/*]
+2018-02-20 17:51:08.196  INFO 25639 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+2018-02-20 17:51:08.199  INFO 25639 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'httpPutFormContentFilter' to: [/*]
+2018-02-20 17:51:08.200  INFO 25639 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'requestContextFilter' to: [/*]
+2018-02-20 17:51:08.334  INFO 25639 --- [restartedMain] org.mongodb.driver.cluster               : Cluster created with settings {hosts=[localhost:27017], mode=SINGLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=500}
+2018-02-20 17:51:08.353  INFO 25639 --- [cluster-ClusterId{value='5a8c51fcbe23aa6427570f1e', description='null'}-localhost:27017] org.mongodb.driver.connection            : Opened connection [connectionId{localValue:47, serverValue:75}] to localhost:27017
+2018-02-20 17:51:08.361  INFO 25639 --- [cluster-ClusterId{value='5a8c51fcbe23aa6427570f1e', description='null'}-localhost:27017] org.mongodb.driver.cluster               : Monitor thread successfully connected to server with description ServerDescription{address=localhost:27017, type=STANDALONE, state=CONNECTED, ok=true, version=ServerVersion{versionList=[3, 6, 2]}, minWireVersion=0, maxWireVersion=6, maxDocumentSize=16777216, roundTripTimeNanos=1037477}
+2018-02-20 17:51:08.486  INFO 2711 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerAdapter : Looking for @ControllerAdvice: org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@5740c1fa: startup date [Tue Feb 20 17:51:05 CET 2018]; root of context hierarchy
+2018-02-20 17:51:08.556  INFO 2711 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/],methods=[GET]}" onto public java.lang.String com.invitationService.invitationService.InvitationServiceController.login(org.springframework.ui.Model)
+2018-02-20 17:51:08.559  INFO 2711 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/goToConfirmation],methods=[POST]}" onto public java.lang.String com.invitationService.invitationService.InvitationServiceController.goToDesigner(com.invitationService.models.Creator,org.springframework.validation.BindingResult,org.springframework.ui.Model)
+2018-02-20 17:51:08.559  INFO 2711 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/sendInvitationToParticipants],methods=[POST]}" onto public com.invitationService.models.Survey com.invitationService.invitationService.InvitationServiceController.SendMailToParticipants(com.invitationService.models.Survey)
+2018-02-20 17:51:08.560  INFO 2711 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/sendInvitationEmailsList],methods=[POST]}" onto public java.util.List<com.invitationService.models.Creator> com.invitationService.invitationService.InvitationServiceController.SendInvitationEmailsList(java.util.List<com.invitationService.models.Creator>)
+2018-02-20 17:51:08.571  INFO 2711 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/list/{id}]}" onto public java.util.List<com.invitationService.models.Participant> com.invitationService.invitationService.InvitationServiceController.getRows(java.lang.String)
+2018-02-20 17:51:08.587  INFO 2711 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2018-02-20 17:51:08.596  INFO 2711 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+2018-02-20 17:51:08.628  INFO 2711 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-02-20 17:51:08.629  INFO 2711 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-02-20 17:51:08.679  INFO 2711 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-02-20 17:51:08.853  INFO 25639 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerAdapter : Looking for @ControllerAdvice: org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@37197d66: startup date [Tue Feb 20 17:51:06 CET 2018]; root of context hierarchy
+2018-02-20 17:51:08.881  INFO 25639 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/],methods=[GET]}" onto public java.lang.String com.invitationService.invitationService.InvitationServiceController.login(org.springframework.ui.Model)
+2018-02-20 17:51:08.884  INFO 25639 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/sendInvitationEmailsList],methods=[POST]}" onto public java.util.List<com.invitationService.models.Creator> com.invitationService.invitationService.InvitationServiceController.SendInvitationEmailsList(java.util.List<com.invitationService.models.Creator>)
+2018-02-20 17:51:08.888  INFO 25639 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/list/{id}]}" onto public java.util.List<com.invitationService.models.Participant> com.invitationService.invitationService.InvitationServiceController.getRows(java.lang.String)
+2018-02-20 17:51:08.890  INFO 25639 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/goToConfirmation],methods=[POST]}" onto public java.lang.String com.invitationService.invitationService.InvitationServiceController.goToDesigner(com.invitationService.models.Creator,org.springframework.validation.BindingResult,org.springframework.ui.Model)
+2018-02-20 17:51:08.892  INFO 25639 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/sendInvitationToParticipants],methods=[POST]}" onto public com.invitationService.models.Survey com.invitationService.invitationService.InvitationServiceController.SendMailToParticipants(com.invitationService.models.Survey)
+2018-02-20 17:51:08.898  INFO 25639 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2018-02-20 17:51:08.902  INFO 25639 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+2018-02-20 17:51:08.931  INFO 25639 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-02-20 17:51:08.932  INFO 25639 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-02-20 17:51:08.977  WARN 2711 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : Unable to start LiveReload server
+2018-02-20 17:51:08.987  INFO 25639 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-02-20 17:51:09.129  WARN 25639 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : Unable to start LiveReload server
+2018-02-20 17:51:09.171  INFO 2711 --- [restartedMain] o.s.j.e.a.AnnotationMBeanExporter        : Registering beans for JMX exposure on startup
+2018-02-20 17:51:09.229  INFO 25639 --- [restartedMain] o.s.j.e.a.AnnotationMBeanExporter        : Registering beans for JMX exposure on startup
+2018-02-20 17:51:09.243 ERROR 25639 --- [restartedMain] o.apache.catalina.core.StandardService   : Failed to start connector [Connector[HTTP/1.1-8083]]
+
+org.apache.catalina.LifecycleException: Failed to start component [Connector[HTTP/1.1-8083]]
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:167)
+	at org.apache.catalina.core.StandardService.addConnector(StandardService.java:225)
+	at org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainer.addPreviouslyRemovedConnectors(TomcatEmbeddedServletContainer.java:250)
+	at org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainer.start(TomcatEmbeddedServletContainer.java:193)
+	at org.springframework.boot.context.embedded.EmbeddedWebApplicationContext.startEmbeddedServletContainer(EmbeddedWebApplicationContext.java:297)
+	at org.springframework.boot.context.embedded.EmbeddedWebApplicationContext.finishRefresh(EmbeddedWebApplicationContext.java:145)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:546)
+	at org.springframework.boot.context.embedded.EmbeddedWebApplicationContext.refresh(EmbeddedWebApplicationContext.java:122)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:693)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:360)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:303)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1118)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1107)
+	at com.invitationService.invitationService.InvitationServiceApplication.main(InvitationServiceApplication.java:13)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:49)
+Caused by: org.apache.catalina.LifecycleException: Protocol handler start failed
+	at org.apache.catalina.connector.Connector.startInternal(Connector.java:1021)
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:150)
+	... 18 common frames omitted
+Caused by: java.net.BindException: Address already in use
+	at sun.nio.ch.Net.bind0(Native Method)
+	at sun.nio.ch.Net.bind(Net.java:433)
+	at sun.nio.ch.Net.bind(Net.java:425)
+	at sun.nio.ch.ServerSocketChannelImpl.bind(ServerSocketChannelImpl.java:223)
+	at sun.nio.ch.ServerSocketAdaptor.bind(ServerSocketAdaptor.java:74)
+	at org.apache.tomcat.util.net.NioEndpoint.bind(NioEndpoint.java:210)
+	at org.apache.tomcat.util.net.AbstractEndpoint.start(AbstractEndpoint.java:1150)
+	at org.apache.coyote.AbstractProtocol.start(AbstractProtocol.java:591)
+	at org.apache.catalina.connector.Connector.startInternal(Connector.java:1018)
+	... 19 common frames omitted
+
+2018-02-20 17:51:09.247  INFO 25639 --- [restartedMain] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2018-02-20 17:51:09.263  INFO 25639 --- [restartedMain] utoConfigurationReportLoggingInitializer : 
+
+Error starting ApplicationContext. To display the auto-configuration report re-run your application with 'debug' enabled.
+2018-02-20 17:51:09.264 ERROR 25639 --- [restartedMain] o.s.b.d.LoggingFailureAnalysisReporter   : 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+The Tomcat connector configured to listen on port 8083 failed to start. The port may already be in use or the connector may be misconfigured.
+
+Action:
+
+Verify the connector's configuration, identify and stop any process that's listening on port 8083, or configure this application to listen on another port.
+
+2018-02-20 17:51:09.264  INFO 25639 --- [restartedMain] ationConfigEmbeddedWebApplicationContext : Closing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@37197d66: startup date [Tue Feb 20 17:51:06 CET 2018]; root of context hierarchy
+2018-02-20 17:51:09.267  INFO 25639 --- [restartedMain] o.s.j.e.a.AnnotationMBeanExporter        : Unregistering JMX-exposed beans on shutdown
+2018-02-20 17:51:09.315  INFO 2711 --- [restartedMain] s.b.c.e.t.TomcatEmbeddedServletContainer : Tomcat started on port(s): 8083 (http)
+2018-02-20 17:51:09.320  INFO 2711 --- [restartedMain] c.i.i.InvitationServiceApplication       : Started InvitationServiceApplication in 4.423 seconds (JVM running for 887.911)
