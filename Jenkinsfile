@@ -12,7 +12,7 @@ pipeline {
                 sh '''
                     echo "PATH = ${PATH}"
                     echo "M2_HOME = ${M2_HOME}"
-                    echo "REMOVE ME! Token Key is: $TOKEN_KEY"
+                    echo "REMOVE ME! Token Key is: ${TOKEN_KEY}"
                 '''
             }
         }
