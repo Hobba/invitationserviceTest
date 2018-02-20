@@ -47,7 +47,7 @@ public class MailgunEmailService implements EmailService {
 		}
 
 		email.setContent(email.getContent().replaceAll("\\$\\{CREATORLINK\\}",
-				designservice_base_url + "?creator=" + creator.getEmail()));
+				designservice_base_url + "/c/?creator=" + creator.getEmail()));
 
 		sendMailToAddress(email);
 	}
