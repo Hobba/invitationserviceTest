@@ -13,7 +13,7 @@ pipeline {
         stage ('Initialize') {
             steps {
                 sh '''
-                    set +x
+                   
                     echo "PATH = ${PATH}"
                     echo "M2_HOME = ${M2_HOME}"
                     echo "REMOVE ME! Token Key is: ${TOKEN_KEY}"
