@@ -5,8 +5,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 
 public class ApiKeyClass {
+	
+	//NOTIZ WIE MAN DIE ANNOTATION FIXED: Die Klasse ApiKeyClass muss als Bean angelegt werden und im TokenService Autowired werden, nur so kann die Value Annotation funktionieren. :)
 
-	@Value("token.key")
+	@Value("${token.key}")
 	private String key;
 
 	Logger logger = LoggerFactory.getLogger(this.getClass());

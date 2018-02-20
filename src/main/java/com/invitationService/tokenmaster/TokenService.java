@@ -6,6 +6,7 @@ import java.util.Date;
 import javax.crypto.spec.SecretKeySpec;
 import javax.xml.bind.DatatypeConverter;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import io.jsonwebtoken.Claims;
@@ -19,6 +20,9 @@ public class TokenService {
 	private static final String CLAIM_EMAIL = "email";
 	private ApiKeyClass apiKey = new ApiKeyClass();
 	private long ttlMillis = 1209600000;
+	
+//	@Autowired
+//	ApiKeyClass apiKey;
 
 	// Sample method to construct a JWT
 	public String createJWT(String id, String issuer, String subject, String email) {
