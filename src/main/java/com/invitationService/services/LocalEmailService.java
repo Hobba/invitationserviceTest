@@ -36,7 +36,7 @@ public class LocalEmailService implements EmailService {
 		}
 
 		email.setContent(email.getContent().replaceAll("\\$\\{CREATORLINK\\}",
-				designservice_base_url + "/c/?creator=" + creator.getEmail()));
+				designservice_base_url + "c/?creator=" + creator.getEmail()));
 
 		LOGGER.info(email.getContent());
 	}
