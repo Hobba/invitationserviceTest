@@ -7,17 +7,22 @@ import java.io.StringWriter;
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 
 import com.invitationService.models.Creator;
 import com.invitationService.models.Email;
 import com.invitationService.models.Participant;
 import com.invitationService.models.Survey;
+import com.invitationService.tokenmaster.TokenService;
 
 public class LocalEmailService implements EmailService {
 
 	@Value("${invitationservice.base.url}")
 	private String base_url;
+	
+	@Autowired
+	private TokenService tokenService;
 
 	@Value("${designservice.base.url}")
 	private String designservice_base_url;
@@ -36,7 +41,7 @@ public class LocalEmailService implements EmailService {
 		}
 
 		email.setContent(email.getContent().replaceAll("\\$\\{CREATORLINK\\}",
-				designservice_base_url + "c/?creator=" + creator.getEmail()));
+				designservice_base_url + "c/?creator=" + tokenService.createCreatorJWT("", "invitationservice", "email", creator.getEmail())));
 
 		LOGGER.info(email.getContent());
 	}
