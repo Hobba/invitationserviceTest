@@ -17,7 +17,7 @@ public class ApiKeyClass {
 
 	public String getSecret() {
 
-		logger.debug("Dies ist der mega geheime secret key", key);
+		logger.debug("Dies ist der mega geheime secret key: {}", key);
 		return key;
 	}
 }
