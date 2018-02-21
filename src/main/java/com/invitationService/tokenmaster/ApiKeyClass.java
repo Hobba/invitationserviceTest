@@ -10,6 +10,10 @@ public class ApiKeyClass {
 
 	public String getSecret() {
 
+<<<<<<< HEAD
+=======
+		logger.debug("Dies ist der mega geheime secret key: {}", key);
+>>>>>>> master
 		return key;
 	}
 }
