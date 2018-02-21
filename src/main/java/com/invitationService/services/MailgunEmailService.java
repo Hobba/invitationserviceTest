@@ -54,7 +54,7 @@ public class MailgunEmailService implements EmailService {
 	
 
 		email.setContent(email.getContent().replaceAll("\\$\\{CREATORLINK\\}", designservice_base_url + "c/?creator="
-				+ tokenService.createJWT("", "invitationservice", "email", creator.getEmail())));
+				+ tokenService.createJWT("id", "invitationservice", "email", creator.getEmail())));
 
 		sendMailToAddress(email);
 	}

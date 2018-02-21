@@ -6,7 +6,6 @@ import java.util.Date;
 import javax.crypto.spec.SecretKeySpec;
 import javax.xml.bind.DatatypeConverter;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -20,7 +19,7 @@ public class TokenService {
 
 	@Value("${token.key}")
 	private String key;
-	
+
 	private static final String CLAIM_EMAIL = "email";
 
 	private long ttlMillis = 1209600000;
@@ -32,7 +31,7 @@ public class TokenService {
 		SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS256;
 
 		long nowMillis = System.currentTimeMillis();
-	
+
 		Date now = new Date(nowMillis);
 
 		// We will sign our JWT with our ApiKey secret
@@ -60,10 +59,6 @@ public class TokenService {
 		// This line will throw an exception if it is not a signed JWS (as expected)
 		Claims claims = Jwts.parser().setSigningKey(DatatypeConverter.parseBase64Binary(apiKey.getSecret()))
 				.parseClaimsJws(jwt).getBody();
-		// System.out.println("ID: " + claims.getId());
-		// System.out.println("Subject: " + claims.getSubject());
-		// System.out.println("Issuer: " + claims.getIssuer());
-		// System.out.println("Expiration: " + claims.getExpiration());
 
 		return claims.get(CLAIM_EMAIL, String.class);
 	}
