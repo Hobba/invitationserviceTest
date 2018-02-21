@@ -38,6 +38,9 @@ public class MailgunEmailService implements EmailService {
 	@Value("${designservice.base.url}")
 	private String designservice_base_url;
 
+	@Value("${surveyservice.base.url}")
+	private String surveyservice_base_url;
+
 	private final Logger LOGGER = LoggerFactory.getLogger(MailgunEmailService.class);
 
 	public void sendAccountMailToCreator(Creator creator, boolean isRegistered) {
@@ -51,10 +54,8 @@ public class MailgunEmailService implements EmailService {
 			email.setContent(getEmailContent(TEMPLATE_TYPE.CREATOR_UNREGISTERED));
 		}
 
-	
-
 		email.setContent(email.getContent().replaceAll("\\$\\{CREATORLINK\\}", designservice_base_url + "c/?creator="
-				+ tokenService.createJWT("id", "invitationservice", "email", creator.getEmail())));
+				+ tokenService.createCreatorJWT("id", "invitationservice", "email", creator.getEmail())));
 
 		sendMailToAddress(email);
 	}
@@ -69,7 +70,8 @@ public class MailgunEmailService implements EmailService {
 			email.getContent().replaceAll("\\$\\{TITLE\\}", survey.getTitle());
 			email.getContent().replaceAll("\\$\\{CREATORNAME\\}", getCreatorName(survey.getCreator()));
 			email.getContent().replaceAll("\\$\\{GREETING\\}", survey.getGreeting());
-			email.setContent(email.getContent().replaceAll("\\$\\{USERLINK\\}", "http://userlink.de/"));
+			email.setContent(email.getContent().replaceAll("\\$\\{USERLINK\\}", surveyservice_base_url + "s/?user="
+					+ tokenService.createUserJWT("", "IS", "surveyInvitation", p.getEmail(), survey.getId())));
 
 			sendMailToAddress(email);
 		}
