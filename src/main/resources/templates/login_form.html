@@ -17,17 +17,18 @@
 <link href="https://fonts.googleapis.com/css?family=Nunito"
 	rel="stylesheet"></link>
 <!-- 	 -->
-	
+
 </head>
 
-<body style="font-family: 'Nunito', sans-serif;" onresize="resizeTrigger()">
+<body style="font-family: 'Nunito', sans-serif;"
+	onresize="resizeTrigger()">
 
 	<div
-		style="background:url('https://static.pexels.com/photos/669622/pexels-photo-669622.jpeg') ; background-size: cover; background-position: 0 center; position: fixed; z-index: 0; right: 0px; left: 0px; top: 0px; bottom: 0px;">
+		style="background: url('https://static.pexels.com/photos/669622/pexels-photo-669622.jpeg'); background-size: cover; background-position: 0 center; position: fixed; z-index: 0; right: 0px; left: 0px; top: 0px; bottom: 0px;">
 	</div>
 
 	<nav class="navbar navbar-expand-lg navbar-light"
-		style="background-color: rgba(248, 248, 248, 0.95); z-index:2;">
+		style="background-color: rgba(248, 248, 248, 0.95); z-index: 2;">
 		<a class="navbar-brand" href="#"><img class="simque-brand-logo"
 			th:src="@{img/logo_simque.png}" /></a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -35,7 +36,7 @@
 			aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 		</button>
-		<div class="collapse navbar-collapse" id="navbarNav">
+		<!-- 		<div class="collapse navbar-collapse" id="navbarNav">
 			<ul class="navbar-nav">
 				<li class="nav-item active"><a class="nav-link" href="#">Meine
 						Umfragen <span class="sr-only">(current)</span>
@@ -45,7 +46,7 @@
 				<li class="nav-item"><a class="nav-link simque-user-icon"
 					href="#"><i class="fas fa-user-circle"></i></a></li>
 			</ul>
-		</div>
+		</div> -->
 	</nav>
 
 
@@ -60,51 +61,67 @@
 
 			<!-- 			</div> -->
 			<div th:if="${showLogin}" class="col-md-9 col-sm-12 col-lg-9 "
-				style="background-color: rgba(256, 256, 256, 0.95); height: 300px;padding: 20px; box-shadow: 0px 0px 10px rgb(70,70,70);">
+				style="background-color: rgba(256, 256, 256, 0.95); height: 300px; padding: 20px; box-shadow: 0px 0px 10px rgb(70, 70, 70);">
 				<h3>SimQue - Your Simple Questionnaire</h3>
-				<p>Schön, dass Du hier bist! Gib Deine
-					Emailadresse ein und wir senden Dir deinen persönlichen
-					Zugangslink, anschließend kannst Du sofort mit Deiner ersten
-					Umfrage starten.</p>
+				<p>Schön, dass Du hier bist! Gib Deine Emailadresse ein und wir
+					senden Dir deinen persönlichen Zugangslink, anschließend kannst Du
+					sofort mit Deiner ersten Umfrage starten.</p>
 
 				<form enctype="multipart/form-data" th:object="${user}"
 					th:action="@{goToConfirmation}" method="post" style="margin: auto;">
 
-					<input type="text" th:field="*{Email}"
-						placeholder="me@example.com" style="width: auto; text-indent: 2px;" />
+					<input type="text" th:field="*{Email}" placeholder="me@example.com"
+						style="width: auto; text-indent: 2px;" />
 					<div>
 
 
-						<div th:if="${errormessage}" style="margin-top: 3px; min-height: 10px;">
+						<div th:if="${errormessage}"
+							style="margin-top: 3px; min-height: 10px;">
 							<label th:text="${errormessage}" style="color: red;"></label>
 						</div>
-					<!-- 	<div th:if="${empty errormessage}" style="margin-top: 3px; height: 10px; display: block"></div> -->
+						<!-- 	<div th:if="${empty errormessage}" style="margin-top: 3px; height: 10px; display: block"></div> -->
 					</div>
-
+					
 					<div>
 						<button class="btn btn-primary" type="submit" value="Login"
-							style="background-color: #991F3D;border-color: #991F3D;">Los Geht's</button>
+							style="background-color: #991F3D; border-color: #991F3D; margin-top: 15px;">Los
+							Geht's</button>
 					</div>
+					
 				</form>
 			</div>
-			
-			
-			
+
+
+
 			<div th:if="${not showLogin}" class="col-md-9 col-sm-12 col-lg-9 "
-				style="background-color: rgba(256, 256, 256, 0.95);padding: 20px; box-shadow: 0px 0px 10px rgb(70,70,70);">
-				
-				
+				style="background-color: rgba(256, 256, 256, 0.95); padding: 20px; box-shadow: 0px 0px 10px rgb(70, 70, 70);">
+
+
 				<div th:if="${userExisted}">
-						<div style="text-align: center; margin-bottom: 15px;"><i style="font-size: 50px; color: LightGreen;" class="far fa-check-circle"></i></div>
-						<p>Hallo <b th:text="${email}"></b>, schön, dass du wieder da bist. Wir haben Dir eben ein Email mit einem Link gesendet. Öffne die Email und klicke den Link an. Viel Spaß!</p>
+					<div style="text-align: center; margin-bottom: 15px;">
+						<i style="font-size: 50px; color: LightGreen;"
+							class="far fa-check-circle"></i>
+					</div>
+					<p>
+						Hallo <b th:text="${email}"></b>, schön, dass du wieder da bist.
+						Wir haben Dir eben ein Email mit einem Link gesendet. Öffne die
+						Email und klicke den Link an. Viel Spaß!
+					</p>
 				</div>
 				<div th:if="${not userExisted}">
-					<div style="text-align: center; margin-bottom: 15px;"><i style="font-size: 50px; color: LightGreen;" class="far fa-check-circle"></i></div>
-					<p>Wir haben Dir soeben eine E-Mail an <b th:text="${email}"></b> gesendet. Öffne die Email und klicke den Link an. Schon kannst du damit beginnen, die erste Umfrage zu erstellen. Viel Spaß!</p>
+					<div style="text-align: center; margin-bottom: 15px;">
+						<i style="font-size: 50px; color: LightGreen;"
+							class="far fa-check-circle"></i>
+					</div>
+					<p>
+						Wir haben Dir soeben eine E-Mail an <b th:text="${email}"></b>
+						gesendet. Öffne die Email und klicke den Link an. Schon kannst du
+						damit beginnen, die erste Umfrage zu erstellen. Viel Spaß!
+					</p>
 				</div>
 
 			</div>
-			
+
 
 		</div>
 
@@ -115,9 +132,8 @@
 
 
 <script type="text/javascript">
-//<![CDATA[
-	
-	
+	//<![CDATA[
+
 	$(document).ready(function() {
 		var w = window.outerWidth;
 		if (w < 576) {
