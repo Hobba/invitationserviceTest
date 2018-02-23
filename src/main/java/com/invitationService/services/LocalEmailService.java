@@ -18,18 +18,30 @@ import com.invitationService.tokenmaster.TokenService;
 
 public class LocalEmailService implements EmailService {
 
-	@Value("${invitationservice.base.url}")
-	private String base_url;
-	
 	@Autowired
 	private TokenService tokenService;
+
+	@Value("${mailgun.api.url}")
+	private String mailgun_url;
+
+	@Value("${mailgun.api.key}")
+	private String mailgun_key;
+
+	@Value("${mailgun.api.from}")
+	private String mailgun_from;
+
+	@Value("${invitationservice.base.url}")
+	private String base_url;
 
 	@Value("${designservice.base.url}")
 	private String designservice_base_url;
 
-	private final Logger LOGGER = LoggerFactory.getLogger(LocalEmailService.class);
+	@Value("${surveyservice.base.url}")
+	private String surveyservice_base_url;
 
-	public void sendAccountMailToCreator(Creator creator, boolean isRegistered) {
+	private final Logger LOGGER = LoggerFactory.getLogger(MailgunEmailService.class);
+
+	public boolean sendAccountMailToCreator(Creator creator, boolean isRegistered) {
 		Email email = new Email();
 		email.setAddress(creator.getEmail());
 		email.setSubject("SimQue: Deine Registrierung");
@@ -40,13 +52,18 @@ public class LocalEmailService implements EmailService {
 			email.setContent(getEmailContent(TEMPLATE_TYPE.CREATOR_UNREGISTERED));
 		}
 
-		email.setContent(email.getContent().replaceAll("\\$\\{CREATORLINK\\}",
-				designservice_base_url + "c/?creator=" + tokenService.createCreatorJWT("", "invitationservice", "email", creator.getEmail())));
+		email.setContent(email.getContent().replaceAll("\\$\\{CREATORLINK\\}", designservice_base_url + "c/?creator="
+				+ tokenService.createCreatorJWT("id", "invitationservice", "email", creator.getEmail())));
 
 		LOGGER.info(email.getContent());
+
+		// RETURN TRUE, because we suspect that the send method was successfull (which
+		// does not exist in localemailservice)
+		return true;
 	}
 
-	public void sendInviteToParticipants(Survey survey) {
+	public int sendInviteToParticipants(Survey survey) {
+		int successfullSendCounter = 0;
 		for (Participant p : survey.getParticipants()) {
 			Email email = new Email();
 			email.setAddress(p.getEmail());
@@ -56,18 +73,21 @@ public class LocalEmailService implements EmailService {
 			email.getContent().replaceAll("\\$\\{TITLE\\}", survey.getTitle());
 			email.getContent().replaceAll("\\$\\{CREATORNAME\\}", getCreatorName(survey.getCreator()));
 			email.getContent().replaceAll("\\$\\{GREETING\\}", survey.getGreeting());
-			email.setContent(email.getContent().replaceAll("\\$\\{USERLINK\\}", "http://userlink.de/"));
+			email.setContent(email.getContent().replaceAll("\\$\\{USERLINK\\}", surveyservice_base_url + "?user="
+					+ tokenService.createUserJWT("", "IS", "surveyInvitation", p.getEmail(), survey.getId())));
 
 			LOGGER.info(email.getContent());
 		}
+		return successfullSendCounter;
 	}
 
-	public void sendReminderToParticipants(Survey survey) {
+	public int sendReminderToParticipants(Survey survey) {
+		int successfullSendCounter = 0;
 		for (Participant p : survey.getParticipants()) {
 			Email email = new Email();
 			email.setAddress(p.getEmail());
 			email.setSubject(
-					"Hast du vergessen an der Umfrage von " + survey.getCreator().getName() + " teilzunehmen?");
+					"Hast du vergessen an der Umfrage von " + getCreatorName(survey.getCreator()) + " teilzunehmen?");
 			email.setContent(getEmailContent(TEMPLATE_TYPE.REMINDER));
 			email.getContent().replaceAll("\\$\\{TITLE\\}", survey.getTitle());
 			email.getContent().replaceAll("\\$\\{CREATORNAME\\}", getCreatorName(survey.getCreator()));
@@ -75,6 +95,7 @@ public class LocalEmailService implements EmailService {
 
 			LOGGER.info(email.getContent());
 		}
+		return successfullSendCounter;
 	}
 
 	private String getEmailContent(TEMPLATE_TYPE template) {
@@ -116,5 +137,4 @@ public class LocalEmailService implements EmailService {
 	private enum TEMPLATE_TYPE {
 		CREATOR_UNREGISTERED, CREATOR_REGISTERED, PARTICIPANTS, REMINDER;
 	}
-
 }
