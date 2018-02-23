@@ -100,7 +100,7 @@ public class InvitationServiceController {
 	}
 
 	@ResponseBody
-	@RequestMapping(value = "/sendReminderToParticipants", method = RequestMethod.GET)
+	@RequestMapping(value = "/sendReminderToParticipants", method = RequestMethod.POST)
 	public int sendReminderToParticipants(@RequestBody Survey survey) {
 		return emailService.sendReminderToParticipants(survey);
 	}
