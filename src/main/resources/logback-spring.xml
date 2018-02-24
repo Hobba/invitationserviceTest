@@ -4,6 +4,14 @@
 	<logger name="org.springframework.web" level="INFO" />
 
 
+	<appender name="stash" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+		<destination>194.45.211.190:5000</destination>
+
+		<!-- encoder is required -->
+		<encoder class="net.logstash.logback.encoder.LogstashEncoder" />
+		<customFields>{"appname":"invitationservice"}</customFields>
+	</appender>
+
 	<appender name="SAVE-TO-FILE" class="ch.qos.logback.core.FileAppender">
 
 		<file>${LOG_PATH}/invitationservice.log</file>
@@ -20,5 +28,6 @@
 	</logger>
 	<root level="info">
 		<appender-ref ref="SAVE-TO-FILE" />
+		<appender-ref ref="stash" />
 	</root>
 </configuration>
