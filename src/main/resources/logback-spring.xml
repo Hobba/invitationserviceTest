@@ -9,7 +9,7 @@
 
 		<!-- encoder is required -->
 		<encoder class="net.logstash.logback.encoder.LogstashEncoder" />
-		<customFields>{"appname":"invitationservice"}</customFields>
+		<!--<customFields>{"appname":"invitationservice"}</customFields>-->
 	</appender>
 
 	<appender name="SAVE-TO-FILE" class="ch.qos.logback.core.FileAppender">
