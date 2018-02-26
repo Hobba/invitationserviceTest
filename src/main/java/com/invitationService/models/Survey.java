@@ -1,7 +1,5 @@
 package com.invitationService.models;
 
-import java.util.List;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,5 +19,5 @@ public class Survey {
 	protected Creator creator;
 	protected String creationDate;
 
-	protected List<Participant> participants;
+	protected Participant[] participants;
 }
