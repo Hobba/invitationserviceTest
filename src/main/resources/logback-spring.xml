@@ -5,6 +5,7 @@
 
 
 	<appender name="stash" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+		<destination>194.45.211.190:5000</destination>
 		<encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
 			<providers>
 				<pattern>
