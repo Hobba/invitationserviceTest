@@ -43,7 +43,7 @@ public class MailgunEmailService implements EmailService {
 
 	private final Logger LOGGER = LoggerFactory.getLogger(MailgunEmailService.class);
 
-	public void sendAccountMailToCreator(Creator creator, boolean isRegistered) {
+	public boolean sendAccountMailToCreator(Creator creator, boolean isRegistered) {
 		Email email = new Email();
 		email.setAddress(creator.getEmail());
 		email.setSubject("SimQue: Deine Registrierung");
@@ -57,10 +57,11 @@ public class MailgunEmailService implements EmailService {
 		email.setContent(email.getContent().replaceAll("\\$\\{CREATORLINK\\}", designservice_base_url + "c/?creator="
 				+ tokenService.createCreatorJWT("id", "invitationservice", "email", creator.getEmail())));
 
-		sendMailToAddress(email);
+		return sendMailToAddress(email);
 	}
 
-	public void sendInviteToParticipants(Survey survey) {
+	public int sendInviteToParticipants(Survey survey) {
+		int successfullSendCounter = 0;
 		for (Participant p : survey.getParticipants()) {
 			Email email = new Email();
 			email.setAddress(p.getEmail());
@@ -73,32 +74,45 @@ public class MailgunEmailService implements EmailService {
 			email.setContent(email.getContent().replaceAll("\\$\\{USERLINK\\}", surveyservice_base_url + "?user="
 					+ tokenService.createUserJWT("", "IS", "surveyInvitation", p.getEmail(), survey.getId())));
 
-			sendMailToAddress(email);
+			if (sendMailToAddress(email)) {
+				successfullSendCounter++;
+			} else {
+				LOGGER.info("Could not send email to: " + email.getAddress());
+			}
 		}
+		return successfullSendCounter;
 	}
 
-	public void sendReminderToParticipants(Survey survey) {
+	public int sendReminderToParticipants(Survey survey) {
+		int successfullSendCounter = 0;
 		for (Participant p : survey.getParticipants()) {
 			Email email = new Email();
 			email.setAddress(p.getEmail());
 			email.setSubject(
-					"Hast du vergessen an der Umfrage von " + survey.getCreator().getName() + " teilzunehmen?");
+					"Hast du vergessen an der Umfrage von " + getCreatorName(survey.getCreator()) + " teilzunehmen?");
 			email.setContent(getEmailContent(TEMPLATE_TYPE.REMINDER));
 			email.getContent().replaceAll("\\$\\{TITLE\\}", survey.getTitle());
 			email.getContent().replaceAll("\\$\\{CREATORNAME\\}", getCreatorName(survey.getCreator()));
 			email.setContent(email.getContent().replaceAll("\\$\\{USERLINK\\}", "http://userlink.de"));
 
-			sendMailToAddress(email);
+			if (sendMailToAddress(email)) {
+				successfullSendCounter++;
+			} else {
+				LOGGER.info("Could not send email to: " + email.getAddress());
+			}
 		}
+		return successfullSendCounter;
 	}
 
-	private void sendMailToAddress(Email email) {
+	private boolean sendMailToAddress(Email email) {
 		try {
 			Unirest.post(mailgun_url + "/messages").basicAuth("api", mailgun_key).queryString("from", mailgun_from)
 					.queryString("to", email.getAddress()).queryString("subject", email.getSubject())
 					.queryString("html", email.getContent()).asJson();
+			return true;
 		} catch (UnirestException | RuntimeException e) {
 			LOGGER.warn("Couldn't send email due to mail server connection issues", e);
+			return false;
 			// TODO: (JAN) Retry to send email
 		}
 	}

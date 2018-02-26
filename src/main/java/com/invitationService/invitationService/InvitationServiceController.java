@@ -50,12 +50,12 @@ public class InvitationServiceController {
 
 			if (creatorDAO.isCreatorExist(user.getEmail())) {
 				model.addAttribute("userExisted", true);
-				
+
 				emailService.sendAccountMailToCreator(user, true);
 			} else {
 				creatorDAO.insertCreator(user);
 				model.addAttribute("userExisted", false);
-				
+
 				emailService.sendAccountMailToCreator(user, false);
 			}
 
@@ -95,9 +95,14 @@ public class InvitationServiceController {
 
 	@ResponseBody
 	@RequestMapping(value = "/sendInvitationToParticipants", method = RequestMethod.POST)
-	public Survey SendMailToParticipants(@RequestBody Survey survey) {
-		emailService.sendInviteToParticipants(survey);
-		return survey;
+	public int SendMailToParticipants(@RequestBody Survey survey) {
+		return emailService.sendInviteToParticipants(survey);
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/sendReminderToParticipants", method = RequestMethod.POST)
+	public int sendReminderToParticipants(@RequestBody Survey survey) {
+		return emailService.sendReminderToParticipants(survey);
 	}
 
 	@ResponseBody

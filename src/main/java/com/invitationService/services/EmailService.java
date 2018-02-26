@@ -5,10 +5,10 @@ import com.invitationService.models.Survey;
 
 public interface EmailService {
 
-	void sendAccountMailToCreator(Creator creator, boolean isRegistered);
+	boolean sendAccountMailToCreator(Creator creator, boolean isRegistered);
 
-	void sendInviteToParticipants(Survey survey);
+	int sendInviteToParticipants(Survey survey);
 
-	void sendReminderToParticipants(Survey survey);
+	int sendReminderToParticipants(Survey survey);
 
 }

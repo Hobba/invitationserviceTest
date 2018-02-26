@@ -13,16 +13,6 @@ import com.mongodb.MongoClient;
 
 public class CreatorDAO {
 
-	@Bean
-	public MongoDbFactory mongoDbFactory() {
-		return new SimpleMongoDbFactory(new MongoClient(), "bootcamp");
-	}
-
-	@Bean
-	public MongoOperations mongoTemplate() {
-		return new MongoTemplate(mongoDbFactory());
-	}
-
 	@Autowired
 	private MongoOperations template;
 
