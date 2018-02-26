@@ -13,6 +13,8 @@ import lombok.Setter;
 public class Participant {
 
 	protected String email;
+	protected String token;
+	protected String survey_id;
 	protected Boolean status;
 
 }

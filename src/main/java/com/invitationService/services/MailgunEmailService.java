@@ -3,6 +3,8 @@ package com.invitationService.services;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.StringWriter;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
@@ -10,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 
+import com.invitationService.invitationService.CreatorDAO;
 import com.invitationService.models.Creator;
 import com.invitationService.models.Email;
 import com.invitationService.models.Participant;
@@ -61,23 +64,44 @@ public class MailgunEmailService implements EmailService {
 	}
 
 	public int sendInviteToParticipants(Survey survey) {
+
+		CreatorDAO dao = new CreatorDAO();
+		Set<Participant> part_list = new HashSet<Participant>();
+
 		int successfullSendCounter = 0;
 		for (Participant p : survey.getParticipants()) {
-			Email email = new Email();
-			email.setAddress(p.getEmail());
-			email.setSubject(
-					"Du wurdest von " + survey.getCreator().getName() + " eingeladen, an einer Umfrage teilzunehmen");
-			email.setContent(getEmailContent(TEMPLATE_TYPE.PARTICIPANTS));
-			email.getContent().replaceAll("\\$\\{TITLE\\}", survey.getTitle());
-			email.getContent().replaceAll("\\$\\{CREATORNAME\\}", getCreatorName(survey.getCreator()));
-			email.getContent().replaceAll("\\$\\{GREETING\\}", survey.getGreeting());
-			email.setContent(email.getContent().replaceAll("\\$\\{USERLINK\\}", surveyservice_base_url + "?user="
-					+ tokenService.createUserJWT("", "IS", "surveyInvitation", p.getEmail(), survey.getId())));
 
-			if (sendMailToAddress(email)) {
-				successfullSendCounter++;
-			} else {
-				LOGGER.info("Could not send email to: " + email.getAddress());
+			if (!part_list.contains(p)) {
+				part_list.add(p);
+
+				// TODO create token -done
+				// TODO write token and email to DB
+				// TODO send token with email -done
+				// TODO surveyservice: check if token is used
+
+				String token = tokenService.createUserJWT("", "IS", "surveyInvitation", p.getEmail(), survey.getId());
+				p.setToken(token);
+				p.setSurvey_id(survey.getId());
+				
+				dao.insertParticipant(p);
+
+				Email email = new Email();
+				email.setAddress(p.getEmail());
+				email.setSubject("Du wurdest von " + survey.getCreator().getName()
+						+ " eingeladen, an einer Umfrage teilzunehmen");
+				email.setContent(getEmailContent(TEMPLATE_TYPE.PARTICIPANTS));
+				email.getContent().replaceAll("\\$\\{TITLE\\}", survey.getTitle());
+				email.getContent().replaceAll("\\$\\{CREATORNAME\\}", getCreatorName(survey.getCreator()));
+				email.getContent().replaceAll("\\$\\{GREETING\\}", survey.getGreeting());
+				email.setContent(
+						email.getContent().replaceAll("\\$\\{USERLINK\\}", surveyservice_base_url + "?user=" + token));
+
+				if (sendMailToAddress(email)) {
+					successfullSendCounter++;
+				} else {
+					LOGGER.info("Could not send email to: " + email.getAddress());
+				}
+
 			}
 		}
 		return successfullSendCounter;
