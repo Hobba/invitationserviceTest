@@ -92,9 +92,9 @@ public class MailgunEmailService implements EmailService {
 				email.setSubject("Du wurdest von " + survey.getCreator().getName()
 						+ " eingeladen, an einer Umfrage teilzunehmen");
 				email.setContent(getEmailContent(TEMPLATE_TYPE.PARTICIPANTS));
-				email.getContent().replaceAll("\\$\\{TITLE\\}", survey.getTitle());
-				email.getContent().replaceAll("\\$\\{CREATORNAME\\}", getCreatorName(survey.getCreator()));
-				email.getContent().replaceAll("\\$\\{GREETING\\}", survey.getGreeting());
+				email.setContent(email.getContent().replaceAll("\\$\\{TITLE\\}", survey.getTitle()));
+				email.setContent(email.getContent().replaceAll("\\$\\{CREATORNAME\\}", getCreatorName(survey.getCreator())));
+				email.setContent(email.getContent().replaceAll("\\$\\{GREETING\\}", survey.getGreeting()));
 				email.setContent(
 						email.getContent().replaceAll("\\$\\{USERLINK\\}", surveyservice_base_url + "?user=" + token));
 
@@ -117,8 +117,8 @@ public class MailgunEmailService implements EmailService {
 			email.setSubject(
 					"Hast du vergessen an der Umfrage von " + getCreatorName(survey.getCreator()) + " teilzunehmen?");
 			email.setContent(getEmailContent(TEMPLATE_TYPE.REMINDER));
-			email.getContent().replaceAll("\\$\\{TITLE\\}", survey.getTitle());
-			email.getContent().replaceAll("\\$\\{CREATORNAME\\}", getCreatorName(survey.getCreator()));
+			email.setContent(email.getContent().replaceAll("\\$\\{TITLE\\}", survey.getTitle()));
+			email.setContent(email.getContent().replaceAll("\\$\\{CREATORNAME\\}", getCreatorName(survey.getCreator())));
 			email.setContent(email.getContent().replaceAll("\\$\\{USERLINK\\}", "http://userlink.de"));
 
 			if (sendMailToAddress(email)) {
