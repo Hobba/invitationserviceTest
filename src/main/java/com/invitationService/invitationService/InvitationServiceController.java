@@ -129,7 +129,7 @@ public class InvitationServiceController {
 	@ResponseBody
 	@RequestMapping(value = "/setTokenAsUsed", method = RequestMethod.POST)
 	public boolean setParticipantTokenAsUsed(Participant p, Survey survey) {
-		
+		return true;
 	}
 
 	@RequestMapping("/list/{id}")
