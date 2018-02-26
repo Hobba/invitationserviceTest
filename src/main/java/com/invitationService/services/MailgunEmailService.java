@@ -25,6 +25,9 @@ public class MailgunEmailService implements EmailService {
 
 	@Autowired
 	private TokenService tokenService;
+	
+	@Autowired
+	private CreatorDAO dao;
 
 	@Value("${mailgun.api.url}")
 	private String mailgun_url;
@@ -65,7 +68,6 @@ public class MailgunEmailService implements EmailService {
 
 	public int sendInviteToParticipants(Survey survey) {
 
-		CreatorDAO dao = new CreatorDAO();
 		Set<Participant> part_list = new HashSet<Participant>();
 
 		int successfullSendCounter = 0;
