@@ -125,6 +125,12 @@ public class InvitationServiceController {
 		}
 
 	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/setTokenAsUsed", method = RequestMethod.POST)
+	public boolean setParticipantTokenAsUsed(Participant p, Survey survey) {
+		
+	}
 
 	@RequestMapping("/list/{id}")
 	public List<Participant> getRows(@PathVariable String id) {

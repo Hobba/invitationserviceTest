@@ -31,6 +31,11 @@ public class CreatorDAO {
 		
 		return result;
 	}
+	
+	public boolean setParticipantAsAnswered(Participant p, Survey survey) {
+		//TODO IMPLEMENT JANNIK
+		return true;
+	}
 
 	public boolean isCreatorExist(String email) {
 		BasicQuery q = new BasicQuery("{ \"email\" : \"" + email + "\"}");
