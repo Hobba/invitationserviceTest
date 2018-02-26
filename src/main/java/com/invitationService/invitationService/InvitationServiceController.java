@@ -113,6 +113,19 @@ public class InvitationServiceController {
 		return null;
 	}
 
+	@ResponseBody
+	@RequestMapping(value = "/checkIfTokenIsAlreadyUsed", method = RequestMethod.GET)
+	public boolean checkParticipantHasAnswered(Participant p, Survey survey) {
+
+		CreatorDAO dao = new CreatorDAO();
+		if (dao.hasParticipantAnswered(p, survey)) {
+			return true;
+		} else {
+			return false;
+		}
+
+	}
+
 	@RequestMapping("/list/{id}")
 	public List<Participant> getRows(@PathVariable String id) {
 		return new ArrayList<>();
