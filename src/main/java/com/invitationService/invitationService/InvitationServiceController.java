@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.stereotype.Controller;
@@ -31,8 +33,11 @@ public class InvitationServiceController {
 	@Autowired
 	private CreatorDAO dao;
 
+	Logger logger = LoggerFactory.getLogger(InvitationServiceController.class);
+
 	@GetMapping("/")
 	public String login(Model model) {
+		logger.info("Die Invitationservice root page wurde aufgerufen");
 		model.addAttribute("user", new Creator());
 		model.addAttribute("showLogin", true);
 		return "login_form";
@@ -40,10 +45,12 @@ public class InvitationServiceController {
 
 	@PostMapping("/goToConfirmation")
 	public String goToDesigner(@Valid @ModelAttribute Creator user, BindingResult bindingResult, Model model) {
+		logger.info("Eine Email wurde eingegeben und die 'Bitte Emaillink anklicken' Seite wurde angefragt");
 		if (bindingResult.hasErrors()) {
 			model.addAttribute("showLogin", true);
 			model.addAttribute("user", user);
 			model.addAttribute("errormessage", "Bitte die Eingabe prüfen, die Emailadresse ist nicht gültig.");
+			logger.info("Eine falsche Email wurde eingegeben: {}", user.getEmail());
 			return "login_form";
 		} else {
 			// send email to creator
@@ -69,39 +76,17 @@ public class InvitationServiceController {
 	@Autowired
 	private EmailService emailService;
 
-	// @RequestMapping("/emails")
-	// public String home(Model model) {
-	// List<Participant> liste = new ArrayList<>();
-	//
-	// liste.add(new Participant(1, "e@mail.de", true));
-	// liste.add(new Participant(1, "e@mail.de", true));
-	// liste.add(new Participant(1, "e@mail.de", false));
-	// liste.add(new Participant(1, "e@mail.de", true));
-	// liste.add(new Participant(1, "e@mail.de", true));
-	// liste.add(new Participant(1, "e@mail.de", true));
-	// liste.add(new Participant(1, "e@mail.de", true));
-	// liste.add(new Participant(1, "e@mail.de", false));
-	// liste.add(new Participant(1, "e@mail.de", true));
-	// liste.add(new Participant(1, "e@mail.de", true));
-	// liste.add(new Participant(1, "e@mail.de", true));
-	// liste.add(new Participant(1, "e@mail.de", true));
-	// liste.add(new Participant(1, "e@mail.de", true));
-	// liste.add(new Participant(1, "e@mail.de", true));
-	// liste.add(new Participant(1, "e@mail.de", true));
-	//
-	// model.addAttribute("liste", liste);
-	// return "index";
-	// }
-
 	@ResponseBody
 	@RequestMapping(value = "/sendInvitationToParticipants", method = RequestMethod.POST)
 	public int SendMailToParticipants(@RequestBody Survey survey) {
+		logger.info("SendMailToParticipants wurde aufgerufen für die Survey {}", survey.getId());
 		return emailService.sendInviteToParticipants(survey);
 	}
 
 	@ResponseBody
 	@RequestMapping(value = "/sendReminderToParticipants", method = RequestMethod.POST)
 	public int sendReminderToParticipants(@RequestBody Survey survey) {
+		logger.info("SendReminderToParticipants wurde aufgerufen für die Survey {}", survey.getId());
 		return emailService.sendReminderToParticipants(survey);
 	}
 
@@ -116,6 +101,8 @@ public class InvitationServiceController {
 	@ResponseBody
 	@RequestMapping(value = "/checkIfTokenIsAlreadyUsed", method = RequestMethod.POST)
 	public boolean checkParticipantHasAnswered(Participant p) {
+		logger.info("Ein Check, ob ein User {} eine Umfrage {} bereits beantwortet hat wurde aufgerufen", p.getEmail(),
+				p.getSurvey_id());
 		if (dao.hasParticipantAnswered(p)) {
 			return true;
 		} else {
@@ -123,10 +110,11 @@ public class InvitationServiceController {
 		}
 
 	}
-	
+
 	@ResponseBody
 	@RequestMapping(value = "/setTokenAsUsed", method = RequestMethod.POST)
-	public String setParticipantTokenAsUsed(Participant p) {	
+	public String setParticipantTokenAsUsed(Participant p) {
+		logger.info("Ein Teilnehmer {} hat eine Umfrage beantwortet {}", p.getEmail(), p.getSurvey_id() );
 		dao.setParticipantAsAnswered(p);
 		return "Set as answered: " + p.getEmail();
 	}
