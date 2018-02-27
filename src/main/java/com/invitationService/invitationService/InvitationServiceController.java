@@ -103,11 +103,7 @@ public class InvitationServiceController {
 	public boolean checkParticipantHasAnswered(Participant p) {
 		logger.info("Ein Check, ob ein User {} eine Umfrage {} bereits beantwortet hat wurde aufgerufen", p.getEmail(),
 				p.getSurvey_id());
-		if (dao.hasParticipantAnswered(p)) {
-			return true;
-		} else {
-			return false;
-		}
+		return dao.hasParticipantAnswered(p);
 
 	}
 
