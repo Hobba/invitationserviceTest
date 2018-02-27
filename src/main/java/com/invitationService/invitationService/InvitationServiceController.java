@@ -29,7 +29,7 @@ import com.invitationService.services.EmailService;
 public class InvitationServiceController {
 
 	@Autowired
-	private CreatorDAO creatorDAO;
+	private CreatorDAO dao;
 
 	@GetMapping("/")
 	public String login(Model model) {
@@ -48,12 +48,12 @@ public class InvitationServiceController {
 		} else {
 			// send email to creator
 
-			if (creatorDAO.isCreatorExist(user.getEmail())) {
+			if (dao.isCreatorExist(user.getEmail())) {
 				model.addAttribute("userExisted", true);
 
 				emailService.sendAccountMailToCreator(user, true);
 			} else {
-				creatorDAO.insertCreator(user);
+				dao.insertCreator(user);
 				model.addAttribute("userExisted", false);
 
 				emailService.sendAccountMailToCreator(user, false);
@@ -114,11 +114,9 @@ public class InvitationServiceController {
 	}
 
 	@ResponseBody
-	@RequestMapping(value = "/checkIfTokenIsAlreadyUsed", method = RequestMethod.GET)
-	public boolean checkParticipantHasAnswered(Participant p, Survey survey) {
-
-		CreatorDAO dao = new CreatorDAO();
-		if (dao.hasParticipantAnswered(p, survey)) {
+	@RequestMapping(value = "/checkIfTokenIsAlreadyUsed", method = RequestMethod.POST)
+	public boolean checkParticipantHasAnswered(Participant p) {
+		if (dao.hasParticipantAnswered(p)) {
 			return true;
 		} else {
 			return false;
@@ -128,8 +126,9 @@ public class InvitationServiceController {
 	
 	@ResponseBody
 	@RequestMapping(value = "/setTokenAsUsed", method = RequestMethod.POST)
-	public boolean setParticipantTokenAsUsed(Participant p, Survey survey) {
-		return true;
+	public String setParticipantTokenAsUsed(Participant p) {	
+		dao.setParticipantAsAnswered(p);
+		return "Set as answered: " + p.getEmail();
 	}
 
 	@RequestMapping("/list/{id}")

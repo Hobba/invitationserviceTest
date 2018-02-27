@@ -15,7 +15,6 @@ import org.springframework.data.mongodb.core.query.Update;
 
 import com.invitationService.models.Creator;
 import com.invitationService.models.Participant;
-import com.invitationService.models.Survey;
 
 public class CreatorDAO {
 
@@ -35,27 +34,27 @@ public class CreatorDAO {
 		logger.info("Teilnehmer {} wurde in der DB angelegt", p.getEmail());
 	}
 
-	public boolean hasParticipantAnswered(Participant p, Survey survey) {
+	public boolean hasParticipantAnswered(Participant p) {
 
-		logger.info("Teilnehmer( {} ) und die Survey ( {} ) sollen abgefragt werden", p, survey);
+		logger.info("Teilnehmer( {} ) und die Survey ( {} ) sollen abgefragt werden", p, p.getSurvey_id());
 		Boolean result = false;
 		try {
-			result = template.exists(query(where("email").is(p.getEmail()).and("id").is(survey.getId())),
+			result = template.exists(query(where("email").is(p.getEmail()).and("id").is(p.getSurvey_id())),
 					Boolean.class);
 		} catch (Exception e) {
 			logger.warn("Die DB Abfrage nach Teilnehmer {} und Umfrage {} - Match für den Status ist fehlgeschlagen", p,
-					survey);
+					p.getSurvey_id());
 
 		}
 
 		return result;
 	}
 
-	public String setParticipantAsAnswered(Participant p, Survey survey) {
+	public String setParticipantAsAnswered(Participant p) {
 		// TODO IMPLEMENT JANNIK
 		List<Participant> participant = new ArrayList<>();
 		try {
-			participant = template.find(query(where("email").is(p.getEmail()).and("id").is(survey.getId())),
+			participant = template.find(query(where("email").is(p.getEmail()).and("id").is(p.getSurvey_id())),
 					Participant.class);
 			if (!participant.isEmpty()) {
 				Participant rewriteParticipant = participant.get(0);
