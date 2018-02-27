@@ -34,6 +34,8 @@ public class CreatorDAO {
 		logger.info("Teilnehmer {} wurde in der DB angelegt", p.getEmail());
 	}
 
+	
+	//TODO: DAS GEHT NICHT
 	public boolean hasParticipantAnswered(Participant p) {
 
 		logger.info("Teilnehmer( {} ) und die Survey ( {} ) sollen abgefragt werden", p, p.getSurvey_id());
@@ -51,7 +53,6 @@ public class CreatorDAO {
 	}
 
 	public String setParticipantAsAnswered(Participant p) {
-		// TODO IMPLEMENT JANNIK
 		List<Participant> participant = new ArrayList<>();
 		try {
 			participant = template.find(query(where("email").is(p.getEmail()).and("id").is(p.getSurvey_id())),
