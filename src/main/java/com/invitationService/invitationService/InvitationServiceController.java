@@ -1,8 +1,5 @@
 package com.invitationService.invitationService;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.validation.Valid;
 
 import org.slf4j.Logger;
@@ -14,7 +11,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -91,14 +87,6 @@ public class InvitationServiceController {
 	}
 
 	@ResponseBody
-	@RequestMapping(value = "/sendInvitationEmailsList", method = RequestMethod.POST)
-	public List<Creator> SendInvitationEmailsList(@RequestBody List<Creator> users) {
-		users.forEach(s -> System.out.println(s));
-		// emailService.sendMail(user);
-		return null;
-	}
-
-	@ResponseBody
 	@RequestMapping(value = "/checkIfTokenIsAlreadyUsed", method = RequestMethod.POST)
 	public boolean checkParticipantHasAnswered(Participant p) {
 		logger.info("Ein Check, ob ein User {} eine Umfrage {} bereits beantwortet hat wurde aufgerufen", p.getEmail(),
@@ -113,11 +101,6 @@ public class InvitationServiceController {
 		logger.info("Ein Teilnehmer {} hat eine Umfrage beantwortet {}", p.getEmail(), p.getSurvey_id() );
 		dao.setParticipantAsAnswered(p);
 		return "Set as answered: " + p.getEmail();
-	}
-
-	@RequestMapping("/list/{id}")
-	public List<Participant> getRows(@PathVariable String id) {
-		return new ArrayList<>();
 	}
 
 }
