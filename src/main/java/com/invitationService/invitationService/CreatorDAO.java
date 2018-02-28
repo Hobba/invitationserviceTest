@@ -34,7 +34,6 @@ public class CreatorDAO {
 		logger.info("Teilnehmer {} wurde in der DB angelegt", p.getEmail());
 	}
 
-
 	public boolean hasParticipantAnswered(Participant p) {
 
 		if (p.getSurvey_id() != null) {
@@ -44,9 +43,9 @@ public class CreatorDAO {
 		}
 		Boolean result = null;
 		try {
-//TODO WAS ist wenn die DB keinen Teilnehmer enthält??
-			Participant participant = template
-					.findOne(query(where("email").is(p.getEmail()).and("survey_id").is(p.getSurvey_id())), Participant.class);
+			// TODO WAS ist wenn die DB keinen Teilnehmer enthält??
+			Participant participant = template.findOne(
+					query(where("email").is(p.getEmail()).and("survey_id").is(p.getSurvey_id())), Participant.class);
 			if (participant != null) {
 				result = participant.getHasAnswered();
 			}
@@ -68,8 +67,10 @@ public class CreatorDAO {
 			if (!participant.isEmpty()) {
 				Participant rewriteParticipant = participant.get(0);
 				rewriteParticipant.setHasAnswered(true);
-				template.updateFirst(query(where("participant").is(rewriteParticipant)), Update.update("hasAnswered", "true"),
-						Participant.class);
+				template.updateFirst(
+						query(where("email").is(rewriteParticipant.getEmail()).and("survey_id")
+								.is(rewriteParticipant.getSurvey_id())),
+						Update.update("hasAnswered", "true"), Participant.class);
 				logger.info("Teilnehmer {} erfolgreich geupdatet", rewriteParticipant);
 			} else {
 				logger.info("Teilnehmerupdate für {} gescheitert!", p.getEmail());
