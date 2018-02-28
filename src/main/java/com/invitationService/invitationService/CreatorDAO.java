@@ -36,16 +36,19 @@ public class CreatorDAO {
 	public boolean hasParticipantAnswered(Participant p) {
 
 		if (p.getSurvey_id() != null) {
-			logger.info("Teilnehmer( {} ) und die Survey ( {} ) sollen abgefragt werden", p, p.getSurvey_id());
+			logger.info("Teilnehmer( {} ) und die Survey ( {} ) sollen abgefragt werden", p.getEmail(), p.getSurvey_id());
 		} else {
-			logger.info("Der Teilnehmer {} und eine Survey sollen abgefragt werden, aber die Survey ist null", p);
+			logger.info("Der Teilnehmer {} und eine Survey sollen abgefragt werden, aber die Survey ist null", p.getEmail());
 		}
+		
 		Boolean result = null;
+		
 		try {
 			// TODO WAS ist wenn die DB keinen Teilnehmer enthält??
 			Participant participant = template.findOne(
 					query(where("email").is(p.getEmail()).and("survey_id").is(p.getSurvey_id())), Participant.class);
 			if (participant != null) {
+				logger.info("Participant wurde in der DB gefunden");
 				result = participant.getHasAnswered();
 			}
 

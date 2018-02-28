@@ -109,7 +109,7 @@ public class InvitationServiceController {
 	@ResponseBody
 	@RequestMapping(value = "surveys/{id}/participants", method = RequestMethod.GET)
 	public List<Participant> getParticipants(@PathVariable("id") String surveyID) {
-
+		logger.info("Anfrage für eine Participants Liste");
 		List<Participant> result = dao.getAllParticipantsForSurvey(surveyID);
 
 		if (result != null) {
