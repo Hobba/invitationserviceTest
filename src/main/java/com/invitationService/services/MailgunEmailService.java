@@ -56,12 +56,16 @@ public class MailgunEmailService implements EmailService {
 
 		if (isRegistered) {
 			email.setContent(getEmailContent(TEMPLATE_TYPE.CREATOR_REGISTERED));
+			LOGGER.info("Das  Emailtemplate für einen bereits registrierten Creator wurde aufgerufen");
 		} else {
 			email.setContent(getEmailContent(TEMPLATE_TYPE.CREATOR_UNREGISTERED));
+			LOGGER.info("Das  Emailtemplate für einen NEUEN Creator wurde aufgerufen");
 		}
 
 		email.setContent(email.getContent().replaceAll("\\$\\{CREATORLINK\\}", designservice_base_url + "c/?creator="
 				+ tokenService.createCreatorJWT("id", "invitationservice", "email", creator.getEmail())));
+		
+		LOGGER.info("Eine Mail für einen Creator {} wurde erstellt", creator.getEmail());
 
 		return sendMailToAddress(email);
 	}
@@ -85,8 +89,10 @@ public class MailgunEmailService implements EmailService {
 				p.setToken(token);
 				p.setSurvey_id(survey.getId());
 				
+				LOGGER.info("Es wird versucht, der Teilnehmer {} für die Umfrage {} in die DB zu schreiben", p.getEmail(), survey.getId());
 				dao.insertParticipant(p);
-
+			
+				
 				Email email = new Email();
 				email.setAddress(p.getEmail());
 				email.setSubject("Du wurdest von " + survey.getCreator().getName()
@@ -97,15 +103,20 @@ public class MailgunEmailService implements EmailService {
 				email.setContent(email.getContent().replaceAll("\\$\\{GREETING\\}", survey.getGreeting()));
 				email.setContent(
 						email.getContent().replaceAll("\\$\\{USERLINK\\}", surveyservice_base_url + "?user=" + token));
+				LOGGER.info("Eine Email für einen Teilnehmer wurde erstellt");
 
 				if (sendMailToAddress(email)) {
+					LOGGER.info("Eine Email wurde an {} gesendet", email.getAddress());
 					successfullSendCounter++;
 				} else {
 					LOGGER.info("Could not send email to: " + email.getAddress());
 				}
 
+			}else {
+				LOGGER.info("Es wurde versucht, die Email {} doppelt als Teilnehmer einzutragen und dies wurde verhindet", p.getEmail());
 			}
 		}
+		LOGGER.info("Es wurden Emails an {} Teilnehmer gesendet", successfullSendCounter);
 		return successfullSendCounter;
 	}
 
@@ -148,12 +159,16 @@ public class MailgunEmailService implements EmailService {
 
 		switch (template) {
 		case CREATOR_UNREGISTERED:
+			LOGGER.info("Das CreatorEmail Template wurde abgerufen");
 			return inputStreamToString(cl.getResourceAsStream("static/tmpl/emailTemplate_Creator.html"));
 		case CREATOR_REGISTERED:
+			LOGGER.info("Das CreatorAlreadyRegistered Template wurde abgerufen");
 			return inputStreamToString(cl.getResourceAsStream("static/tmpl/emailTemplate_Creator_Registered.html"));
 		case PARTICIPANTS:
+			LOGGER.info("Das TeilnehmerEmail Template wurde abgerufen");
 			return inputStreamToString(cl.getResourceAsStream("static/tmpl/emailTemplate_Participants.html"));
 		case REMINDER:
+			LOGGER.info("Das TeilnehmerReminderEmail Template wurde abgerufen");
 			return inputStreamToString(cl.getResourceAsStream("static/tmpl/emailTemplate_Reminder.html"));
 		default:
 			LOGGER.warn("Couldn't get template files, falling back to default file.");

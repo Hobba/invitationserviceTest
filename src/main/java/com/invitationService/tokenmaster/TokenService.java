@@ -6,6 +6,8 @@ import java.util.Date;
 import javax.crypto.spec.SecretKeySpec;
 import javax.xml.bind.DatatypeConverter;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +21,8 @@ public class TokenService {
 
 	@Value("${token.key}")
 	private String key;
+	
+	Logger logger = LoggerFactory.getLogger(TokenService.class);
 
 	private static final String CLAIM_EMAIL = "email";
 
@@ -27,6 +31,7 @@ public class TokenService {
 	// Sample method to construct a JWT
 	public String createCreatorJWT(String id, String issuer, String subject, String email) {
 
+		logger.info("Die TokenErzeugung wurde angestossen");
 		// The JWT signature algorithm we will be using to sign the token
 		SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS256;
 
@@ -51,6 +56,7 @@ public class TokenService {
 		}
 
 		// Builds the JWT and serializes it to a compact, URL-safe string
+		logger.info("Ein Token wurde erzeugt");
 		return builder.compact();
 	}
 	
