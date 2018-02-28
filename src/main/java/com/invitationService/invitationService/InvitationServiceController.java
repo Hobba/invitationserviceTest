@@ -1,5 +1,7 @@
 package com.invitationService.invitationService;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.slf4j.Logger;
@@ -102,6 +104,19 @@ public class InvitationServiceController {
 		logger.info("Ein Teilnehmer {} hat eine Umfrage beantwortet {}", p.getEmail(), p.getSurvey_id() );
 		dao.setParticipantAsAnswered(p);
 		return "Set as answered: " + p.getEmail();
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "surveys/{id}/participants", method = RequestMethod.GET)
+	public List<Participant> getParticipants(@PathVariable("id") String surveyID) {
+
+		List<Participant> result = dao.getAllParticipantsForSurvey(surveyID);
+
+		if (result != null) {
+			logger.info("Survey-ID {} | Es wurden die Participants für das Survey angefragt und eine List mit {} Participants zurückgegeben.", surveyID, result.size());
+		}
+
+		return result;
 	}
 
 }
