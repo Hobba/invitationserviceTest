@@ -48,8 +48,9 @@ public class CreatorDAO {
 			Participant participant = template.findOne(
 					query(where("email").is(p.getEmail()).and("survey_id").is(p.getSurvey_id())), Participant.class);
 			if (participant != null) {
-				logger.info("Participant wurde in der DB gefunden");
+				
 				result = participant.getHasAnswered();
+				logger.info("Participant wurde in der DB gefunden und Antwort-Status ist {}", result);
 			}
 
 		} catch (Exception e) {
