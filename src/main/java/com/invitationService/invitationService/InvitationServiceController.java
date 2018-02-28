@@ -9,13 +9,7 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import com.invitationService.models.Creator;
 import com.invitationService.models.Participant;
@@ -74,7 +68,8 @@ public class InvitationServiceController {
 
 	@ResponseBody
 	@RequestMapping(value = "/sendInvitationToParticipants", method = RequestMethod.POST)
-	public int SendMailToParticipants(@RequestBody Survey survey) {
+	public int SendMailToParticipants(@RequestBody Survey survey, @RequestHeader("Authorization")String tokenBase64) {
+		logger.info("Token Key: {}", tokenBase64);
 		logger.info("SendMailToParticipants wurde aufgerufen für die Survey {}", survey.getId());
 		return emailService.sendInviteToParticipants(survey);
 	}
