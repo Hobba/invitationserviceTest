@@ -62,6 +62,11 @@ public class InvitationServiceController {
 			return "login_form";
 		}
 	}
+	
+	@RequestMapping("/impressum")
+	String impressum(Model model) {
+		return "impressum";
+	}
 
 	@Autowired
 	private EmailService emailService;
