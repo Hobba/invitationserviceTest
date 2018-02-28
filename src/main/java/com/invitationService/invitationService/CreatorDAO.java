@@ -68,7 +68,7 @@ public class CreatorDAO {
 			if (!participant.isEmpty()) {
 				Participant rewriteParticipant = participant.get(0);
 				rewriteParticipant.setHasAnswered(true);
-				template.updateFirst(query(where("participant").is(participant)), Update.update("hasAnswered", "true"),
+				template.updateFirst(query(where("participant").is(rewriteParticipant)), Update.update("hasAnswered", "true"),
 						Participant.class);
 				logger.info("Teilnehmer {} erfolgreich geupdatet", rewriteParticipant);
 			} else {
