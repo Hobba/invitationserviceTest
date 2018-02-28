@@ -86,6 +86,7 @@ public class MailgunEmailService implements EmailService {
 				// TODO surveyservice: check if token is used
 
 				String token = tokenService.createUserJWT("", "IS", "surveyInvitation", p.getEmail(), survey.getId());
+				p.setHasAnswered(false);
 				p.setToken(token);
 				p.setSurvey_id(survey.getId());
 				
