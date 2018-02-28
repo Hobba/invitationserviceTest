@@ -15,6 +15,6 @@ public class Participant {
 	protected String email;
 	protected String token;
 	protected String survey_id;
-	protected Boolean status;
+	protected Boolean hasAnswered;
 
 }
