@@ -46,7 +46,7 @@ public class CreatorDAO {
 		try {
 //TODO WAS ist wenn die DB keinen Teilnehmer enthält??
 			Participant participant = template
-					.findOne(query(where("email").is(p.getEmail()).and("id").is(p.getSurvey_id())), Participant.class);
+					.findOne(query(where("email").is(p.getEmail()).and("survey_id").is(p.getSurvey_id())), Participant.class);
 			if (participant != null) {
 				result = participant.getHasAnswered();
 			}
