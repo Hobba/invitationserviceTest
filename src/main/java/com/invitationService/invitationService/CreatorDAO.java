@@ -38,7 +38,11 @@ public class CreatorDAO {
 	//TODO: DAS GEHT NICHT
 	public boolean hasParticipantAnswered(Participant p) {
 
+		if(p.getSurvey_id() != null) {
 		logger.info("Teilnehmer( {} ) und die Survey ( {} ) sollen abgefragt werden", p, p.getSurvey_id());
+		}else {
+			logger.info("Der Teilnehmer {} und eine Survey sollen abgefragt werden, aber die Survey ist null", p);
+		}
 		Boolean result = false;
 		try {
 			result = template.exists(query(where("email").is(p.getEmail()).and("id").is(p.getSurvey_id())),
