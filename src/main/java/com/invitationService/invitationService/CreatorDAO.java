@@ -34,19 +34,23 @@ public class CreatorDAO {
 		logger.info("Teilnehmer {} wurde in der DB angelegt", p.getEmail());
 	}
 
-	
-	//TODO: DAS GEHT NICHT
+
 	public boolean hasParticipantAnswered(Participant p) {
 
-		if(p.getSurvey_id() != null) {
-		logger.info("Teilnehmer( {} ) und die Survey ( {} ) sollen abgefragt werden", p, p.getSurvey_id());
-		}else {
+		if (p.getSurvey_id() != null) {
+			logger.info("Teilnehmer( {} ) und die Survey ( {} ) sollen abgefragt werden", p, p.getSurvey_id());
+		} else {
 			logger.info("Der Teilnehmer {} und eine Survey sollen abgefragt werden, aber die Survey ist null", p);
 		}
-		Boolean result = false;
+		Boolean result = null;
 		try {
-			result = template.exists(query(where("email").is(p.getEmail()).and("id").is(p.getSurvey_id())),
-					Boolean.class);
+//TODO WAS ist wenn die DB keinen Teilnehmer enthält??
+			Participant participant = template
+					.findOne(query(where("email").is(p.getEmail()).and("id").is(p.getSurvey_id())), Participant.class);
+			if (participant != null) {
+				result = participant.getHasAnswered();
+			}
+
 		} catch (Exception e) {
 			logger.warn("Die DB Abfrage nach Teilnehmer {} und Umfrage {} - Match für den Status ist fehlgeschlagen", p,
 					p.getSurvey_id());
