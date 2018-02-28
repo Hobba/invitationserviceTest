@@ -26,7 +26,14 @@ pipeline {
                 '''
             }
         }
-        
+          stage('Test'){
+            steps {
+                sh '''
+                export SPRING_PROFILES_ACTIVE=production
+                mvn test
+                '''
+            }
+        }        
         stage('DeployDev'){
             steps {
                 sh '''
