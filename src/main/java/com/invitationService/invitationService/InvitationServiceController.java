@@ -89,7 +89,7 @@ public class InvitationServiceController {
 
 	@ResponseBody
 	@RequestMapping(value = "/checkIfTokenIsAlreadyUsed", method = RequestMethod.POST)
-	public boolean checkParticipantHasAnswered(Participant p) {
+	public boolean checkParticipantHasAnswered(@RequestBody Participant p) {
 		logger.info("Ein Check, ob ein User {} eine Umfrage {} bereits beantwortet hat wurde aufgerufen", p.getEmail(),
 				p.getSurvey_id());
 		return dao.hasParticipantAnswered(p);
@@ -98,7 +98,7 @@ public class InvitationServiceController {
 
 	@ResponseBody
 	@RequestMapping(value = "/setTokenAsUsed", method = RequestMethod.POST)
-	public String setParticipantTokenAsUsed(Participant p) {
+	public String setParticipantTokenAsUsed(@RequestBody Participant p) {
 		logger.info("Ein Teilnehmer {} hat eine Umfrage beantwortet {}", p.getEmail(), p.getSurvey_id() );
 		dao.setParticipantAsAnswered(p);
 		return "Set as answered: " + p.getEmail();
