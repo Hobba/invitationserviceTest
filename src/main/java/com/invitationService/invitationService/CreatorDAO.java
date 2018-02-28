@@ -63,7 +63,7 @@ public class CreatorDAO {
 	public String setParticipantAsAnswered(Participant p) {
 		List<Participant> participant = new ArrayList<>();
 		try {
-			participant = template.find(query(where("email").is(p.getEmail()).and("id").is(p.getSurvey_id())),
+			participant = template.find(query(where("email").is(p.getEmail()).and("survey_id").is(p.getSurvey_id())),
 					Participant.class);
 			if (!participant.isEmpty()) {
 				Participant rewriteParticipant = participant.get(0);
