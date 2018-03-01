@@ -79,12 +79,7 @@ public class MailgunEmailService implements EmailService {
 
 			if (!part_list.contains(p)) {
 				part_list.add(p);
-
-				// TODO create token -done
-				// TODO write token and email to DB
-				// TODO send token with email -done
-				// TODO surveyservice: check if token is used
-
+				
 				String token = tokenService.createUserJWT("", "IS", "surveyInvitation", p.getEmail(), survey.getId());
 				p.setHasAnswered(false);
 				p.setToken(token);
