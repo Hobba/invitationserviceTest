@@ -18,8 +18,9 @@ public class Survey {
 	private String id;
 
 	private String title;
-	private String greeting;
+	private String description;
 	
+	private Settings settings;
 	
 	private Creator creator;
 	private String creationDate;

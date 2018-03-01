@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.invitationService.models.Creator;
 import com.invitationService.models.Participant;
 import com.invitationService.models.Survey;
@@ -76,6 +77,11 @@ public class InvitationServiceController {
 	@ResponseBody
 	@RequestMapping(value = "/sendInvitationToParticipants", method = RequestMethod.POST)
 	public int SendMailToParticipants(@RequestBody Survey survey, @RequestHeader("Authorization")String tokenBase64) {
+			
+			ObjectMapper mapper = new ObjectMapper();
+			mapper.findAndRegisterModules();
+			//mapper.registerModule(new JavaTimeModule());
+		
 		logger.info("Token Key: {}", tokenBase64);
 		logger.info("SendMailToParticipants wurde aufgerufen für die Survey {}", survey.getId());
 		return emailService.sendInviteToParticipants(survey);
