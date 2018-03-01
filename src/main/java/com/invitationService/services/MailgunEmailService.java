@@ -96,7 +96,7 @@ public class MailgunEmailService implements EmailService {
 				email.setContent(getEmailContent(TEMPLATE_TYPE.PARTICIPANTS));
 				email.setContent(email.getContent().replaceAll("\\$\\{TITLE\\}", survey.getTitle()));
 				email.setContent(email.getContent().replaceAll("\\$\\{CREATORNAME\\}", getCreatorName(survey.getCreator())));
-				email.setContent(email.getContent().replaceAll("\\$\\{GREETING\\}", survey.getGreeting()));
+				email.setContent(email.getContent().replaceAll("\\$\\{GREETING\\}", survey.getSettings().getGreeting()));
 				email.setContent(
 						email.getContent().replaceAll("\\$\\{USERLINK\\}", surveyservice_base_url + "?user=" + token));
 				LOGGER.info("Eine Email für einen Teilnehmer wurde erstellt");

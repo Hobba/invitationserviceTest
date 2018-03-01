@@ -72,7 +72,7 @@ public class LocalEmailService implements EmailService {
 			email.setContent(getEmailContent(TEMPLATE_TYPE.PARTICIPANTS));
 			email.getContent().replaceAll("\\$\\{TITLE\\}", survey.getTitle());
 			email.getContent().replaceAll("\\$\\{CREATORNAME\\}", getCreatorName(survey.getCreator()));
-			email.getContent().replaceAll("\\$\\{GREETING\\}", survey.getGreeting());
+			email.getContent().replaceAll("\\$\\{GREETING\\}", survey.getSettings().getGreeting());
 			email.setContent(email.getContent().replaceAll("\\$\\{USERLINK\\}", surveyservice_base_url + "?user="
 					+ tokenService.createUserJWT("", "IS", "surveyInvitation", p.getEmail(), survey.getId())));
 
