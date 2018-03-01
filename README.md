@@ -12,3 +12,6 @@ ausgewählt werden.
 mvn clean install -Dspring.profiles.active=local
 alternativ:
 export SPRING_PROFILES_ACTIVE=local
+
+Profiles:
+mock:  schaltet die lokale mongodb ab
