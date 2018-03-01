@@ -3,6 +3,8 @@ package com.invitationService.services;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.StringWriter;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
@@ -10,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 
+import com.invitationService.invitationService.CreatorDAO;
 import com.invitationService.models.Creator;
 import com.invitationService.models.Email;
 import com.invitationService.models.Participant;
@@ -20,6 +23,9 @@ public class LocalEmailService implements EmailService {
 
 	@Autowired
 	private TokenService tokenService;
+
+	@Autowired
+	private CreatorDAO dao;
 
 	@Value("${mailgun.api.url}")
 	private String mailgun_url;
@@ -48,54 +54,106 @@ public class LocalEmailService implements EmailService {
 
 		if (isRegistered) {
 			email.setContent(getEmailContent(TEMPLATE_TYPE.CREATOR_REGISTERED));
+			LOGGER.info("Das  Emailtemplate für einen bereits registrierten Creator wurde aufgerufen");
 		} else {
 			email.setContent(getEmailContent(TEMPLATE_TYPE.CREATOR_UNREGISTERED));
+			LOGGER.info("Das  Emailtemplate für einen NEUEN Creator wurde aufgerufen");
 		}
 
 		email.setContent(email.getContent().replaceAll("\\$\\{CREATORLINK\\}", designservice_base_url + "c/?creator="
 				+ tokenService.createCreatorJWT("id", "invitationservice", "email", creator.getEmail())));
 
-		LOGGER.info(email.getContent());
+		LOGGER.info("Eine Mail für einen Creator {} wurde erstellt", creator.getEmail());
 
-		// RETURN TRUE, because we suspect that the send method was successfull (which
-		// does not exist in localemailservice)
-		return true;
+		LOGGER.info(email.getContent());
+		return sendMailToAddress(email);
 	}
 
 	public int sendInviteToParticipants(Survey survey) {
+
+		Set<Participant> part_list = new HashSet<Participant>();
+
 		int successfullSendCounter = 0;
 		for (Participant p : survey.getParticipants()) {
-			Email email = new Email();
-			email.setAddress(p.getEmail());
-			email.setSubject(
-					"Du wurdest von " + survey.getCreator().getName() + " eingeladen, an einer Umfrage teilzunehmen");
-			email.setContent(getEmailContent(TEMPLATE_TYPE.PARTICIPANTS));
-			email.getContent().replaceAll("\\$\\{TITLE\\}", survey.getTitle());
-			email.getContent().replaceAll("\\$\\{CREATORNAME\\}", getCreatorName(survey.getCreator()));
-			email.getContent().replaceAll("\\$\\{GREETING\\}", survey.getSettings().getGreeting());
-			email.setContent(email.getContent().replaceAll("\\$\\{USERLINK\\}", surveyservice_base_url + "?user="
-					+ tokenService.createUserJWT("", "IS", "surveyInvitation", p.getEmail(), survey.getId())));
 
-			LOGGER.info(email.getContent());
+			if (!part_list.contains(p)) {
+				part_list.add(p);
+
+				String token = tokenService.createUserJWT("", "IS", "surveyInvitation", p.getEmail(), survey.getId());
+				p.setHasAnswered(false);
+				p.setToken(token);
+				p.setSurvey_id(survey.getId());
+
+				LOGGER.info("Es wird versucht, der Teilnehmer {} für die Umfrage {} in die DB zu schreiben",
+						p.getEmail(), survey.getId());
+				dao.insertParticipant(p);
+
+				Email email = new Email();
+				email.setAddress(p.getEmail());
+				email.setSubject("Du wurdest von " + survey.getCreator().getName()
+						+ " eingeladen, an einer Umfrage teilzunehmen");
+				email.setContent(getEmailContent(TEMPLATE_TYPE.PARTICIPANTS));
+				email.setContent(email.getContent().replaceAll("\\$\\{TITLE\\}", survey.getTitle()));
+				email.setContent(
+						email.getContent().replaceAll("\\$\\{CREATORNAME\\}", getCreatorName(survey.getCreator())));
+				email.setContent(
+						email.getContent().replaceAll("\\$\\{GREETING\\}", survey.getSettings().getGreeting()));
+				email.setContent(
+						email.getContent().replaceAll("\\$\\{USERLINK\\}", surveyservice_base_url + "?user=" + token));
+				LOGGER.info("Eine Email für einen Teilnehmer wurde erstellt");
+
+				if (sendMailToAddress(email)) {
+					LOGGER.info(email.getContent());
+					LOGGER.info("Eine Email wurde an {} gesendet", email.getAddress());
+					successfullSendCounter++;
+				} else {
+					LOGGER.info("Could not send email to: " + email.getAddress());
+				}
+
+			} else {
+				LOGGER.info(
+						"Es wurde versucht, die Email {} doppelt als Teilnehmer einzutragen und dies wurde verhindet",
+						p.getEmail());
+			}
 		}
+		LOGGER.info("Es wurden Emails an {} Teilnehmer gesendet", successfullSendCounter);
 		return successfullSendCounter;
 	}
-
+	
 	public int sendReminderToParticipants(Survey survey) {
 		int successfullSendCounter = 0;
 		for (Participant p : survey.getParticipants()) {
-			Email email = new Email();
-			email.setAddress(p.getEmail());
-			email.setSubject(
-					"Hast du vergessen an der Umfrage von " + getCreatorName(survey.getCreator()) + " teilzunehmen?");
-			email.setContent(getEmailContent(TEMPLATE_TYPE.REMINDER));
-			email.getContent().replaceAll("\\$\\{TITLE\\}", survey.getTitle());
-			email.getContent().replaceAll("\\$\\{CREATORNAME\\}", getCreatorName(survey.getCreator()));
-			email.setContent(email.getContent().replaceAll("\\$\\{USERLINK\\}", "http://userlink.de"));
+				String token = tokenService.createUserJWT("", "IS", "surveyInvitation", p.getEmail(), survey.getId());
 
-			LOGGER.info(email.getContent());
+				Email email = new Email();
+				email.setAddress(p.getEmail());
+				email.setSubject("Hast du vergessen an der Umfrage von " + survey.getCreator().getName()
+						+ " teilzunehmen?");
+				email.setContent(getEmailContent(TEMPLATE_TYPE.REMINDER));
+				email.setContent(email.getContent().replaceAll("\\$\\{TITLE\\}", survey.getTitle()));
+				email.setContent(
+						email.getContent().replaceAll("\\$\\{CREATORNAME\\}", getCreatorName(survey.getCreator())));
+				email.setContent(
+						email.getContent().replaceAll("\\$\\{GREETING\\}", survey.getSettings().getGreeting()));
+				email.setContent(
+						email.getContent().replaceAll("\\$\\{USERLINK\\}", surveyservice_base_url + "?user=" + token));
+				LOGGER.info("Eine Email für einen Teilnehmer wurde erstellt");
+
+				if (sendMailToAddress(email)) {
+					LOGGER.info(email.getContent());
+					LOGGER.info("Eine Email wurde an {} gesendet", email.getAddress());
+					successfullSendCounter++;
+				} else {
+					LOGGER.info("Could not send email to: " + email.getAddress());
+				}
 		}
+		LOGGER.info("Es wurden Emails an {} Teilnehmer gesendet", successfullSendCounter);
 		return successfullSendCounter;
+	}
+
+	private boolean sendMailToAddress(Email email) {
+		// RETURN TRUE, because we suspect that the send method was successfull
+		return true;
 	}
 
 	private String getEmailContent(TEMPLATE_TYPE template) {
@@ -103,12 +161,16 @@ public class LocalEmailService implements EmailService {
 
 		switch (template) {
 		case CREATOR_UNREGISTERED:
+			LOGGER.info("Das CreatorEmail Template wurde abgerufen");
 			return inputStreamToString(cl.getResourceAsStream("static/tmpl/emailTemplate_Creator.html"));
 		case CREATOR_REGISTERED:
+			LOGGER.info("Das CreatorAlreadyRegistered Template wurde abgerufen");
 			return inputStreamToString(cl.getResourceAsStream("static/tmpl/emailTemplate_Creator_Registered.html"));
 		case PARTICIPANTS:
+			LOGGER.info("Das TeilnehmerEmail Template wurde abgerufen");
 			return inputStreamToString(cl.getResourceAsStream("static/tmpl/emailTemplate_Participants.html"));
 		case REMINDER:
+			LOGGER.info("Das TeilnehmerReminderEmail Template wurde abgerufen");
 			return inputStreamToString(cl.getResourceAsStream("static/tmpl/emailTemplate_Reminder.html"));
 		default:
 			LOGGER.warn("Couldn't get template files, falling back to default file.");
@@ -117,10 +179,14 @@ public class LocalEmailService implements EmailService {
 	}
 
 	private String getCreatorName(Creator creator) {
-		if (!creator.getName().isEmpty()) {
-			return creator.getName();
-		} else {
+		if (creator.getName() == null) {
+			LOGGER.warn("Creator has no Name field, please provide at least a empty name field.");
 			return creator.getEmail();
+		}
+		if (creator.getName().isEmpty()) {
+			return creator.getEmail();
+		} else {
+			return creator.getName();
 		}
 	}
 
@@ -137,4 +203,5 @@ public class LocalEmailService implements EmailService {
 	private enum TEMPLATE_TYPE {
 		CREATOR_UNREGISTERED, CREATOR_REGISTERED, PARTICIPANTS, REMINDER;
 	}
+
 }
