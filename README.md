@@ -6,11 +6,17 @@
 
 * E-Mail-Versand per [Mailgun](https://www.mailgun.com/)
 * Generierung von JWTs zur Nutzerauthentifizierung
-* ...
+* Bereitstellung der Landingpage www.simque.de
 
 ### Umgebungsvariablen
 
+* Secret für Token
+
 ### Welche Profile werden genutzt?
+
+1. Local
+2. Production
+3. Mock
 
 ####_ACHTUNG:_
 
@@ -38,13 +44,34 @@ alternativ:
 `export SPRING_PROFILES_ACTIVE=local`
 
 
-### Konfiguration -->App.Properties
+### Konfiguration
+
+Siehe *application.properties* und *application-production.properties*
 
 ### JSON-Endpoints inkl. JSON-Struktur
 
+* InvitationServiceController
+
+_*JSON-Struktur:*_
+
+Noch nicht abbildbar, da Work in Progress
+
 ### HTML-Endpoints
+
+* https://www.simque.de
+* https://www.simque.de/goToConfirmation
 
 ### Actuator-Endpoints (Togglz)
 
+
+
 ### Datenbankstruktur
+
+* mongoDB
+
+Zwei Tabellen:
+
+* Creators
+* Participants
+
 
