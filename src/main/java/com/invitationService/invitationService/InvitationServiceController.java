@@ -46,7 +46,6 @@ public class InvitationServiceController {
 			logger.info("Eine falsche Email wurde eingegeben: {}", user.getEmail());
 			return "login_form";
 		} else {
-			// send email to creator
 
 			if (dao.isCreatorExist(user.getEmail())) {
 				model.addAttribute("userExisted", true);
@@ -92,7 +91,6 @@ public class InvitationServiceController {
 	public int sendReminderToParticipants(@RequestBody Survey survey) {
 		logger.info("SendReminderToParticipants wurde aufgerufen für die Survey {}", survey.getId());
 		return emailService.sendReminderToParticipants(survey);
-//		return survey;
 	}
 
 	@ResponseBody
