@@ -67,6 +67,15 @@ public class TestCreatorDAO {
 
 		verify(template, times(1)).insert(c, "creator");
 	}
+	
+	@Test
+	public void testeInsertParticipant() {
+		Participant parti = new Participant();
+		creatorDAO.insertParticipant(parti);
+		
+		
+		verify(template, times(1)).insert(parti, "participant");
+	}
 
 	@Test
 	public void testeHasParticipantAnsweredFalse() {
