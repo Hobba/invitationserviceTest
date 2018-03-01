@@ -36,19 +36,21 @@ public class CreatorDAO {
 	public boolean hasParticipantAnswered(Participant p) {
 
 		if (p.getSurvey_id() != null) {
-			logger.info("Teilnehmer( {} ) und die Survey ( {} ) sollen abgefragt werden", p.getEmail(), p.getSurvey_id());
+			logger.info("Teilnehmer( {} ) und die Survey ( {} ) sollen abgefragt werden", p.getEmail(),
+					p.getSurvey_id());
 		} else {
-			logger.info("Der Teilnehmer {} und eine Survey sollen abgefragt werden, aber die Survey ist null", p.getEmail());
+			logger.info("Der Teilnehmer {} und eine Survey sollen abgefragt werden, aber die Survey ist null",
+					p.getEmail());
 		}
-		
+
 		Boolean result = null;
-		
+
 		try {
 			// TODO WAS ist wenn die DB keinen Teilnehmer enthält??
 			Participant participant = template.findOne(
 					query(where("email").is(p.getEmail()).and("survey_id").is(p.getSurvey_id())), Participant.class);
 			if (participant != null) {
-				
+
 				result = participant.getHasAnswered();
 				logger.info("Participant wurde in der DB gefunden und Antwort-Status ist {}", result);
 			}
@@ -62,7 +64,7 @@ public class CreatorDAO {
 		return result;
 	}
 
-	public String setParticipantAsAnswered(Participant p) {
+	public void setParticipantAsAnswered(Participant p) {
 		List<Participant> participant = new ArrayList<>();
 		try {
 			participant = template.find(query(where("email").is(p.getEmail()).and("survey_id").is(p.getSurvey_id())),
@@ -77,14 +79,13 @@ public class CreatorDAO {
 				logger.info("Teilnehmer {} erfolgreich geupdatet", rewriteParticipant);
 			} else {
 				logger.info("Teilnehmerupdate für {} gescheitert!", p.getEmail());
-				return "participant not existing";
+
 			}
 		} catch (Exception e) {
 			logger.warn("Error beim setzen des Status des Teilnehmers: {}", p.getEmail());
 
 		}
 
-		return "";
 	}
 
 	public boolean isCreatorExist(String email) {
@@ -93,10 +94,10 @@ public class CreatorDAO {
 		logger.info("Es wurde der Creator mit email: {} gesucht und das Ergebnis war: {}", email, result);
 		return result;
 	}
-	
-	public List<Participant> getAllParticipantsForSurvey (String survey_id) {
+
+	public List<Participant> getAllParticipantsForSurvey(String survey_id) {
 		return template.find(query(where("survey_id").is(survey_id)), Participant.class);
-		
+
 	}
 
 }
