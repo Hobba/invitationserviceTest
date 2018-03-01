@@ -71,8 +71,8 @@
 				<form enctype="multipart/form-data" th:object="${user}"
 					th:action="@{goToConfirmation}" method="post" style="margin: auto;">
 
-					<input type="text" th:field="*{Email}" placeholder="me@example.com"
-						style="width: auto; text-indent: 2px;" />
+					<input class="form-control" type="text" th:field="*{Email}" placeholder="me@example.com"
+						style="width: 50%; min-width:320px; max-width:60%; text-indent: 2px;" />
 					<div>
 
 
@@ -115,7 +115,7 @@
 							class="far fa-check-circle"></i>
 					</div>
 					<p>
-						Wir haben Dir soeben eine E-Mail an <b th:text="${email}"></b>
+						Wir haben Dir soeben eine E-Mail an <b th:text="${email}" style="width:100% ; text-overflow:'...'; white-space: nowrap; overflow:hidden;"></b>
 						gesendet. Öffne die Email und klicke den Link an. Schon kannst du
 						damit beginnen, die erste Umfrage zu erstellen. Viel Spaß!
 					</p>
