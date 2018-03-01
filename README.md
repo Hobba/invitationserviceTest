@@ -16,7 +16,7 @@
 
 1. Local
 2. Production
-3. Mock
+3. Mock: schaltet die lokale mongodb ab
 
 ####_ACHTUNG:_
 
@@ -28,15 +28,6 @@ _für lokale Testing-E-Mails:_
 _für Live-E-Mails:_  
 `--spring.profiles.active=production`
 ausgewählt werden.
-
-
-﻿Beispiel:
-mvn clean install -Dspring.profiles.active=local
-alternativ:
-export SPRING_PROFILES_ACTIVE=local
-
-Profiles:
-mock:  schaltet die lokale mongodb ab
 
 ﻿Beispiel:  
 `mvn clean install -Dspring.profiles.active=local`  
@@ -63,7 +54,7 @@ Noch nicht abbildbar, da Work in Progress
 
 ### Actuator-Endpoints (Togglz)
 
-
+* Keine Actuators
 
 ### Datenbankstruktur
 
