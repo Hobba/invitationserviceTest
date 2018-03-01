@@ -41,8 +41,7 @@ public class CreatorDAOStub extends CreatorDAO{
 		return false;
 	}
 
-	public String setParticipantAsAnswered(Participant p) {
-		return "";
+	public void setParticipantAsAnswered(Participant p) {
 	}
 
 	public boolean isCreatorExist(String email) {
