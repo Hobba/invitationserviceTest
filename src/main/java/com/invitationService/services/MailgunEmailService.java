@@ -79,12 +79,7 @@ public class MailgunEmailService implements EmailService {
 
 			if (!part_list.contains(p)) {
 				part_list.add(p);
-
-				// TODO create token -done
-				// TODO write token and email to DB
-				// TODO send token with email -done
-				// TODO surveyservice: check if token is used
-
+				
 				String token = tokenService.createUserJWT("", "IS", "surveyInvitation", p.getEmail(), survey.getId());
 				p.setHasAnswered(false);
 				p.setToken(token);
@@ -101,7 +96,7 @@ public class MailgunEmailService implements EmailService {
 				email.setContent(getEmailContent(TEMPLATE_TYPE.PARTICIPANTS));
 				email.setContent(email.getContent().replaceAll("\\$\\{TITLE\\}", survey.getTitle()));
 				email.setContent(email.getContent().replaceAll("\\$\\{CREATORNAME\\}", getCreatorName(survey.getCreator())));
-				email.setContent(email.getContent().replaceAll("\\$\\{GREETING\\}", survey.getGreeting()));
+				email.setContent(email.getContent().replaceAll("\\$\\{GREETING\\}", survey.getSettings().getGreeting()));
 				email.setContent(
 						email.getContent().replaceAll("\\$\\{USERLINK\\}", surveyservice_base_url + "?user=" + token));
 				LOGGER.info("Eine Email für einen Teilnehmer wurde erstellt");
