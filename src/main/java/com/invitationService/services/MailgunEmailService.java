@@ -156,9 +156,9 @@ public class MailgunEmailService implements EmailService {
 		try {
 			Unirest.post(mailgun_url + "/messages").basicAuth("api", mailgun_key).queryString("from", mailgun_from)
 					.queryString("to", email.getAddress()).queryString("subject", email.getSubject())
-					.queryString("html", email.getContent()).asJson();
+					.queryString("html", email.getContent());
 			return true;
-		} catch (UnirestException | RuntimeException e) {
+		} catch (RuntimeException e) {
 			LOGGER.warn("Couldn't send email due to mail server connection issues", e);
 			return false;
 		}
