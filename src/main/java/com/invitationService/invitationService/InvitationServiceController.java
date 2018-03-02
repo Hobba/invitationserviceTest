@@ -1,6 +1,5 @@
 package com.invitationService.invitationService;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -12,15 +11,9 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.invitationService.models.Creator;
 import com.invitationService.models.Participant;
 import com.invitationService.models.Survey;
@@ -53,7 +46,6 @@ public class InvitationServiceController {
 			logger.info("Eine falsche Email wurde eingegeben: {}", user.getEmail());
 			return "login_form";
 		} else {
-			// send email to creator
 
 			if (dao.isCreatorExist(user.getEmail())) {
 				model.addAttribute("userExisted", true);
@@ -72,13 +64,24 @@ public class InvitationServiceController {
 			return "login_form";
 		}
 	}
+	
+	@RequestMapping("/impressum")
+	String impressum(Model model) {
+		return "impressum";
+	}
 
 	@Autowired
 	private EmailService emailService;
 
 	@ResponseBody
 	@RequestMapping(value = "/sendInvitationToParticipants", method = RequestMethod.POST)
-	public int SendMailToParticipants(@RequestBody Survey survey) {
+	public int SendMailToParticipants(@RequestBody Survey survey, @RequestHeader("Authorization")String tokenBase64) {
+			
+			ObjectMapper mapper = new ObjectMapper();
+			mapper.findAndRegisterModules();
+			//mapper.registerModule(new JavaTimeModule());
+		
+		logger.info("Token Key: {}", tokenBase64);
 		logger.info("SendMailToParticipants wurde aufgerufen für die Survey {}", survey.getId());
 		return emailService.sendInviteToParticipants(survey);
 	}
@@ -91,16 +94,8 @@ public class InvitationServiceController {
 	}
 
 	@ResponseBody
-	@RequestMapping(value = "/sendInvitationEmailsList", method = RequestMethod.POST)
-	public List<Creator> SendInvitationEmailsList(@RequestBody List<Creator> users) {
-		users.forEach(s -> System.out.println(s));
-		// emailService.sendMail(user);
-		return null;
-	}
-
-	@ResponseBody
 	@RequestMapping(value = "/checkIfTokenIsAlreadyUsed", method = RequestMethod.POST)
-	public boolean checkParticipantHasAnswered(Participant p) {
+	public boolean checkParticipantHasAnswered(@RequestBody Participant p) {
 		logger.info("Ein Check, ob ein User {} eine Umfrage {} bereits beantwortet hat wurde aufgerufen", p.getEmail(),
 				p.getSurvey_id());
 		return dao.hasParticipantAnswered(p);
@@ -109,15 +104,23 @@ public class InvitationServiceController {
 
 	@ResponseBody
 	@RequestMapping(value = "/setTokenAsUsed", method = RequestMethod.POST)
-	public String setParticipantTokenAsUsed(Participant p) {
+	public String setParticipantTokenAsUsed(@RequestBody Participant p) {
 		logger.info("Ein Teilnehmer {} hat eine Umfrage beantwortet {}", p.getEmail(), p.getSurvey_id() );
 		dao.setParticipantAsAnswered(p);
 		return "Set as answered: " + p.getEmail();
 	}
+	
+	@ResponseBody
+	@RequestMapping(value = "surveys/{id}/participants", method = RequestMethod.GET)
+	public List<Participant> getParticipants(@PathVariable("id") String surveyID) {
+		logger.info("Anfrage für eine Participants Liste");
+		List<Participant> result = dao.getAllParticipantsForSurvey(surveyID);
 
-	@RequestMapping("/list/{id}")
-	public List<Participant> getRows(@PathVariable String id) {
-		return new ArrayList<>();
+		if (result != null) {
+			logger.info("Survey-ID {} | Es wurden die Participants für das Survey angefragt und eine List mit {} Participants zurückgegeben.", surveyID, result.size());
+		}
+
+		return result;
 	}
 
 }

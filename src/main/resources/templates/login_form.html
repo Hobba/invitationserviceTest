@@ -14,6 +14,8 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <script src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
 <link type="text/css" rel="stylesheet" th:href="@{css/style.css}" />
+<link rel="shortcut icon" th:href="@{img/favicon.ico}"
+	type="image/x-icon" />
 <link href="https://fonts.googleapis.com/css?family=Nunito"
 	rel="stylesheet"></link>
 	
@@ -30,11 +32,7 @@
 		style="background-color: rgba(248, 248, 248, 0.95); z-index: 2;">
 		<a class="navbar-brand" href="#"><img class="simque-brand-logo"
 			th:src="@{img/logo_simque.png}" /></a>
-		<button class="navbar-toggler" type="button" data-toggle="collapse"
-			data-target="#navbarNav" aria-controls="navbarNav"
-			aria-expanded="false" aria-label="Toggle navigation">
-			<span class="navbar-toggler-icon"></span>
-		</button>
+
 		<!-- 		<div class="collapse navbar-collapse" id="navbarNav">
 			<ul class="navbar-nav">
 				<li class="nav-item active"><a class="nav-link" href="#">Meine
@@ -68,8 +66,8 @@
 				<form enctype="multipart/form-data" th:object="${user}"
 					th:action="@{goToConfirmation}" method="post" style="margin: auto;">
 
-					<input type="text" th:field="*{Email}" placeholder="me@example.com"
-						style="width: auto; text-indent: 2px;" />
+					<input class="form-control" type="text" th:field="*{Email}" placeholder="me@example.com"
+						style="width: 50%; min-width:320px; max-width:60%; text-indent: 2px;" />
 					<div>
 
 
@@ -112,7 +110,7 @@
 							class="far fa-check-circle"></i>
 					</div>
 					<p>
-						Wir haben Dir soeben eine E-Mail an <b th:text="${email}"></b>
+						Wir haben Dir soeben eine E-Mail an <b th:text="${email}" style="width:100% ; text-overflow:'...'; white-space: nowrap; overflow:hidden;"></b>
 						gesendet. Öffne die Email und klicke den Link an. Schon kannst du
 						damit beginnen, die erste Umfrage zu erstellen. Viel Spaß!
 					</p>
@@ -124,6 +122,10 @@
 		</div>
 
 	</div>
+
+<nav class="navbar fixed-bottom navbar-light bg-light">
+  <a class="navbar-brand" th:href="@{impressum}">Impressum und Datenschutzerklärung</a>
+</nav>
 
 
 </body>

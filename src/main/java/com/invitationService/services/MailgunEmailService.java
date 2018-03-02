@@ -25,7 +25,7 @@ public class MailgunEmailService implements EmailService {
 
 	@Autowired
 	private TokenService tokenService;
-	
+
 	@Autowired
 	private CreatorDAO dao;
 
@@ -64,7 +64,7 @@ public class MailgunEmailService implements EmailService {
 
 		email.setContent(email.getContent().replaceAll("\\$\\{CREATORLINK\\}", designservice_base_url + "c/?creator="
 				+ tokenService.createCreatorJWT("id", "invitationservice", "email", creator.getEmail())));
-		
+
 		LOGGER.info("Eine Mail für einen Creator {} wurde erstellt", creator.getEmail());
 
 		return sendMailToAddress(email);
@@ -80,27 +80,26 @@ public class MailgunEmailService implements EmailService {
 			if (!part_list.contains(p)) {
 				part_list.add(p);
 
-				// TODO create token -done
-				// TODO write token and email to DB
-				// TODO send token with email -done
-				// TODO surveyservice: check if token is used
-
 				String token = tokenService.createUserJWT("", "IS", "surveyInvitation", p.getEmail(), survey.getId());
+				p.setHasAnswered(false);
 				p.setToken(token);
 				p.setSurvey_id(survey.getId());
-				
-				LOGGER.info("Es wird versucht, der Teilnehmer {} für die Umfrage {} in die DB zu schreiben", p.getEmail(), survey.getId());
+
+				LOGGER.info("Es wird versucht, der Teilnehmer {} für die Umfrage {} in die DB zu schreiben",
+						p.getEmail(), survey.getId());
 				dao.insertParticipant(p);
-			
-				
+
 				Email email = new Email();
 				email.setAddress(p.getEmail());
 				email.setSubject("Du wurdest von " + survey.getCreator().getName()
 						+ " eingeladen, an einer Umfrage teilzunehmen");
 				email.setContent(getEmailContent(TEMPLATE_TYPE.PARTICIPANTS));
 				email.setContent(email.getContent().replaceAll("\\$\\{TITLE\\}", survey.getTitle()));
-				email.setContent(email.getContent().replaceAll("\\$\\{CREATORNAME\\}", getCreatorName(survey.getCreator())));
-				email.setContent(email.getContent().replaceAll("\\$\\{GREETING\\}", survey.getGreeting()));
+				email.setContent(
+						email.getContent().replaceAll("\\$\\{CREATORNAME\\}", getCreatorName(survey.getCreator())));
+				// email.setContent(
+				// email.getContent().replaceAll("\\$\\{GREETING\\}",
+				// survey.getSettings().getGreeting()));
 				email.setContent(
 						email.getContent().replaceAll("\\$\\{USERLINK\\}", surveyservice_base_url + "?user=" + token));
 				LOGGER.info("Eine Email für einen Teilnehmer wurde erstellt");
@@ -112,8 +111,10 @@ public class MailgunEmailService implements EmailService {
 					LOGGER.info("Could not send email to: " + email.getAddress());
 				}
 
-			}else {
-				LOGGER.info("Es wurde versucht, die Email {} doppelt als Teilnehmer einzutragen und dies wurde verhindet", p.getEmail());
+			} else {
+				LOGGER.info(
+						"Es wurde versucht, die Email {} doppelt als Teilnehmer einzutragen und dies wurde verhindet",
+						p.getEmail());
 			}
 		}
 		LOGGER.info("Es wurden Emails an {} Teilnehmer gesendet", successfullSendCounter);
@@ -123,21 +124,32 @@ public class MailgunEmailService implements EmailService {
 	public int sendReminderToParticipants(Survey survey) {
 		int successfullSendCounter = 0;
 		for (Participant p : survey.getParticipants()) {
-			Email email = new Email();
-			email.setAddress(p.getEmail());
-			email.setSubject(
-					"Hast du vergessen an der Umfrage von " + getCreatorName(survey.getCreator()) + " teilzunehmen?");
-			email.setContent(getEmailContent(TEMPLATE_TYPE.REMINDER));
-			email.setContent(email.getContent().replaceAll("\\$\\{TITLE\\}", survey.getTitle()));
-			email.setContent(email.getContent().replaceAll("\\$\\{CREATORNAME\\}", getCreatorName(survey.getCreator())));
-			email.setContent(email.getContent().replaceAll("\\$\\{USERLINK\\}", "http://userlink.de"));
-
-			if (sendMailToAddress(email)) {
-				successfullSendCounter++;
-			} else {
-				LOGGER.info("Could not send email to: " + email.getAddress());
+			if(!p.getHasAnswered()) {
+				String token = tokenService.createUserJWT("", "IS", "surveyInvitation", p.getEmail(), survey.getId());
+				Email email = new Email();
+				email.setAddress(p.getEmail());
+				email.setSubject(
+						"Hast du vergessen an der Umfrage von " + survey.getCreator().getName() + " teilzunehmen?");
+				email.setContent(getEmailContent(TEMPLATE_TYPE.REMINDER));
+				email.setContent(email.getContent().replaceAll("\\$\\{TITLE\\}", survey.getTitle()));
+				email.setContent(
+						email.getContent().replaceAll("\\$\\{CREATORNAME\\}", getCreatorName(survey.getCreator())));
+				// email.setContent(
+				// email.getContent().replaceAll("\\$\\{GREETING\\}",
+				// survey.getSettings().getGreeting()));
+				email.setContent(
+						email.getContent().replaceAll("\\$\\{USERLINK\\}", surveyservice_base_url + "?user=" + token));
+				LOGGER.info("Eine Email für einen Teilnehmer wurde erstellt");
+	
+				if (sendMailToAddress(email)) {
+					LOGGER.info("Eine Email wurde an {} gesendet", email.getAddress());
+					successfullSendCounter++;
+				} else {
+					LOGGER.info("Could not send email to: " + email.getAddress());
+				}
 			}
 		}
+		LOGGER.info("Es wurden Emails an {} Teilnehmer gesendet", successfullSendCounter);
 		return successfullSendCounter;
 	}
 
@@ -150,7 +162,6 @@ public class MailgunEmailService implements EmailService {
 		} catch (UnirestException | RuntimeException e) {
 			LOGGER.warn("Couldn't send email due to mail server connection issues", e);
 			return false;
-			// TODO: (JAN) Retry to send email
 		}
 	}
 
@@ -177,10 +188,14 @@ public class MailgunEmailService implements EmailService {
 	}
 
 	private String getCreatorName(Creator creator) {
-		if (!creator.getName().isEmpty()) {
-			return creator.getName();
-		} else {
+		if (creator.getName() == null) {
+			LOGGER.warn("Creator has no Name field, please provide at least a empty name field.");
 			return creator.getEmail();
+		}
+		if (creator.getName().isEmpty()) {
+			return creator.getEmail();
+		} else {
+			return creator.getName();
 		}
 	}
 

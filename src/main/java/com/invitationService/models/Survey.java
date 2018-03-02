@@ -1,23 +1,33 @@
 package com.invitationService.models;
 
+import java.util.List;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
-@AllArgsConstructor
-@NoArgsConstructor
+
 @Getter
 @Setter
-
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
 public class Survey {
-	protected String id;
+	private String id;
 
-	protected String title;
+	private String title;
+	private String description;
+	
+	private Settings settings;
+	
+	private Creator creator;
+	private String creationDate;
 
-	protected String greeting;
-	protected Creator creator;
-	protected String creationDate;
-
-	protected Participant[] participants;
+	private List<Participant> participants;
+	private List<Answer> answer; 
+	private List<Question> questions;
+	
+	private Object participantEmail;
 }

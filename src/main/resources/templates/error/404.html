@@ -13,11 +13,11 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <script src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
-<link type="text/css" rel="stylesheet" th:href="@{css/style.css}" />
-<link rel="shortcut icon" th:href="@{img/favicon.ico}"
-	type="image/x-icon" />
+<link type="text/css" rel="stylesheet" th:href="@{../css/style.css}" />
 <link href="https://fonts.googleapis.com/css?family=Nunito"
 	rel="stylesheet"></link>
+	<link rel="shortcut icon" th:href="@{../img/favicon.ico}"
+	type="image/x-icon" />
 <!-- 	 -->
 
 </head>
@@ -25,14 +25,14 @@
 <body style="font-family: 'Nunito', sans-serif;"
 	onresize="resizeTrigger()">
 
-	<div class="main"></div>
+	<div th:style="'background:url(' + @{../img/backgroundimage_compressed.jpg} + '); background-size: cover; background-position: 0 center; position: fixed; z-index: 0; right: 0px; left: 0px; top: 0px; bottom: 0px;'"></div>
 
 
 	<nav class="navbar navbar-expand-lg navbar-light"
 		style="background-color: rgba(248, 248, 248, 0.95); z-index: 2;">
 		<a class="navbar-brand" href="/">
 		<img class="simque-brand-logo"
-			th:src="@{img/logo_simque.png}" style="height: 40px;"/></a>
+			th:src="@{../img/logo_simque.png}" style="height: 40px;"/></a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#navbarNav" aria-controls="navbarNav"
 			aria-expanded="false" aria-label="Toggle navigation">
@@ -61,10 +61,9 @@
 				<p>Die gute Nachricht ist: Du bist auf der richtigen Webseite. Die schlechte: Du scheinst dich etwas verlaufen zu haben.</p>
 					<p>
 					Macht nichts! Starte einfach direkt neu: </p>
-					<a class="btn btn-primary" type="button" value="Login" href="https://simque.de/"
+					<button class="btn btn-primary" type="submit" value="Login" onclick="window.location.href='https://simque.de/'"
 							style="background-color: #991F3D; border-color: #991F3D; margin-top: 15px; color: white;">
-							Zurück zum Login
-							</a>
+							Zurück zum Login</button>	
 
 
 			</div>

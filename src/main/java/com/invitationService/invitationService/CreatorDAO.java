@@ -12,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.query.BasicQuery;
 import org.springframework.data.mongodb.core.query.Update;
-
 import com.invitationService.models.Creator;
 import com.invitationService.models.Participant;
 
@@ -34,15 +33,28 @@ public class CreatorDAO {
 		logger.info("Teilnehmer {} wurde in der DB angelegt", p.getEmail());
 	}
 
-	
-	//TODO: DAS GEHT NICHT
 	public boolean hasParticipantAnswered(Participant p) {
 
-		logger.info("Teilnehmer( {} ) und die Survey ( {} ) sollen abgefragt werden", p, p.getSurvey_id());
-		Boolean result = false;
+		if (p.getSurvey_id() != null) {
+			logger.info("Teilnehmer( {} ) und die Survey ( {} ) sollen abgefragt werden", p.getEmail(),
+					p.getSurvey_id());
+		} else {
+			logger.info("Der Teilnehmer {} und eine Survey sollen abgefragt werden, aber die Survey ist null",
+					p.getEmail());
+		}
+
+		Boolean result = null;
+
 		try {
-			result = template.exists(query(where("email").is(p.getEmail()).and("id").is(p.getSurvey_id())),
-					Boolean.class);
+			// TODO WAS ist wenn die DB keinen Teilnehmer enthält??
+			Participant participant = template.findOne(
+					query(where("email").is(p.getEmail()).and("survey_id").is(p.getSurvey_id())), Participant.class);
+			if (participant != null) {
+
+				result = participant.getHasAnswered();
+				logger.info("Participant wurde in der DB gefunden und Antwort-Status ist {}", result);
+			}
+
 		} catch (Exception e) {
 			logger.warn("Die DB Abfrage nach Teilnehmer {} und Umfrage {} - Match für den Status ist fehlgeschlagen", p,
 					p.getSurvey_id());
@@ -52,27 +64,28 @@ public class CreatorDAO {
 		return result;
 	}
 
-	public String setParticipantAsAnswered(Participant p) {
+	public void setParticipantAsAnswered(Participant p) {
 		List<Participant> participant = new ArrayList<>();
 		try {
-			participant = template.find(query(where("email").is(p.getEmail()).and("id").is(p.getSurvey_id())),
+			participant = template.find(query(where("email").is(p.getEmail()).and("survey_id").is(p.getSurvey_id())),
 					Participant.class);
 			if (!participant.isEmpty()) {
 				Participant rewriteParticipant = participant.get(0);
-				rewriteParticipant.setStatus(true);
-				template.updateFirst(query(where("participant").is(participant)), Update.update("status", "true"),
-						Participant.class);
+				rewriteParticipant.setHasAnswered(true);
+				template.updateFirst(
+						query(where("email").is(rewriteParticipant.getEmail()).and("survey_id")
+								.is(rewriteParticipant.getSurvey_id())),
+						Update.update("hasAnswered", "true"), Participant.class);
 				logger.info("Teilnehmer {} erfolgreich geupdatet", rewriteParticipant);
 			} else {
 				logger.info("Teilnehmerupdate für {} gescheitert!", p.getEmail());
-				return "participant not existing";
+
 			}
 		} catch (Exception e) {
 			logger.warn("Error beim setzen des Status des Teilnehmers: {}", p.getEmail());
 
 		}
 
-		return "";
 	}
 
 	public boolean isCreatorExist(String email) {
@@ -80,6 +93,11 @@ public class CreatorDAO {
 		Boolean result = template.find(q, Creator.class).size() != 0;
 		logger.info("Es wurde der Creator mit email: {} gesucht und das Ergebnis war: {}", email, result);
 		return result;
+	}
+
+	public List<Participant> getAllParticipantsForSurvey(String survey_id) {
+		return template.find(query(where("survey_id").is(survey_id)), Participant.class);
+
 	}
 
 }
