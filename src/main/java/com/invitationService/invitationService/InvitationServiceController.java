@@ -76,11 +76,6 @@ public class InvitationServiceController {
 	@ResponseBody
 	@RequestMapping(value = "/sendInvitationToParticipants", method = RequestMethod.POST)
 	public int SendMailToParticipants(@RequestBody Survey survey, @RequestHeader("Authorization")String tokenBase64) {
-			
-			ObjectMapper mapper = new ObjectMapper();
-			mapper.findAndRegisterModules();
-			//mapper.registerModule(new JavaTimeModule());
-		
 		logger.info("Token Key: {}", tokenBase64);
 		logger.info("SendMailToParticipants wurde aufgerufen für die Survey {}", survey.getId());
 		return emailService.sendInviteToParticipants(survey);
