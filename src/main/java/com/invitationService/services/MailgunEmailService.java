@@ -97,9 +97,8 @@ public class MailgunEmailService implements EmailService {
 				email.setContent(email.getContent().replaceAll("\\$\\{TITLE\\}", survey.getTitle()));
 				email.setContent(
 						email.getContent().replaceAll("\\$\\{CREATORNAME\\}", getCreatorName(survey.getCreator())));
-				// email.setContent(
-				// email.getContent().replaceAll("\\$\\{GREETING\\}",
-				// survey.getSettings().getGreeting()));
+//				email.setContent(
+//						email.getContent().replaceAll("\\$\\{GREETING\\}", survey.getSettings().getGreeting()));
 				email.setContent(
 						email.getContent().replaceAll("\\$\\{USERLINK\\}", surveyservice_base_url + "?user=" + token));
 				LOGGER.info("Eine Email für einen Teilnehmer wurde erstellt");
@@ -124,7 +123,7 @@ public class MailgunEmailService implements EmailService {
 	public int sendReminderToParticipants(Survey survey) {
 		int successfullSendCounter = 0;
 		for (Participant p : survey.getParticipants()) {
-			if(!p.getHasAnswered()) {
+			if (!p.getHasAnswered()) {
 				String token = tokenService.createUserJWT("", "IS", "surveyInvitation", p.getEmail(), survey.getId());
 				Email email = new Email();
 				email.setAddress(p.getEmail());
@@ -140,7 +139,7 @@ public class MailgunEmailService implements EmailService {
 				email.setContent(
 						email.getContent().replaceAll("\\$\\{USERLINK\\}", surveyservice_base_url + "?user=" + token));
 				LOGGER.info("Eine Email für einen Teilnehmer wurde erstellt");
-	
+
 				if (sendMailToAddress(email)) {
 					LOGGER.info("Eine Email wurde an {} gesendet", email.getAddress());
 					successfullSendCounter++;
